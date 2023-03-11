@@ -16,7 +16,7 @@ function AvailableJobDetails() {
 
   useEffect(() => {
     axios
-      .get("https://s2fdn95cu1.execute-api.us-east-1.amazonaws.com/prod/uploadedjob")
+      .get("https://uiuokt5tql.execute-api.us-east-1.amazonaws.com/prod/transporteravailablejob")
       .then((response) => {
         setavailaleJobDetails(response.data.body);
       })
