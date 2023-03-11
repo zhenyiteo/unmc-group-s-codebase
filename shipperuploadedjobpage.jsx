@@ -10,7 +10,7 @@ import {
 import styles from './index.module.css';
 import axios from 'axios';
 
-function UploadedJobDetails() {
+function UploadedJob() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(null);
   const [cates, setCates] = useState([
@@ -50,17 +50,20 @@ function UploadedJobDetails() {
     axios.get('https://s2fdn95cu1.execute-api.us-east-1.amazonaws.com/prod/uploadedjob')
       .then(response => {
         setList(response.data.body.map(item => ({
+          JobID: item.JobID,
           logo: '/images/tlogo.jpg',
           name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate} ` ,
           remark: `Type: ${item.itemtype}`,
+          
         })))
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
   }, []);
 
   const handleItemClick = (item) => {
-    if (item.remark === 'Type: Glass' || 'Type: glass') {
-      navigate('/transporter/availableJobDetail');
+    const matchingItem = list.find((listItem) => listItem.JobID === item.JobID);
+    if (matchingItem) {
+      navigate('/shipper/uploadedJobDetail' + item.JobID);
     }
   };
 
@@ -116,4 +119,4 @@ function UploadedJobDetails() {
   );
 }
 
-export default UploadedJobDetails;
+export default UploadedJob;

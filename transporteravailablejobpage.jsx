@@ -10,7 +10,7 @@ import {
 import styles from './index.module.css';
 import axios from 'axios';
 
-function UploadedJobDetails() {
+function AvailableJob() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(null);
   const [cates, setCates] = useState([
@@ -47,22 +47,27 @@ function UploadedJobDetails() {
   const filteredList = selectCate && selectCate.name !== 'All' ? list.filter(item => item.remark.toLowerCase().includes(selectCate.name.toLowerCase())) : list;
 
   useEffect(() => {
-    axios.get('https://s2fdn95cu1.execute-api.us-east-1.amazonaws.com/prod/uploadedjob')
+    axios.get('https://uiuokt5tql.execute-api.us-east-1.amazonaws.com/prod/transporteravailablejob')
       .then(response => {
         setList(response.data.body.map(item => ({
+          JobID: item.JobID ,
           logo: '/images/tlogo.jpg',
-          name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate} ` ,
+          name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
           remark: `Type: ${item.itemtype}`,
-          JobID: `${item.JobID}`, // for line 63 hard-coded for job ID 
         })))
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
   }, []);
 
+  
+    
+   
+ 
+
   const handleItemClick = (item) => {
-    if (item.JobID === '8e0f6bca-f1b6-4bc6-8fe8-0eefe55e4b07') {  
-      //hard-coded for JobID, the problem is I want to map the specific JobID from database, but each box will have diff JobID
-      navigate('/transporter/availableJobDetail');
+    const matchingItem = list.find((listItem) => listItem.JobID === item.JobID);
+    if (matchingItem) {
+      navigate('/transporter/availableJobDetail' + item.JobID);
     }
   };
 
@@ -118,4 +123,4 @@ function UploadedJobDetails() {
   );
 }
 
-export default UploadedJobDetails;
+export default AvailableJob;
