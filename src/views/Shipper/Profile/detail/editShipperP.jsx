@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-function UpdateTransporterForm() {
+function UpdateShipperForm() {
   const [formData, setFormData] = useState({
-    transID: '',
+    shipperID: '',
     name: '',
     email: '',
     contact: '',
@@ -13,7 +13,7 @@ function UpdateTransporterForm() {
     event.preventDefault();
 
     const response = await fetch(
-      'https://w62n1e1wfj.execute-api.us-east-1.amazonaws.com/prod/transporter',
+      'https://oxvie2kqq5.execute-api.us-east-1.amazonaws.com/prod/shippername',
       {
         method: 'PUT',
         body: JSON.stringify(formData),
@@ -24,16 +24,16 @@ function UpdateTransporterForm() {
     );
 
     if (response.ok) {
-      alert('Transporter Profile updated successfully!');
+      alert('Shipper updated successfully!');
       setFormData({
-        transID: '',
+        shipperID: '',
         name: '',
         email: '',
         contact: '',
         website: '',
       });
     } else {
-      alert('Failed to update transporter profile.');
+      alert('Failed to update shipper.');
     }
   };
 
@@ -46,17 +46,17 @@ function UpdateTransporterForm() {
 
   return (
     <form
-      id="transporter-form"
+      id="shipper-form"
       onSubmit={handleSubmit}
     >
-      <h1>Edit Transporter Profile</h1>
-      <label htmlFor="transID">Transporter ID : </label>
+      <h1>Edit Shipper Profile</h1>
+      <label htmlFor="shipperID">Shipper ID : </label>
       <input
         type="text"
-        name="transID"
-        id="transID"
+        name="shipperID"
+        id="shipperID"
         required
-        value={formData.transID}
+        value={formData.shipperID}
         onChange={handleInputChange}
       />
       <br />
@@ -115,4 +115,4 @@ function UpdateTransporterForm() {
   );
 }
 
-export default UpdateTransporterForm;
+export default UpdateShipperForm;
