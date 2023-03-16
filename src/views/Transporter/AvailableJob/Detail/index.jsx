@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 //import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 //import * as api from '../../api/api';
 // import {
 //   LoadingOutlined,
@@ -14,12 +14,12 @@ import { useParams } from 'react-router-dom';
 
 function AvailableJobDetails() {
   const { JobID } = useParams();
-  console.log("use params "+useParams());
+  const [searchParams, setSearchParams] = useSearchParams();
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
-
+  console.log("searching for job id " + searchParams.get("JobID"));
   useEffect(() => {
     axios
-      .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/ok/prod?jobid=`+ JobID)
+      .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
       .then((response) => {
         setAvailableJobDetails(response.data.body);
         
