@@ -27,16 +27,16 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 
-function TransDetails() {
-  const [TransData, setTransData] = useState([]);
+function ShipperDetails() {
+  const [shipperData, setShipperData] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        'https://w62n1e1wfj.execute-api.us-east-1.amazonaws.com/prod/transporter'
+        'https://oxvie2kqq5.execute-api.us-east-1.amazonaws.com/prod/shippername'
       )
       .then((response) => {
-        setTransData(response.data.body);
+        setShipperData(response.data.body);
       })
       .catch((error) => {
         console.log(error);
@@ -45,14 +45,14 @@ function TransDetails() {
 
   return (
     <div>
-      <h1>Transporter Profile</h1>
-      {TransData.map((trans) => (
-        <div key={trans.transID}>
-          <p>Transporter ID: {trans.transID}</p>
-          <p>Name: {trans.name}</p>
-          <p>Contact: {trans.contact}</p>
-          <p>Email: {trans.email}</p>
-          <p>Website: {trans.website}</p>
+      <h1>Shipper Profile</h1>
+      {shipperData.map((shipper) => (
+        <div key={shipper.ShipperID}>
+          <p>Shipper ID: {shipper.ShipperID}</p>
+          <p>Name: {shipper.name}</p>
+          <p>Contact: {shipper.contact}</p>
+          <p>Email: {shipper.email}</p>
+          <p>Website: {shipper.website}</p>
           <hr />
         </div>
       ))}
@@ -60,4 +60,4 @@ function TransDetails() {
   );
 }
 
-export default TransDetails;
+export default ShipperDetails;
