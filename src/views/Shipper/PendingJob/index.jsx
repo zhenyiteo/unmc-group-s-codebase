@@ -143,7 +143,7 @@ export default function Add() {
           />
         </div>
       </div>
-      <h1 style={{ marginTop: 20 }}>My pending jobs</h1>
+      <h1 style={{ marginTop: 20 }}>Results</h1>
       <div className={styles.list}>
         {list.map((item) => (
           <div
@@ -151,7 +151,7 @@ export default function Add() {
             style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
             onClick={() => {
               if (item.name === 'Fantacy Glass Company') {
-                navigate('/transporter/pendingJobDetail');
+                navigate('/transporter/availableJobDetail');
               }
             }}
           >

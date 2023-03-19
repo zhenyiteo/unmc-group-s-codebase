@@ -10,7 +10,7 @@ import {
 import styles from './index.module.css';
 import axios from 'axios';
 
-function UploadedJob() {
+function UploadedJobDetails() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(null);
   const [cates, setCates] = useState([
@@ -61,10 +61,7 @@ function UploadedJob() {
   }, []);
 
   const handleItemClick = (item) => {
-    const matchingItem = list.find((listItem) => listItem.JobID === item.JobID);
-    if (matchingItem) {
-      navigate('/shipper/uploadedJobDetail' + item.JobID);
-    }
+    navigate(`/shipper/availableJobDetail/`);
   };
 
   return (
@@ -119,4 +116,4 @@ function UploadedJob() {
   );
 }
 
-export default UploadedJob;
+export default UploadedJobDetails;

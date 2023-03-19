@@ -16,7 +16,32 @@ import {
 export default function Add() {
   const navigate = useNavigate();
 
-  const [cates, setCates] = useState([]);
+  const [cates, setCates] = useState([
+    {
+      name: 'Glass',
+    },
+    {
+      name: 'Flammable',
+    },
+    {
+      name: 'Frozen',
+    },
+    {
+      name: 'Medicine',
+    },
+    {
+      name: 'Electronics',
+    },
+    {
+      name: 'Fragile',
+    },
+    {
+      name: 'Daily',
+    },
+    {
+      name: 'Plastice',
+    },
+  ]);
   const [list, setList] = useState([
     {
       logo: '/images/tlogo.jpg',
@@ -72,6 +97,7 @@ export default function Add() {
     <div className={styles.home}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
+          <Input.Search placeholder="Search company"></Input.Search>
           <div className={styles.cates}>
             {cates.map((item) => (
               <div
@@ -117,10 +143,7 @@ export default function Add() {
           />
         </div>
       </div>
-      <h1 style={{ marginTop: 20 }}>
-        Applied Job Status{' '}
-        <Input.Search placeholder="Search company"></Input.Search>
-      </h1>
+      <h1 style={{ marginTop: 20 }}>Results</h1>
       <div className={styles.list}>
         {list.map((item) => (
           <div
@@ -128,7 +151,7 @@ export default function Add() {
             style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
             onClick={() => {
               if (item.name === 'Fantacy Glass Company') {
-                navigate('/transporter/appliedJobDetail');
+                navigate('/transporter/availableJobDetail');
               }
             }}
           >
