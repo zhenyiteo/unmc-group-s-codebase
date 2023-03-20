@@ -6,17 +6,21 @@ import LayoutTransporter from './views/Transporter/Layout';
 import Profile from './views/Shipper/Profile';
 import PostJob from './views/Shipper/PostJob';
 import UploadedJob from './views/Shipper/UploadedJob';
+import UploadedJobDetail from './views/Shipper/UploadedJob/Detail';
 // import ActiveJob from './views/Shipper/ActiveJob';
 
 //transporter
 //import Profile from './views/Transporter/Profile';
 import AvailableJob from './views/Transporter/AvailableJob';
-import AppliedJob from './views/Transporter/AppliedJob';
 import AvailableJobDetail from './views/Transporter/AvailableJob/Detail';
+import SmartContract from './views/Transporter/AvailableJob/SmartContract';
+import AppliedJob from './views/Transporter/AppliedJob';
+import AppliedJobDetail from './views/Transporter/AppliedJob/Detail';
 
 //in common
-import PendingJob from './views/Shipper/PendingJob';
-// import JobHistory from './views/Shipper/JobHistory';
+import PendingJob from './views/Transporter/PendingJob';
+//import PendingJobDetail from './views/Transporter/PendingJob/Detail';
+import JobHistory from './views/Shipper/JobHistory';
 
 const GetRoutes = () => {
   const routes = useRoutes([
@@ -39,10 +43,17 @@ const GetRoutes = () => {
               path: 'uploadedJob',
               element: <UploadedJob></UploadedJob>,
             },
-            
+            {
+              path: 'uploadedJobDetail',
+              element: <UploadedJobDetail></UploadedJobDetail>,
+            },
             {
               path: 'pendingJob',
               element: <PendingJob></PendingJob>,
+            },
+            {
+              path: 'jobHistory',
+              element: <JobHistory></JobHistory>,
             },
           ],
         },
@@ -60,20 +71,32 @@ const GetRoutes = () => {
               element: <AvailableJob></AvailableJob>,
             },
             {
+              path: 'availableJobDetail',
+              element: <AvailableJobDetail></AvailableJobDetail>,
+            },
+            {
+              path: 'smartContract',
+              element: <SmartContract></SmartContract>,
+            },
+            {
               path: 'appliedJob',
               element: <AppliedJob></AppliedJob>,
+            },
+            {
+              path: 'appliedJobDetail',
+              element: <AppliedJobDetail></AppliedJobDetail>,
             },
             {
               path: 'pendingJob',
               element: <PendingJob></PendingJob>,
             },
+            // {
+            //   path: 'pendingJobDetail',
+            //   element: <PendingJobDetail></PendingJobDetail>,
+            // },
             {
               path: 'profile4',
               element: <Profile></Profile>,
-            },
-            {
-              path: 'availableJobDetail',
-              element: <AvailableJobDetail></AvailableJobDetail>,
             },
           ],
         },

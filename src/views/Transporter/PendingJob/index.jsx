@@ -17,7 +17,33 @@ export default function Add() {
   const navigate = useNavigate();
 
   const [cates, setCates] = useState([]);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([
+    {
+      logo: '/images/tlogo.jpg',
+      name: 'MyonDong Daily Production',
+      remark: 'Type: Fragile, Egg',
+    },
+    {
+      logo: '/images/tlogo.jpg',
+      name: 'Hengyang Medicine Company',
+      remark: 'Type: Medicine',
+    },
+    {
+      logo: '/images/tlogo.jpg',
+      name: 'Xixi Electronic Production',
+      remark: 'Type: Electronics',
+    },
+    {
+      logo: '/images/tlogo.jpg',
+      name: 'Fantacy Glass Company',
+      remark: 'Type: Fragile, Glass',
+    },
+    {
+      logo: '/images/tlogo.jpg',
+      name: 'Happy Month Firework Production',
+      remark: 'Type: Fragile, Egg',
+    },
+  ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
   useEffect(() => {}, []);
 
@@ -46,13 +72,12 @@ export default function Add() {
     <div className={styles.home}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
-          <Input.Search placeholder="Search company"></Input.Search>
           <div className={styles.cates}>
             {cates.map((item) => (
               <div
                 className={styles.cate}
                 style={{
-                  backgroundColor: selectCate === item ? '#d7dffc' : '',
+                  backgroundColor: selectCate === item ? '#d7dffc' : '#bfbfbf',
                 }}
                 onClick={() => {
                   setSelectCate(item);
@@ -92,11 +117,14 @@ export default function Add() {
           />
         </div>
       </div>
+      <h1 style={{ marginTop: 20 }}> Smart Contract Status</h1>
       <div className={styles.list}>
         {list.map((item) => (
           <div
             className={styles.item}
-            style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
+            style={{
+              backgroundColor: selectCate === item ? '#bfbfbf' : '#d7dffc',
+            }}
             onClick={() => {
               if (item.name === 'Fantacy Glass Company') {
                 navigate('/transporter/pendingJobDetail');
