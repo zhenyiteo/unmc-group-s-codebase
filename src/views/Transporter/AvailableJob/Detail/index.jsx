@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 //import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 import axios from "axios";
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 //import * as api from '../../api/api';
 // import {
 //   LoadingOutlined,
@@ -44,6 +44,7 @@ function CreateContract(item){
 }
 
 function AvailableJobDetails() {
+  const navigate = useNavigate();
   const { JobID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
@@ -105,7 +106,8 @@ function AvailableJobDetails() {
                   borderRadius: 5,
                 }}
                 onClick={() => {
-                  CreateContract(item);
+                  CreateContract(item)
+                  navigate("/transporter/smartContract");
                 }}
               >
                 Accept job
