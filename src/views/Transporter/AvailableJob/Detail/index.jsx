@@ -12,6 +12,37 @@ import { useParams, useSearchParams } from 'react-router-dom';
 //   PlusOutlined,
 // } from '@ant-design/icons';
 
+function CreateContract(item){
+  //const [searchParams, setSearchParams] = useSearchParams();
+  axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "accord-contracts-accord-deploy",
+      "data": {
+        contractSourceS3BucketObjectPath: "test-contract7.cta",
+        ledgerDataPath: "Accord",
+        eventsQueue: "accord-contracts-output",
+        contractId: item.JobID,
+        contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
+          transporter:"resource:org.accordproject.party.Party#456",
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}
+  )
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+}
+
 function AvailableJobDetails() {
   const { JobID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -72,6 +103,9 @@ function AvailableJobDetails() {
                   width: 200,
                   marginTop: 20,
                   borderRadius: 5,
+                }}
+                onClick={() => {
+                  CreateContract(item);
                 }}
               >
                 Accept job
