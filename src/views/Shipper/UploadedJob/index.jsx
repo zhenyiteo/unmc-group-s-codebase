@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 
 //localhost:3000/#/transporter/availableJob
-//localhost:3000/#/shipper/postJobs
+//localhost:3000/#/shipper/postJob
 
 export default function Add() {
   const navigate = useNavigate();

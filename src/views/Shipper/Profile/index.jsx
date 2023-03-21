@@ -1,31 +1,5 @@
-import {
-  Button,
-  Checkbox,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  message,
-  Radio,
-  Rate,
-  Row,
-  Select,
-  Tabs,
-  Upload,
-} from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import styles from './index.module.css';
-//import * as api from '../../api/api';
-import moment from 'moment';
-import PropTypes from 'prop-types'; // yarn add prop-types
-import Column from 'antd/lib/table/Column';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
 
 function ShipperDetails() {
   const [shipperData, setShipperData] = useState([]);

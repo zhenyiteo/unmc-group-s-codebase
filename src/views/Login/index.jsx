@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons';
 
 
-export default function Add() {
+export default function Login() {
   const navigate = useNavigate();
 
   const [cates, setCates] = useState([
@@ -92,68 +92,36 @@ export default function Add() {
   const onFinishFailed = () => { };
 
   return (
-    <div className={styles.home}>
+    <div style={{ display: "flex", justifyContent: "center", padding: 30, alignItems: "center" }}>
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
-          < Input.Search placeholder='Search company'></Input.Search>
-          <div className={styles.cates}>
-            {
-              cates.map(item =>
-                <div className={styles.cate} style={{ backgroundColor: selectCate === item ? "#d7dffc" : "" }} onClick={() => {
-                  setSelectCate(item);
-                }}>
-                  {item.name}
-                </div>)
-            }
-          </div>
-        </div>
-        <div>
-          <Select
-            defaultValue="lucy"
-            style={{ width: 200 }}
-            options={[
-              {
-                value: '1',
-                label: 'sort by allowance',
-              },
-              {
-                value: '2',
-                label: 'sort by location',
-              },
-              {
-                value: '3',
-                label: 'sort by rating',
-              },
-              {
-                value: '4',
-                label: 'oldest',
-              },
-              {
-                value: '5',
-                label: 'latest(newest)',
-              },
-            ]}
-          />
+      <div style={{ marginRight: 70 }}>
+        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Select Account Type</span>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/shipper/postJob");
+          }}>Shipper</Button>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/transporter/availableJob");
+          }}>Transporter</Button>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/admin/p1");
+          }}>Admin</Button>
         </div>
       </div>
-      <h1 style={{ marginTop: 20 }}>Results</h1>
-      <div className={styles.list}>
-        {
-          list.map(item =>
-            <div className={styles.item} style={{ backgroundColor: selectCate === item ? "#d7dffc" : "" }} onClick={() => {
-              if (item.name === "Fantacy Glass Company") {
-                navigate("/transporter/availableJobDetail");
-              }
-            }}>
-              <img src={item.logo} alt="" style={{ width: 70, height: 70 }}></img>
-              <div className={styles.right}>
-                <div className={styles.name}>{item.name}</div>
-                <div className={styles.remark}>{item.remark}</div>
-              </div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Log in your Account!</span>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span style={{ marginBottom: 10 }}>Email address</span>
+          <Input style={{ height: 40, borderRadius: 10 }}></Input>
+          <span style={{ marginBottom: 10 }}>Password</span>
+          <Input style={{ height: 40, borderRadius: 10 }}></Input>
+          <span style={{ marginBottom: 10, color: "#9898dd", marginTop: 10 }}>Forgot password?</span>
 
-            </div>)
-        }
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}>Sign in</Button>
+          <div style={{ marginTop: 20 }}>
+            -A new user? <span style={{ color: "#9898dd" }}>Sign Up</span>
+          </div>
+        </div>
       </div>
     </div >
   );
