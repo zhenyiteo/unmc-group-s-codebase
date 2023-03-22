@@ -46,7 +46,7 @@
 }
 .left {
   width: 500px;
-  position: relative;
+  position: relative; /* danyi's change */
 }
 .value {
   color: #000;

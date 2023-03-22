@@ -1,263 +1,196 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
+//import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
+import { Button, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+//import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
+import axios from "axios";
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 //import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+// import {
+//   LoadingOutlined,
+//   FileImageOutlined
+//   PlusOutlined,
+// } from '@ant-design/icons';
 
+function CreateContract(item){
+  //const [searchParams, setSearchParams] = useSearchParams();
+  axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "accord-contracts-accord-deploy",
+      "data": {
+        contractSourceS3BucketObjectPath: "test-contract7.cta",
+        ledgerDataPath: "Accord",
+        eventsQueue: "accord-contracts-output",
+        contractId: item.JobID,
+        contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
+          transporter:"resource:org.accordproject.party.Party#456",
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}
+  )
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-export default function Add() {
+}
+
+function AvailableJobDetails() {
   const navigate = useNavigate();
-
-  const [cates, setCates] = useState([
-    {
-      name: "Glass"
-    },
-    {
-      name: "Flammable"
-    },
-    {
-      name: "Frozen"
-    },
-    {
-      name: "Medicine"
-    },
-    {
-      name: "Electronics"
-    },
-    {
-      name: "Fragile"
-    },
-    {
-      name: "Daily"
-    },
-    {
-      name: "Plastice"
-    }
-  ]);
-  const [list, setList] = useState([
-    {
-      logo: "/images/tlogo.jpg",
-      name: "MyonDong Daily Production",
-      remark: "Type: Fragile, Egg"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Hengyang Medicine Company",
-      remark: "Tune: Medicine"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Xixi Electronic Production",
-      remark: "Toe: Electronics"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Fantacy Glass Company",
-      remark: "Type: Fragile, Glass"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Happy Month Firework Production",
-      remark: "Type: Fragile, Egg"
-    },
-
-  ]);
-  const [selectCate, setSelectCate] = useState(cates[0]);
-  useEffect(() => { }, []);
+  const { JobID } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [availableJobDetails, setAvailableJobDetails] = useState([]);
+  console.log("searching for job id " + searchParams.get("JobID"));
+  useEffect(() => {
+    axios
+      .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
+      .then((response) => {
+        setAvailableJobDetails(response.data.body);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
-
     message.info('Successfully Saved!');
   };
 
-  const onFinishFailed = () => { };
+  const onFinishFailed = () => {};
 
   return (
-    <div className={styles.home}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <h1>Fantacy Glass Company</h1>
-        <div style={{ fontSize: 20 }}>Shipment Duration:72 Hours</div>
-      </div>
-      <div style={{ display: "flex" }}>
-        <div>
-          <img src={"/images/ship.jpg"} alt="" style={{ width: 150, height: 150 }}></img>
-          <div className={styles.label}>
-            Released hu
+    <>
+      {availableJobDetails.map((item) => (
+        <div className={styles.home}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <h1>From {item.originstate} To {item.deststate}</h1>
+            <div style={{ fontSize: 20 }}>Shipment Duration:{item.shipmentduration}hours </div>
           </div>
-          <div className={styles.value}>
-            Fantacy Glass Compan
-          </div>
-          <div className={styles.label}>
-            Contact Number (Shipper)
-          </div>
-          <div className={styles.value}>
-            019 276 3456
+          <div style={{ display: 'flex' }}>
+            <div>
+              <img
+                src={'/images/ship.jpg'}
+                alt=""
+                style={{ width: 150, height: 150 }}
+              ></img>
+              <div className={styles.label}>Job ID</div>
+              <div className={styles.value}>{item.JobID}</div>
+              
+  
+              
+  
+              <div style={{ fontSize: 20, marginTop: 30 }}>Shipment</div>
+              <div style={{ fontSize: 20 }}>Allowance: RM{item.allowance}</div>
+              <Button
+                style={{
+                  backgroundColor: '#4abc3a',
+                  color: '#fff',
+                  height: 50,
+                  width: 200,
+                  marginTop: 20,
+                  borderRadius: 5,
+                }}
+                onClick={() => {
+                  CreateContract(item)
+                  navigate("/transporter/smartContract");
+                }}
+              >
+                Accept job
+              </Button>
+            </div>
+  
+            <div style={{ flex: 1, paddingLeft: 30 }}>
+              <div className={styles.label}>Remarks</div>
+              <div className={styles.value}>
+              {item.remarks}
+              </div>
+  
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin State</div>
+              <div className={styles.value}>{item.originstate}</div>
+            </div>
+
+               <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipment Penalty</div>
+              <div className={styles.value}>RM{item.penalty}</div>
+            </div>
           </div>
 
-          <div className={styles.label}>
-            Publish Time
-          </div>
-          <div className={styles.value}>
-            08 / 09 / 2022
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin Address</div>
+              <div className={styles.value}>{item.originaddress}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Item Type</div>
+              <div className={styles.value}>{item.itemtype}</div>
+            </div>
           </div>
 
-          <div style={{ fontSize: 20, marginTop: 30 }}>
-            Shipment
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destination State</div>
+              <div className={styles.value}>{item.deststate}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipping Method</div>
+              <div className={styles.value}>{item.shipmentmethod}</div>
+            </div>
           </div>
-          <div style={{ fontSize: 20 }}>
-            Allowance: RM 500
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destination Address</div>
+              <div className={styles.value}>{item.destaddress}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipment Weight</div>
+              <div className={styles.value}>{item.shipmentweight}kg</div>
+            </div>
           </div>
-          <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {
-            navigate("/transporter/smartContract");
-          }}>Accept job</Button>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destinatian Postcode</div>
+              <div className={styles.value}>{item.destpostcode}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipment Dimensions Length*Width*Height</div>
+              <div className={styles.value}>{item.itemlength}M*{item.itemwidth}M*{item.itemheight}M</div>
+            </div>
+          </div>
+          
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Receiver Name and Contact</div>
+              <div className={styles.value}>{item.recipientname} {item.recipientcontact}</div>
+            </div>
+            
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div style={{ flex: 1, paddingLeft: 30 }}>
-          <div className={styles.label}>
-            Job Reguirment Briefing
-          </div>
-          <div className={styles.value}>
-            Deliver a box of lasses to Universitv of Nottindham Malavsia hv air. Companv who are
-            able to make sure the glasses are not damased and deliver the parcel within 72 hours
-            can nick uo this job.
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Origin State
-              </div>
-              <div className={styles.value}>
-                pulau Pinang
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Shipment Penalty
-              </div>
-              <div className={styles.value}>
-                RM 1,000
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Origin Address
-              </div>
-              <div className={styles.value}>
-                12 Jalan Aman. Taman Aman
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Shipment Type
-              </div>
-              <div className={styles.value}>
-                Fradilo (Glass)
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Dacstinatian State
-              </div>
-              <div className={styles.value}>
-                Selangor
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Shipping Method
-              </div>
-              <div className={styles.value}>
-                Air
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Destination Address
-              </div>
-              <div className={styles.value}>
-                University of Nottindham Malavcia
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Shipment Weight
-              </div>
-              <div className={styles.value}>
-                Pulau Pinang
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Dastinatian Postcode
-              </div>
-              <div className={styles.value}>
-                43500
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Shipment Dimensions
-              </div>
-              <div className={styles.value}>
-                1.0M x 3.0M x 0.5M
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Contact Number (Receiver)
-              </div>
-              <div className={styles.value}>
-                1234512332
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>
-                Remarks
-              </div>
-              <div className={styles.value}>
-                None
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div >
+      ))}
+    </>
   );
-}
+
+              }
+
+export default AvailableJobDetails;

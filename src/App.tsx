@@ -30,6 +30,7 @@ import AppliedJobDetail from './views/Transporter/AppliedJob/Detail';
 import PendingJob from './views/Transporter/PendingJob';
 //import PendingJobDetail from './views/Transporter/PendingJob/Detail';
 import JobHistory from './views/Transporter/JobHistory';
+//import JobHistory from './views/Shipper/JobHistory'; ************CHECK WHY GOT BOTH******************
 
 const GetRoutes = () => {
   const routes = useRoutes([
@@ -125,6 +126,9 @@ const GetRoutes = () => {
             {
               path: 'profile',
               element: <ContractHistory></ContractHistory>,
+              //  **************** CHECK what is profile 4****************************
+              // path: 'profile4',
+              // element: <Profile></Profile>,
             },
           ],
         },

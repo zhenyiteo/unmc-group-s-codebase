@@ -1,7 +1,9 @@
-import React from 'react';
-import axios from 'axios';
 import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+// import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
+//import * as api from '../../api/api';
 
 function PostJobForm() {
   const [form] = Form.useForm();
@@ -544,7 +546,7 @@ function PostJobForm() {
             </div>
           </Form.Item>
         </Col>
-
+{/* **********************CHECK *******************last time it was col span 9 */}
         <Col span="6">
           <Button
             style={{ width: '100%' }}

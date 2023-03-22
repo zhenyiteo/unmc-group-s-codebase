@@ -3,121 +3,70 @@ import { Button, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 //import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
+import axios from "axios";
+import { useParams, useSearchParams } from 'react-router-dom';
 //import * as api from '../../api/api';
 // import {
 //   LoadingOutlined,
-//   FileImageOutlined,
+//   FileImageOutlined
 //   PlusOutlined,
 // } from '@ant-design/icons';
 
-export default function Add() {
-  const [cates, setCates] = useState([
-    {
-      name: 'Glass',
-    },
-    {
-      name: 'Flammable',
-    },
-    {
-      name: 'Frozen',
-    },
-    {
-      name: 'Medicine',
-    },
-    {
-      name: 'Electronics',
-    },
-    {
-      name: 'Fragile',
-    },
-    {
-      name: 'Daily',
-    },
-    {
-      name: 'Plastice',
-    },
-  ]);
-  const [list, setList] = useState([
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'MyonDong Daily Production',
-      remark: 'Type: Fragile, Egg',
-    },
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'Hengyang Medicine Company',
-      remark: 'Tune: Medicine',
-    },
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'Xixi Electronic Production',
-      remark: 'Toe: Electronics',
-    },
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'Fantacy Glass Company',
-      remark: 'Type: Fragile, Glass',
-    },
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'Happy Month Firework Production',
-      remark: 'Type: Fragile, Egg',
-    },
-  ]);
-  const [selectCate, setSelectCate] = useState(cates[0]);
-  useEffect(() => {}, []);
+
+
+function AppliedJobDetails() {
+  const { JobID } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [appliedJobDetails, setAppliedJobDetails] = useState([]);
+  console.log("searching for job id " + searchParams.get("JobID"));
+  useEffect(() => {
+    axios
+      .get(`https://xkksd1jot0.execute-api.us-east-1.amazonaws.com/prod/appliedjobdetails?jobid=` +searchParams.get("JobID"))
+      .then((response) => {
+        setAppliedJobDetails(response.data.body);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
-
     message.info('Successfully Saved!');
   };
 
   const onFinishFailed = () => {};
 
   return (
-    <div className={styles.home}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <h1>Fantacy Glass Company</h1>
-        <div style={{ fontSize: 20 }}>Shipment Duration:72 Hours</div>
-      </div>
-      <div style={{ display: 'flex' }}>
-        <div>
-          <img
-            src={'/images/ship.jpg'}
-            alt=""
-            style={{ width: 150, height: 150 }}
-          ></img>
-          <div className={styles.label}>Released hu</div>
-          <div className={styles.value}>Fantacy Glass Compan</div>
-          <div className={styles.label}>Contact Number (Shipper)</div>
-          <div className={styles.value}>019 276 3456</div>
-
-          <div className={styles.label}>Publish Time</div>
-          <div className={styles.value}>08 / 09 / 2022</div>
-
-          <div style={{ fontSize: 20, marginTop: 30 }}>Shipment</div>
-          <div style={{ fontSize: 20 }}>Allowance: RM 500</div>
-          <Button
+    <>
+      {appliedJobDetails.map((item) => (
+        <div className={styles.home}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <h1>From {item.originstate} To {item.deststate}</h1>
+            <div style={{ fontSize: 20 }}>Shipment Duration:{item.shipmentduration}hours </div>
+          </div>
+          <div style={{ display: 'flex' }}>
+            <div>
+              <img
+                src={'/images/ship.jpg'}
+                alt=""
+                style={{ width: 150, height: 150 }}
+              ></img>
+              <div className={styles.label}>Job ID</div>
+              <div className={styles.value}>{item.JobID}</div>
+              
+  
+              
+  
+              <div style={{ fontSize: 20, marginTop: 30 }}>Shipment</div>
+              <div style={{ fontSize: 20 }}>Allowance: RM{item.allowance}</div>
+              <Button
             style={{
               backgroundColor: '#8c8c8c',
               color: '#fff',
@@ -129,84 +78,85 @@ export default function Add() {
           >
             Waiting for shipper response ...
           </Button>
-        </div>
-
-        <div style={{ flex: 1, paddingLeft: 30 }}>
-          <div className={styles.label}>Job Reguirment Briefing</div>
-          <div className={styles.value}>
-            Deliver a box of lasses to Universitv of Nottindham Malavsia hv air.
-            Companv who are able to make sure the glasses are not damased and
-            deliver the parcel within 72 hours can nick uo this job.
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Origin State</div>
-              <div className={styles.value}>pulau Pinang</div>
             </div>
-            <div style={{ flex: 1 }}>
+  
+            <div style={{ flex: 1, paddingLeft: 30 }}>
+              <div className={styles.label}>Remarks</div>
+              <div className={styles.value}>
+              {item.remarks}
+              </div>
+  
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin State</div>
+              <div className={styles.value}>{item.originstate}</div>
+            </div>
+
+               <div style={{ flex: 1 }}>
               <div className={styles.label}>Shipment Penalty</div>
-              <div className={styles.value}>RM 1,000</div>
+              <div className={styles.value}>RM{item.penalty}</div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Origin Address</div>
-              <div className={styles.value}>12 Jalan Aman. Taman Aman</div>
+              <div className={styles.value}>{item.originaddress}</div>
             </div>
             <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipment Type</div>
-              <div className={styles.value}>Fradilo (Glass)</div>
+              <div className={styles.label}>Item Type</div>
+              <div className={styles.value}>{item.itemtype}</div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
-              <div className={styles.label}>Dacstinatian State</div>
-              <div className={styles.value}>Selangor</div>
+              <div className={styles.label}>Destination State</div>
+              <div className={styles.value}>{item.deststate}</div>
             </div>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Shipping Method</div>
-              <div className={styles.value}>Air</div>
+              <div className={styles.value}>{item.shipmentmethod}</div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Destination Address</div>
-              <div className={styles.value}>
-                University of Nottindham Malavcia
-              </div>
+              <div className={styles.value}>{item.destaddress}</div>
             </div>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Shipment Weight</div>
-              <div className={styles.value}>Pulau Pinang</div>
+              <div className={styles.value}>{item.shipmentweight}kg</div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
-              <div className={styles.label}>Dastinatian Postcode</div>
-              <div className={styles.value}>43500</div>
+              <div className={styles.label}>Destinatian Postcode</div>
+              <div className={styles.value}>{item.destpostcode}</div>
             </div>
             <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipment Dimensions</div>
-              <div className={styles.value}>1.0M x 3.0M x 0.5M</div>
+              <div className={styles.label}>Shipment Dimensions Length*Width*Height</div>
+              <div className={styles.value}>{item.itemlength}M*{item.itemwidth}M*{item.itemheight}M</div>
             </div>
           </div>
+          
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
-              <div className={styles.label}>Contact Number (Receiver)</div>
-              <div className={styles.value}>1234512332</div>
+              <div className={styles.label}>Receiver Name and Contact</div>
+              <div className={styles.value}>{item.recipientname} {item.recipientcontact}</div>
             </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Remarks</div>
-              <div className={styles.value}>None</div>
+            
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
-}
+
+              }
+
+export default AppliedJobDetails;

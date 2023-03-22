@@ -23,7 +23,7 @@
   margin-top: 10px;
   display: flex;
   cursor: pointer;
-  width: 100%;
+  width: 100%; /* danyi's one, zhenyi dont have*/
 }
 .right {
   padding-left: 10px;
