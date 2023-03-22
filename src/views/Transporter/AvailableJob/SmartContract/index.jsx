@@ -1,7 +1,8 @@
 import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
+import axios from "axios";
 //import * as api from '../../api/api';
 import {
   LoadingOutlined,
@@ -9,6 +10,37 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 
+
+function CreateContract(item){
+  //const [searchParams, setSearchParams] = useSearchParams();
+  axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "accord-contracts-accord-deploy",
+      "data": {
+        contractSourceS3BucketObjectPath: "test-contract7.cta",
+        ledgerDataPath: "Accord",
+        eventsQueue: "accord-contracts-output",
+        contractId: item.JobID,
+        contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
+          transporter:"resource:org.accordproject.party.Party#456",
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}
+  )
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+}
 
 export default function Add() {
 
@@ -89,8 +121,53 @@ export default function Add() {
   };
 
   const onFinishFailed = () => { };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [availableJobDetails, setAvailableJobDetails] = useState([]);
+  const [template, setTemplate] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
+      .then((response) => {
+        setAvailableJobDetails(response.data.body);
+        console.log(response.data.body[0]);
+
+        axios
+        .post(
+          'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+          {
+            "function": "GetContractTemplate",
+            "data": {$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
+                transporter:"resource:org.accordproject.party.Party#456",
+                shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(availableJobDetails[0].allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:availableJobDetails[0].originaddress,originState:availableJobDetails[0].originstate,originPostcode:"12345",destAddress:availableJobDetails[0].destaddress,destState:availableJobDetails[0].deststate,destPostcode:availableJobDetails[0].destpostcode,itemWidth:parseFloat(availableJobDetails[0].itemwidth),itemHeight:parseFloat(availableJobDetails[0].itemheight),itemWeight:parseFloat(availableJobDetails[0].shipmentweight),recipientName:availableJobDetails[0].recipientname,recipientContact:availableJobDetails[0].recipientcontact,itemType:availableJobDetails[0].itemtype,jobId:availableJobDetails[0].JobID,shipmentMethod:availableJobDetails[0].shipmentmethod,contractId:availableJobDetails[0].JobID,$identifier:availableJobDetails[0].JobID}
+          },{headers:{
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+            "X-Requested-With": "*"
+          }}
+        ).then((response) => {
+          //console.log(response.data.body);
+          setTemplate(response.data.body);
+          if (template.toString().startsWith("Job ID")){
+            return;
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  
+    }, [availableJobDetails,template]);
 
   return (
+    <>
+    {availableJobDetails.map((item) => (
+      
     <div className={styles.home}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
         <div style={{ fontSize: 30, fontWeight: "bold" }}>Smart Contract</div>
@@ -103,17 +180,6 @@ export default function Add() {
           <div className={styles.label}>
             Transacation ID:NDJ#378459023Y
           </div>
-          <div className={styles.row}>
-            <div className={styles.rowLabel}>
-              Smart Contract Valid Since:
-            </div>
-            <div className={styles.rowValue}>
-              09:21:36 25/12/2022
-            </div>
-          </div>
-
-
-
           <div className={styles.row}>
             <div className={styles.rowLabel}>
               Smart Contract Valid Since:
@@ -188,69 +254,9 @@ export default function Add() {
         </div>
 
 
-
-        <div style={{ flex: 1, paddingLeft: 60 }}>
-          <h1 >
-            Terms and Conditions
-          </h1>
-          <h2>
-            CONDITIONS AND CLARIFICATIONS
-          </h2>
-          <div className={styles.value}>
-            At ver cos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-            corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-            qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-            distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
-            maxime placeat facere possimus, omnis voluptas assumenda est. omnis dolor repellendus. Temporibus autem
-            quibusdam et aut officils debitis aut rerum.
-          </div>
-          <h2 style={{ marginTop: 10 }}>
-            Terms
-          </h2>
-          <div className={styles.value}>
-            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-            cumque nihil imped it quo minus id quod maxime placeat facere passimus, omnis voluptas assumenda est, omnis
-            dolor repellendus.
-            Et harum quidem rerum facilis est et expedita distinctio. Nam liber tempore, cum soluta nobis est eligendi optio
-            cumque nihil imped it quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis
-            dolor repellendus.
-            Fleetata holds the final explaination right of this general condition.
-          </div>
-
-          <h2 style={{ marginTop: 10 }}>
-            EXPLANATION OF FEES:
-          </h2>
-          <div className={styles.label}>
-            Violet Shah reserves the right to include the completed product of this project in a professional portfolio.
-          </div>
-
-          <h1 style={{ marginTop: 20 }}>
-            Allowance Fee
-          </h1>
-
-
-
-          <div style={{ marginTop: 10 }}>
-            <div style={{ display: "flex", borderBottom: "1px solid #333", justifyContent: "space-between", paddingBottom: 20 }}>
-              <h3>Service Item</h3>
-              <h3>QTY</h3>
-              <h3>AMOUNT</h3>
-            </div>
-            <div style={{ display: "flex", borderBottom: "1px solid #333", justifyContent: "space-between", paddingBottom: 20, paddingTop: 20 }}>
-              <div >
-                <div>Fragile Object Delivery,</div>
-                <div>A box of glasses to University of,</div>
-                <div> Nottingham Malaysia.</div>
-              </div>
-              <div>1</div>
-              <div>MYR 500.0</div>
-            </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 20 }}>
-            <h3>TOTAL ESTIMATED FEES</h3>
-            <h3>MYR 500.00</h3>
-          </div>
-
+        <div style={{ flex: 1, paddingLeft: 60}}>
+        <h3 style={{paddingLeft:250,paddingTop:30,paddingBottom:30, backgroundColor: 'lightyellow'}}dangerouslySetInnerHTML={{ __html:  template}}>
+          </h3>
           <div style={{ marginTop: 10 }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <h2>Press Confirm and we will send for admin approval</h2>
@@ -261,8 +267,8 @@ export default function Add() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-            <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {
-            }}>Confrim</Button>
+            <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {CreateContract(item)
+            }}>Confirm</Button>
             <Button style={{ backgroundColor: "#ab423d", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, marginLeft: 20 }} onClick={() => {
             }}>Decline</Button>
           </div>
@@ -272,5 +278,7 @@ export default function Add() {
       </div>
 
     </div >
+  ))}
+  </>
   );
 }
