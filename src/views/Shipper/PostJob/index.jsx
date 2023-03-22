@@ -546,8 +546,8 @@ function PostJobForm() {
             </div>
           </Form.Item>
         </Col>
-
-        <Col span="9">
+{/* **********************CHECK *******************last time it was col span 9 */}
+        <Col span="6">
           <Button
             style={{ width: '100%' }}
             type="primary"
