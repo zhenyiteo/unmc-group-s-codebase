@@ -170,10 +170,6 @@ export default function Add() {
   
     }, []);
 
-    const allowClickOnce = event => {
-      event.currentTarget.disabled = true;
-      console.log('button clicked');
-    };
 
   return (
     <>
@@ -278,7 +274,7 @@ export default function Add() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-            <Button id ="confirmBtn" style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {CreateContract(item); allowClickOnce()
+            <Button id ="confirmBtn" style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {CreateContract(item)
             }}>Confirm</Button>
             <Button style={{ backgroundColor: "#ab423d", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, marginLeft: 20 }} onClick={() => {
             }}>Decline</Button>
