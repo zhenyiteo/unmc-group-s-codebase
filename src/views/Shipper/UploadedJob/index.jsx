@@ -61,7 +61,7 @@ function UploadedJobDetails() {
   }, []);
 
   const handleItemClick = (item) => {
-    navigate(`/shipper/uploadedJobDetail/`);
+    navigate('/shipper/uploadedJobDetail?JobID=' + item.JobID);
   };
 
   return (
