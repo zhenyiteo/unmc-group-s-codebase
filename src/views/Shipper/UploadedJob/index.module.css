@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  /*  width: 50%; danyi */
   padding: 20px;
 }
 .cates {
   margin-top: 20px;
+  /*   margin-top: 40px; danyi */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
@@ -19,6 +21,7 @@
 .item {
   background-color: #f0f0f0;
   padding: 10px;
+  /*   margin-top: 10; danyi */
   text-align: center;
   margin-top: 10px;
   display: flex;
@@ -48,6 +51,14 @@
   color: rgba(255, 0, 0, 0.956);
   margin-top: 30px;
   font-size: 15px;
+
+  /* 
+  danyi
+    color: rgba(0, 0, 0, 0.956);
+  font-size: 25px;
+  padding-left: 30%;
+  
+  */
 }
 
 .value {

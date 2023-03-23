@@ -1,6 +1,15 @@
 import { HashRouter as Router, useRoutes } from 'react-router-dom';
+
+//layout
 import Layout from './views/Shipper/Layout';
 import LayoutTransporter from './views/Transporter/Layout';
+import LayoutAdmin from './views/Admin/Layout';
+
+//admin
+import ContractHistory from './views/Admin/ContractHistory';
+
+//login
+import Login from './views/Login';
 
 //shipper
 import Profile from './views/Shipper/Profile';
@@ -20,13 +29,18 @@ import AppliedJobDetail from './views/Transporter/AppliedJob/Detail';
 //in common
 import PendingJob from './views/Transporter/PendingJob';
 //import PendingJobDetail from './views/Transporter/PendingJob/Detail';
-import JobHistory from './views/Shipper/JobHistory';
+import JobHistory from './views/Transporter/JobHistory';
+//import JobHistory from './views/Shipper/JobHistory'; ************CHECK WHY GOT BOTH******************
 
 const GetRoutes = () => {
   const routes = useRoutes([
     {
       path: '/',
       children: [
+        {
+          path: 'login',
+          element: <Login></Login>,
+        },
         {
           path: 'shipper',
           element: <Layout></Layout>,
@@ -95,8 +109,26 @@ const GetRoutes = () => {
             //   element: <PendingJobDetail></PendingJobDetail>,
             // },
             {
-              path: 'profile4',
-              element: <Profile></Profile>,
+              path: 'jobHistory',
+              element: <JobHistory></JobHistory>,
+            },
+          ],
+        },
+
+        {
+          path: 'admin',
+          element: <LayoutAdmin></LayoutAdmin>,
+          children: [
+            {
+              path: 'p1',
+              element: <ContractHistory></ContractHistory>,
+            },
+            {
+              path: 'profile',
+              element: <ContractHistory></ContractHistory>,
+              //  **************** CHECK what is profile 4****************************
+              // path: 'profile4',
+              // element: <Profile></Profile>,
             },
           ],
         },

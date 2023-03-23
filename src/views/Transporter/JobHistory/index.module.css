@@ -17,12 +17,13 @@
   cursor: pointer;
 }
 .item {
-  background-color: #f0f0f0;
-  padding: 10px;
-  text-align: center;
-  margin-top: 10px;
+  flex: 1;
   display: flex;
-  cursor: pointer;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.item-title {
+  font-weight: bold;
 }
 .right {
   padding-left: 10px;
@@ -41,16 +42,16 @@
 }
 .label {
   color: #000;
-  margin-top: 10px;
   font-size: 14px;
 }
 .left {
   width: 500px;
-  position: relative; /* danyi's change */
 }
 .value {
   color: #000;
   font-size: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .row {
   display: flex;
@@ -65,4 +66,14 @@
 .rowValue {
   color: #444;
   font-size: 12px;
+}
+.img-wrapper {
+  background-color: #eee;
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

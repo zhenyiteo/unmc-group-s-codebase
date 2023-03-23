@@ -39,30 +39,3 @@
 .remark {
   font-size: 15px;
 }
-.label {
-  color: #000;
-  margin-top: 10px;
-  font-size: 14px;
-}
-.left {
-  width: 500px;
-  position: relative; /* danyi's change */
-}
-.value {
-  color: #000;
-  font-size: 15px;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 10px 0px;
-}
-.rowLabel {
-  color: #000;
-  font-size: 14px;
-}
-.rowValue {
-  color: #444;
-  font-size: 12px;
-}
