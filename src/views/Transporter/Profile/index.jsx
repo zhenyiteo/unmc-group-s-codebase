@@ -1,14 +1,21 @@
+import {
+  Button,
+  Col,
+  Divider,
+  Row,
+  Typography,
+} from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
 
-function TransDetails() {
-  const [TransData, setTransData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const { Title } = Typography;
 
+function TransDetails() {
+  const [transData, setTransData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
       .get(
@@ -32,18 +39,41 @@ function TransDetails() {
     </div>
     </>)
   }
+  const handleEditProfile = () => {
+    // handle edit profile button click
+    console.log('Edit profile clicked');
+  };
 
   return (
-    <div>
-      <h1>Transporter Profile</h1>
-      {TransData.map((trans) => (
-        <div key={trans.transID}>
-          <p>Transporter ID: {trans.transID}</p>
-          <p>Name: {trans.name}</p>
-          <p>Contact: {trans.contact}</p>
-          <p>Email: {trans.email}</p>
-          <p>Website: {trans.website}</p>
-          <hr />
+    <div style={{ margin: '2rem auto', maxWidth: 800 }}>
+      <Title level={2} style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        Transporter Profile
+      </Title>
+      {transData.map((trans) => (
+        <div key={trans.transID} style={{ marginBottom: '2rem' }}>
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <strong>Transporter ID:</strong> {trans.transID}
+            </Col>
+            <Col span={12}>
+              <strong>Name:</strong> {trans.name}
+            </Col>
+            <Col span={12}>
+              <strong>Contact:</strong> {trans.contact}
+            </Col>
+            <Col span={12}>
+              <strong>Email:</strong> {trans.email}
+            </Col>
+            <Col span={24}>
+              <strong>Website:</strong> {trans.website}
+            </Col>
+          </Row>
+          <Button type="primary" onClick={handleEditProfile}>
+            Edit Profile
+          </Button>
+          {transData.indexOf(trans) !== transData.length - 1 && (
+            <Divider />
+          )}
         </div>
       ))}
     </div>

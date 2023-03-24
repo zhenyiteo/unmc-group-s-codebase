@@ -1,3 +1,4 @@
+import { Button, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spin from 'antd/es/spin';
@@ -32,18 +33,37 @@ function ShipperDetails() {
     </div>
     </>)
   }
+  const handleEditProfile = () => {
+    // logic to handle edit profile click
+    console.log('Edit profile clicked');
+  };
 
   return (
-    <div>
-      <h1>Shipper Profile</h1>
+    <div style={{ margin: '2rem auto', maxWidth: 800 }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        Shipper Profile
+      </h1>
       {shipperData.map((shipper) => (
-        <div key={shipper.ShipperID}>
-          <p>Shipper ID: {shipper.ShipperID}</p>
-          <p>Name: {shipper.name}</p>
-          <p>Contact: {shipper.contact}</p>
-          <p>Email: {shipper.email}</p>
-          <p>Website: {shipper.website}</p>
-          <hr />
+        <div key={shipper.ShipperID} style={{ marginBottom: '2rem' }}>
+          <p>
+            <strong>Shipper ID:</strong> {shipper.ShipperID}
+          </p>
+          <p>
+            <strong>Name:</strong> {shipper.name}
+          </p>
+          <p>
+            <strong>Contact:</strong> {shipper.contact}
+          </p>
+          <p>
+            <strong>Email:</strong> {shipper.email}
+          </p>
+          <p>
+            <strong>Website:</strong> {shipper.website}
+          </p>
+          <Button type="primary" onClick={handleEditProfile}>
+            Edit Profile
+          </Button>
+          <Divider />
         </div>
       ))}
     </div>

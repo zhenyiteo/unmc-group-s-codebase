@@ -45,9 +45,20 @@ function AvailableJob() {
       name: 'Dangerous',
     },
   ]);
+  const [searchText, setSearchText] = useState('');
 
   const navigate = useNavigate();
-  const filteredList = selectCate && selectCate.name !== 'All' ? list.filter(item => item.remark.toLowerCase().includes(selectCate.name.toLowerCase())) : list;
+
+  const filteredList = list.filter(item => {
+    let isMatched = true;
+    if (selectCate && selectCate.name !== 'All') {
+      isMatched = item.remark.toLowerCase().includes(selectCate.name.toLowerCase());
+    }
+    if (searchText && !item.name.toLowerCase().includes(searchText.toLowerCase())) {
+      isMatched = false;
+    }
+    return isMatched;
+  });
 
   useEffect(() => {
     axios.get('https://uiuokt5tql.execute-api.us-east-1.amazonaws.com/prod/transporteravailablejob')
@@ -62,11 +73,6 @@ function AvailableJob() {
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
   }, []);
-
-  
-    
-   
- 
 
   const handleItemClick = (item) => {
     const matchingItem = list.find((listItem) => listItem.JobID === item.JobID);
@@ -103,10 +109,11 @@ function AvailableJob() {
           ))}
         </div>
         <div>
-          <Select
-            defaultValue=" "
-            style={{ width: 200 }}
-            options={[            {              value: '1',              label: 'sort by allowance',            },            {              value: '2',              label: 'sort by location',            },            {              value: '3',              label: 'sort by rating',            },            {              value: '4',              label: 'oldest',            },            {              value: '5',              label: 'latest(newest)',            },          ]}
+          <Input.Search
+            placeholder="Search by keyword"
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+            allowClear
           />
         </div>
       </div>
@@ -117,7 +124,6 @@ function AvailableJob() {
             className={styles.item}
             style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
             onClick={() => {
-              
               handleItemClick(item);
             }}
           >
