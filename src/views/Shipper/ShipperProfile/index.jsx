@@ -1,9 +1,14 @@
 import { Button, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
+import styles from './index.module.css';
 
 function ShipperDetails() {
   const [shipperData, setShipperData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     axios
@@ -12,12 +17,22 @@ function ShipperDetails() {
       )
       .then((response) => {
         setShipperData(response.data.body);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
   const handleEditProfile = () => {
     // logic to handle edit profile click
     console.log('Edit profile clicked');

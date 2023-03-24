@@ -12,6 +12,8 @@ import { Modal } from 'antd';
 //   FileImageOutlined
 //   PlusOutlined,
 // } from '@ant-design/icons';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 
 async function cancelJob(JobID) {
   try {
@@ -30,12 +32,14 @@ function UploadedJobDetails() {
   const { JobID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [uploadedJobDetails, setUploadedJobDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   console.log("searching for job id " + searchParams.get("JobID"));
   useEffect(() => {
     axios
     .get(` https://30y3p7rcp5.execute-api.us-east-1.amazonaws.com/hey/hey?jobid=` +searchParams.get("JobID"))
       .then((response) => {
         setUploadedJobDetails(response.data.body);
+        setIsLoading(false);
          
       })
       .catch((error) => {
@@ -71,6 +75,15 @@ const handleCancel = () => { //for prompt window function for concel job
   setIsModalVisible(false);
 }
 
+if (isLoading){
+  return (<>
+  <div className={styles.home} >
+    <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+      <Spin tip="Loading..." size="large"/>
+    </div>
+  </div>
+  </>)
+}
 
 
   return (

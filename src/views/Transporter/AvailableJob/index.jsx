@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 import {
   LoadingOutlined,
   FileImageOutlined,
@@ -13,6 +15,7 @@ import axios from 'axios';
 function AvailableJob() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [cates, setCates] = useState([
     {
       name: 'All',
@@ -65,7 +68,8 @@ function AvailableJob() {
           logo: '/images/tlogo.jpg',
           name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
           remark: `Type: ${item.itemtype}`,
-        })))
+        })));
+        setIsLoading(false);
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
   }, []);
@@ -76,6 +80,15 @@ function AvailableJob() {
       navigate('/transporter/availableJobDetail?JobID=' + item.JobID);
     }
   };
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
 
   return (
     <div className={styles.home}>

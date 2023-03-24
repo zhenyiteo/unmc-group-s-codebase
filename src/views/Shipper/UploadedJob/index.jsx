@@ -9,10 +9,13 @@ import {
 } from '@ant-design/icons';
 import styles from './index.module.css';
 import axios from 'axios';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 
 function UploadedJobDetails() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [cates, setCates] = useState([
     {
       name: 'All',
@@ -66,7 +69,8 @@ function UploadedJobDetails() {
           name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
           remark: `Type: ${item.itemtype}`, 
           
-        })))
+        })));
+        setIsLoading(false);
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
   }, []);
@@ -75,6 +79,15 @@ function UploadedJobDetails() {
     navigate('/shipper/uploadedJobDetail?JobID=' + item.JobID);
   };
 
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
 
   return (
   <div className={styles.home}>
