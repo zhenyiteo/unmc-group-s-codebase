@@ -1,34 +1,13 @@
-import {
-  Button,
-  Checkbox,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  message,
-  Radio,
-  Rate,
-  Row,
-  Select,
-  Tabs,
-  Upload,
-} from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
-//import * as api from '../../api/api';
-import moment from 'moment';
-import PropTypes from 'prop-types'; // yarn add prop-types
-import Column from 'antd/lib/table/Column';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 
 function TransDetails() {
   const [TransData, setTransData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -37,11 +16,22 @@ function TransDetails() {
       )
       .then((response) => {
         setTransData(response.data.body);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
 
   return (
     <div>

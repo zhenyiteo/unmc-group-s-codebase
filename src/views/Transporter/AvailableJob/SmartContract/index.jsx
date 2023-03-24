@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
 import axios from "axios";
+import ReactMarkdown from 'react-markdown';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 //import * as api from '../../api/api';
 import {
   LoadingOutlined,
   FileImageOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+import reactMarkdown from 'react-markdown';
 
 
 async function GenerateContract(item){
@@ -19,8 +23,8 @@ async function GenerateContract(item){
     {
       "function": "GetContractTemplate",
       "data": {$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
-          transporter:"resource:org.accordproject.party.Party#456",
-          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
+      transporter:"resource:org.accordproject.party.Party#456",
+      shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:"2023-03-26 20:00:00",beginningDate:"2023-03-24 00:00:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -39,20 +43,20 @@ return test;
 
 }
 
-function CreateContract(item){
-  axios
+async function CreateContract(item){
+  await axios
   .post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
     {
       "function": "accord-contracts-accord-deploy",
       "data": {
-        contractSourceS3BucketObjectPath: "test-contract7.cta",
+        contractSourceS3BucketObjectPath: "test-contract9.cta",
         ledgerDataPath: "Accord",
         eventsQueue: "accord-contracts-output",
         contractId: item.JobID,
         contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
           transporter:"resource:org.accordproject.party.Party#456",
-          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},admin:"AdminCompany",deliveryDate:"2023-03-18T00:00:00.000+08:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:"2023-03-26 20:00:00",beginningDate:"2023-03-24 00:00:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -66,6 +70,25 @@ function CreateContract(item){
   .catch((error) => {
     console.error(error);
   });
+
+  await axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "QLDBtest",
+      "data": {
+        jobid:item.JobID}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
 }
 
@@ -154,7 +177,9 @@ export default function Add() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
   const [template, setTemplate] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setTemplate("<center>Please wait while the smart contract is loading...</center>");
     axios
       .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
       .then((response) => {
@@ -163,6 +188,7 @@ export default function Add() {
         const contractText = async() =>{
           const contract = await GenerateContract(response.data.body[0]);
           setTemplate(contract);
+          setIsLoading(false);
         }
         contractText();
       })
@@ -173,12 +199,20 @@ export default function Add() {
   
     }, []);
 
-
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
   return (
     <>
     {availableJobDetails.map((item) => (
       
-    <div className={styles.home}>
+    <div className={styles.home} >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 30 }}>
         <div style={{ fontSize: 30, fontWeight: "bold" }}>Smart Contract</div>
       </div>
@@ -196,22 +230,11 @@ export default function Add() {
             }}></div> : <></>}
           <div style={{ position: "relative" }}>
             <div className={styles.label}>
-              Job ID:357347546072812
+              Job ID: {item.JobID}
             </div>
             <div className={styles.label}>
               Transacation ID:NDJ#378459023Y
             </div>
-            <div className={styles.row}>
-              <div className={styles.rowLabel}>
-                Smart Contract Valid Since:
-              </div>
-              <div className={styles.rowValue}>
-                09:21:36 25/12/2022
-              </div>
-            </div>
-
-
-
             <div className={styles.row}>
               <div className={styles.rowLabel}>
                 Smart Contract Valid Since:
@@ -232,16 +255,16 @@ export default function Add() {
 
             <div className={styles.row}>
               <div className={styles.rowLabel} style={{ color: "#999" }}>
-                Penality:
+                Penalty:
               </div>
               <div className={styles.rowValue} style={{ color: "#999" }}>
-                RM 1,000
+                RM {item.penalty}
               </div>
             </div>
 
             <div className={styles.row}>
               <div className={styles.rowLabel}>
-                Admin Signature
+                Signing Admin
               </div>
               <div className={styles.rowValue}>
                 ADMIN NO2 FLEETATA
@@ -256,7 +279,7 @@ export default function Add() {
                 COMPANY - TRANSPORTER NAME
               </div>
             </div>
-            <div style={{ display: "flex" }}>
+            {/* <div style={{ display: "flex" }}>
               <div style={{ flex: 1 }}>
                 <h2>Violet Shah</h2>
                 <div>Visual Designer</div>
@@ -269,7 +292,23 @@ export default function Add() {
                 <div>VSelangor,Malaysia</div>
                 <div>Yzx9887@yahoo.com</div>
               </div>
+            </div> */}
+
+          <div className={styles.row}>
+              <div className={styles.rowLabel}>
+                <h2>Violet Shah</h2>
+                <div>Visual Designer</div>
+                <div>Vancouver,British Columnbia</div>
+                <div>rosadiaz@gmail.com</div>
+              </div>
+              <div className={styles.rowLabel} style={{ textAlign: 'right' }}>
+                <h2>Dylan Drake Bhd.xx</h2>
+                <div>Robbie Alvarea</div>
+                <div>VSelangor,Malaysia</div>
+                <div>Yzx9887@yahoo.com</div>
+              </div>
             </div>
+            
             <h2 style={{ marginTop: 20 }}>Deliverables</h2>
             <h3>Deliverable Here</h3>
             <div>Lorem ipsum dolor sit amet consectetur adipising edit,Eget quam lucus feugiat sit. Una,semper sagittls non faucibus nunc tortor,id sed donec</div>
@@ -287,9 +326,10 @@ export default function Add() {
         </div>
 
 
-        <div style={{ flex: 1, paddingLeft: 60}}>
-        <h3 style={{paddingLeft:250,paddingTop:30,paddingBottom:30, backgroundColor: 'lightyellow'}}dangerouslySetInnerHTML={{ __html:  template}}>
-          </h3>
+        <div style={{ flex: 1, paddingLeft: 60, marginLeft:"10%"}}>
+          <div style={{paddingLeft:30,paddingTop:30,paddingBottom:30, backgroundColor: 'lightyellow',maxHeight: "65vh",overflow:"auto"}}>
+            <ReactMarkdown style={{textAlign: "center"}}children={template}/>
+          </div>
           <div style={{ marginTop: 10 }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <h2>Press Confirm and we will send for admin approval</h2>

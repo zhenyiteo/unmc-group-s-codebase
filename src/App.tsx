@@ -12,14 +12,14 @@ import ContractHistory from './views/Admin/ContractHistory';
 import Login from './views/Login';
 
 //shipper
-import Profile from './views/Shipper/Profile';
+import ShipperProfile from './views/Shipper/ShipperProfile';
 import PostJob from './views/Shipper/PostJob';
 import UploadedJob from './views/Shipper/UploadedJob';
 import UploadedJobDetail from './views/Shipper/UploadedJob/Detail';
 // import ActiveJob from './views/Shipper/ActiveJob';
 
 //transporter
-//import Profile from './views/Transporter/Profile';
+import TransProfile from './views/Transporter/TransProfile';
 import AvailableJob from './views/Transporter/AvailableJob';
 import AvailableJobDetail from './views/Transporter/AvailableJob/Detail';
 import SmartContract from './views/Transporter/AvailableJob/SmartContract';
@@ -51,7 +51,7 @@ const GetRoutes = () => {
             },
             {
               path: 'profile',
-              element: <Profile></Profile>,
+              element: <ShipperProfile></ShipperProfile>,
             },
             {
               path: 'uploadedJob',
@@ -78,7 +78,7 @@ const GetRoutes = () => {
           children: [
             {
               path: 'profile',
-              element: <Profile></Profile>,
+              element: <TransProfile></TransProfile>,
             },
             {
               path: 'availableJob',

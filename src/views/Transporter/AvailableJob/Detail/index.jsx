@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import axios from "axios";
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 //import * as api from '../../api/api';
 // import {
 //   LoadingOutlined,
@@ -48,13 +50,14 @@ function AvailableJobDetails() {
   const { JobID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   console.log("searching for job id " + searchParams.get("JobID"));
   useEffect(() => {
     axios
       .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
       .then((response) => {
         setAvailableJobDetails(response.data.body);
-        
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -66,6 +69,16 @@ function AvailableJobDetails() {
   };
 
   const onFinishFailed = () => {};
+
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
 
   return (
     <>
