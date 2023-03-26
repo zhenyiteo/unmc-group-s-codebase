@@ -15,16 +15,22 @@ import {
 import reactMarkdown from 'react-markdown';
 
 
-async function GenerateContract(item){
+async function GenerateContract(item, dateTime){
+  var testNewDate = new Date(dateTime);
+  console.log(testNewDate);
+  console.log(item.shipmentduration);
+  testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
+  console.log("Expected Delivery ", testNewDate.toISOString());
 
   const test = await new Promise((resolve, reject)=>{
+
     axios.post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
     {
       "function": "GetContractTemplate",
       "data": {$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
       transporter:"resource:org.accordproject.party.Party#456",
-      shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:"2023-03-26 20:00:00",beginningDate:"2023-03-24 00:00:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
+      shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toISOString(),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -43,7 +49,14 @@ return test;
 
 }
 
-async function CreateContract(item){
+async function CreateContract(item, dateTime){
+
+  var testNewDate = new Date(dateTime);
+  console.log(testNewDate);
+  console.log(item.shipmentduration);
+  testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
+  console.log("Expected Delivery ", testNewDate.toISOString());
+
   await axios
   .post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
@@ -56,7 +69,7 @@ async function CreateContract(item){
         contractId: item.JobID,
         contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#123",
           transporter:"resource:org.accordproject.party.Party#456",
-          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:"2023-03-26 20:00:00",beginningDate:"2023-03-24 00:00:00",originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toISOString(),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -178,15 +191,24 @@ export default function Add() {
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
   const [template, setTemplate] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [dateTime, setDateTime] = useState("");
+
   useEffect(() => {
-    setTemplate("<center>Please wait while the smart contract is loading...</center>");
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const currentDT = date+' '+time;
+
+    setDateTime(currentDT);
+
     axios
       .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
       .then((response) => {
         setAvailableJobDetails(response.data.body);
         console.log(response.data.body[0]);
         const contractText = async() =>{
-          const contract = await GenerateContract(response.data.body[0]);
+
+          const contract = await GenerateContract(response.data.body[0],dateTime);
           setTemplate(contract);
           setIsLoading(false);
         }
@@ -197,7 +219,7 @@ export default function Add() {
       });
 
   
-    }, []);
+    }, [dateTime]);
 
   if (isLoading){
     return (<>
@@ -341,7 +363,7 @@ export default function Add() {
           </div>
           {
             !showSign ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-              <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {CreateContract(item);
+              <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {CreateContract(item, dateTime);
                 setShowSign(true);
               }}>Confrim</Button>
               <Button style={{ backgroundColor: "#ab423d", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, marginLeft: 20 }} onClick={() => {
