@@ -42,7 +42,7 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: '23',
-      tranporterId: 'Dylan Drake Bhd',
+      shiperId: 'Fantacy Glass',
       shipmentMethod: 'Air-DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
@@ -52,7 +52,7 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: 'A773',
-      tranporterId: 'zeroPoint',
+      shiperId: 'Fantacy Glass',
       shipmentMethod: 'Air-DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
@@ -62,7 +62,7 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: 'F429',
-      tranporterId: 'Ninja Van',
+      shiperId: 'Fantacy Glass',
       shipmentMethod: 'Air-DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
@@ -72,7 +72,7 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: 'M27',
-      tranporterId: 'Grab',
+      shiperId: 'Fantacy Glass',
       shipmentMethod: 'Air-DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
@@ -131,7 +131,7 @@ export default function Add() {
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
               onClick={() => {
                 if (item.jobId === '23') {
-                  navigate('/shipper/activeJobDetail');
+                  navigate('/transporter/OnGoingJobDetail');
                 }
               }}
             >
@@ -150,7 +150,7 @@ export default function Add() {
                     className={styles.name}
                     style={{ color: 'blue' }}
                   >
-                    Tranporter Id: {item.tranporterId}
+                    Shipper ID:{item.shiperId}
                   </div>
                   <div style={{ color: 'blue' }}>
                     Shipment Method:{item.shipmentMethod}
@@ -160,10 +160,10 @@ export default function Add() {
                   <div className={styles.name}>
                     Shipment Weight:{item.shipmentWeight}
                   </div>
-                  <div>Shipment Type:{item.shipmentType}</div>
+                  <div>Shipment Type:{item.transporterId}</div>
                 </div>
                 <div className={styles.row}>
-                  <div>Allowance/Penalty: {item.allowance}</div>
+                  <div>Allowance/Penalty:{item.allowance}</div>
                 </div>
               </div>
             </div>

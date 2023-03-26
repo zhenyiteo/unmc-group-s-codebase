@@ -1,23 +1,38 @@
-//import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import { Button, message } from 'antd';
+import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 //import * as api from '../../api/api';
-// import {
-//   LoadingOutlined,
-//   FileImageOutlined,
-//   PlusOutlined,
-// } from '@ant-design/icons';
+import {
+  LoadingOutlined,
+  FileImageOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 
 export default function Add() {
   const navigate = useNavigate();
+
   const [cates, setCates] = useState([]);
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(cates[0]);
   useEffect(() => {}, []);
 
   const onFinish = async (values) => {
+    // console.log('Success:', values);
+    // if (!id) {
+    //   await api.add({
+    //     ...values,
+    //     type: tab === "1" ? 1 : 2,
+    //     cate: selectCate.title
+    //   });
+    // } else {
+    //   await api.update(id, {
+    //     ...values,
+    //     type: tab === "1" ? 1 : 2,
+    //     cate: selectCate.title
+    //   });
+    // }
+
     message.info('Successfully Saved!');
   };
 
@@ -33,7 +48,7 @@ export default function Add() {
         }}
       >
         <h1>Fantacy Glass Company</h1>
-        <div style={{ fontSize: 20 }}>Shipment Duration:72 Hours</div>
+        <div style={{ fontSize: 40 }}>Remaining Time: 26:45:03</div>
       </div>
       <div style={{ display: 'flex' }}>
         <div>
@@ -43,35 +58,35 @@ export default function Add() {
             style={{ width: 150, height: 150 }}
           ></img>
           <div className={styles.label}>Job Status</div>
-          <div className={styles.value}>Waiting for transporter pick up</div>
+          <div className={styles.value}>On Delivery</div>
           <div className={styles.label}>Released By</div>
           <div className={styles.value}>Fantacy Glass Company</div>
           <div className={styles.label}>Contact Number (Shipper)</div>
           <div className={styles.value}>019 276 3456</div>
 
-          <div className={styles.label}>Publish Time</div>
+          <div className={styles.label}>Publish Date</div>
           <div className={styles.value}>08 / 09 / 2022</div>
           <div className={styles.label}>Smart Contract Valid Since</div>
-          <div className={styles.value}>--</div>
+          <div className={styles.value}>08 / 09 / 2022 13:24:09</div>
 
-          <div style={{ fontSize: 20, marginTop: 20 }}>
-            Shipment Allowance: RM 500
+          <div style={{ fontSize: 20, marginTop: 60 }}>
+            Shipment Allowance: 500RM
           </div>
-          <div style={{ fontSize: 20 }}></div>
+          <div style={{ fontSize: 20, marginTop: 5 }}></div>
           <Button
             style={{
-              backgroundColor: '#8c8c8c',
+              backgroundColor: '#1677ff',
               color: '#fff',
-              height: 50,
-              width: 300,
-              marginTop: 5,
+              height: 60,
+              width: 230,
+              marginTop: 8,
               borderRadius: 5,
             }}
             onClick={() => {
-              navigate('/shipper/uploadedJob');
+              navigate('/shipper/shipperJobHistoryDetail');
             }}
           >
-            Waiting..Return uploaded job?
+            Confirm Finished
           </Button>
         </div>
 
@@ -89,7 +104,26 @@ export default function Add() {
             </div>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Shipment Penalty</div>
-              <div className={styles.value}>RM 1,000</div>
+              <div className={styles.value}>
+                RM 1,000
+                {/* <Button
+                  style={{
+                    backgroundColor: '#f5222d',
+                    color: '#fff',
+                    height: 30,
+                    width: 140,
+                    marginTop: 10,
+                    borderRadius: 5,
+                    fontSize: 10,
+                    marginLeft: 20,
+                  }}
+                  onClick={() => {
+                    navigate('');
+                  }}
+                >
+                  Cancel Job
+                </Button> */}
+              </div>
             </div>
           </div>
 
@@ -100,7 +134,7 @@ export default function Add() {
             </div>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Shipment Type</div>
-              <div className={styles.value}>Fradilo (Glass)</div>
+              <div className={styles.value}>Fragile (Glass)</div>
             </div>
           </div>
 
@@ -119,7 +153,7 @@ export default function Add() {
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Destination Address</div>
               <div className={styles.value}>
-                University of Nottindham Malavcia
+                University of Nottindham Malaysia
               </div>
             </div>
             <div style={{ flex: 1 }}>

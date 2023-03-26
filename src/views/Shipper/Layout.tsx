@@ -33,7 +33,7 @@ export default function Layout() {
           mode="inline"
           items={[
             {
-              key: '/shipper/profile',
+              key: '/shipper/shipperProfile',
               icon: <MailOutlined />, //can change later lah
               label: 'Profile',
             },
@@ -53,12 +53,12 @@ export default function Layout() {
               label: 'Active Jobs',
             },
             {
-              key: '/shipper/pendingJob',
+              key: '/shipper/shipperPendingJob',
               icon: <MailOutlined />,
               label: 'Pending Jobs',
             },
             {
-              key: '/shipper/jobHistory',
+              key: '/shipper/shipperJobHistory',
               icon: <MailOutlined />,
               label: 'Job History',
             },

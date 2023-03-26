@@ -14,70 +14,67 @@ export default function Add() {
 
   const [cates, setCates] = useState([
     {
-      name: 'Glass',
+      name: 'Air',
     },
     {
-      name: 'Flammable',
+      name: 'Water',
     },
     {
-      name: 'Frozen',
+      name: 'Motor',
     },
     {
-      name: 'Medicine',
+      name: 'Train',
     },
     {
-      name: 'Electronics',
+      name: 'Truck',
     },
     {
-      name: 'Fragile',
+      name: 'Car',
     },
     {
-      name: 'Daily',
-    },
-    {
-      name: 'Plastice',
+      name: 'Others',
     },
   ]);
   const [list, setList] = useState([
     {
       logo: '/images/tlogo.jpg',
       jobId: '23',
-      tranporterId: 'Dylan Drake Bhd',
+      shiperId: 'Fantacy Glass',
       shipmentMethod: 'Air-DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Delivered',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'A773',
-      tranporterId: 'zeroPoint',
-      shipmentMethod: 'Air-DHL',
-      shipmentWeight: '10KG',
+      shiperId: 'xxxxxx',
+      shipmentMethod: 'xxx',
+      shipmentWeight: '90KG',
       shipmentType: 'Glass',
-      allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      allowance: 'RM1000/2000',
+      status: 'Delievering: 03:45:25 left',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'F429',
-      tranporterId: 'Ninja Van',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Failed Delivery: Penalty 1000RM',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'M27',
-      tranporterId: 'Grab',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Failed Smart Contract',
     },
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
@@ -114,13 +111,11 @@ export default function Add() {
           flex: 1,
         }}
       >
-        <div style={{ fontSize: 40, fontWeight: 'bold' }}>
-          On-Going Job Status
-        </div>
+        <div style={{ fontSize: 40, fontWeight: 'bold' }}>Job History</div>
         <div style={{ marginTop: 20 }}>
           <Input.Search
             style={{ height: 40, borderRadius: 10 }}
-            placeholder="Search company/job id/shipper id"
+            placeholder="Search company name/ job id"
           ></Input.Search>
         </div>
 
@@ -131,7 +126,7 @@ export default function Add() {
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
               onClick={() => {
                 if (item.jobId === '23') {
-                  navigate('/shipper/activeJobDetail');
+                  navigate('/transporter/transJobHistoryDetail');
                 }
               }}
             >
@@ -143,14 +138,14 @@ export default function Add() {
               <div className={styles.itemright}>
                 <div className={styles.row}>
                   <div className={styles.name}>Job ID:{item.jobId}</div>
-                  <div style={{ color: 'red' }}>{item.due}</div>
+                  <div style={{ color: 'red' }}>{item.status}</div>
                 </div>
                 <div className={styles.row}>
                   <div
                     className={styles.name}
                     style={{ color: 'blue' }}
                   >
-                    Tranporter Id: {item.tranporterId}
+                    Shipper ID:{item.shiperId}
                   </div>
                   <div style={{ color: 'blue' }}>
                     Shipment Method:{item.shipmentMethod}
@@ -163,7 +158,7 @@ export default function Add() {
                   <div>Shipment Type:{item.shipmentType}</div>
                 </div>
                 <div className={styles.row}>
-                  <div>Allowance/Penalty: {item.allowance}</div>
+                  <div>Allowance/Penalty:{item.allowance}</div>
                 </div>
               </div>
             </div>
@@ -171,7 +166,7 @@ export default function Add() {
         </div>
       </div>
       <div className={styles['right']}>
-        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
+        <div style={{ marginTop: 112, fontWeight: 'bold' }}>
           Category Filter
         </div>
         <div className={styles.cates}>
@@ -189,23 +184,23 @@ export default function Add() {
           options={[
             {
               value: '1',
-              label: 'sort by allowance',
+              label: 'Less Remaining Time',
             },
             {
               value: '2',
-              label: 'sort by location',
+              label: 'Newly Accepted Job',
             },
             {
               value: '3',
-              label: 'sort by rating',
+              label: 'Delivered Job',
             },
             {
               value: '4',
-              label: 'oldest',
+              label: 'Penalized Job',
             },
             {
               value: '5',
-              label: 'latest(newest)',
+              label: 'Failed Smart Contract',
             },
           ]}
         />

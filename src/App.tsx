@@ -6,30 +6,46 @@ import LayoutTransporter from './views/Transporter/Layout';
 import LayoutAdmin from './views/Admin/Layout';
 
 //admin
+import ApprovedContract from './views/Admin/ApprovedContract';
+import DeclinedContract from './views/Admin/DeclinedContract';
 import ContractHistory from './views/Admin/ContractHistory';
+import PendingContract from './views/Admin/PendingContract';
+import PendingContractDetail from './views/Admin/PendingContract/Detail';
 
 //login
 import Login from './views/Login';
 
 //shipper
-import Profile from './views/Shipper/Profile';
+import ShipperProfile from './views/Shipper/ShipperProfile';
 import PostJob from './views/Shipper/PostJob';
 import UploadedJob from './views/Shipper/UploadedJob';
+import ShipperSmartContract from './views/Shipper/UploadedJob/ShipperSmartContract';
 import UploadedJobDetail from './views/Shipper/UploadedJob/Detail';
-// import ActiveJob from './views/Shipper/ActiveJob';
+import ActiveJob from './views/Shipper/ActiveJob';
+import ActiveJobDetail from './views/Shipper/ActiveJob/Detail';
+import ShipperPendingJob from './views/Shipper/ShipperPendingJob';
+import ShipperWaitAdmin from './views/Shipper/ShipperWaitAdmin';
+import ShipperJobHistory from './views/Shipper/ShipperJobHistory';
+import FinishedJob from './views/Shipper/ShipperJobHistory/FinishedJob';
+import ShipperJobHistoryTransportation from './views/Shipper/ShipperJobHistory/ByTransportaions';
+import ShipperJobHistoryDetail from './views/Shipper/ShipperJobHistory/Detail';
 
 //transporter
-//import Profile from './views/Transporter/Profile';
+import TransProfile from './views/Transporter/TransProfile';
 import AvailableJob from './views/Transporter/AvailableJob';
+import WaitAdminConfirm from './views/Transporter/AvailableJob/WaitAdminConfirm';
 import AvailableJobDetail from './views/Transporter/AvailableJob/Detail';
-import SmartContract from './views/Transporter/AvailableJob/SmartContract';
-import AppliedJob from './views/Transporter/AppliedJob';
-import AppliedJobDetail from './views/Transporter/AppliedJob/Detail';
-
-//in common
-import PendingJob from './views/Transporter/PendingJob';
+import TransContract from './views/Transporter/AvailableJob/TransContract';
+import OnGoingJob from './views/Transporter/OnGoingJob';
+import OnGoingJobDetail from './views/Transporter/OnGoingJob/Detail';
+import OnGoingJobDelivered from './views/Transporter/OnGoingJob/Delivered';
+import TransPendingJob from './views/Transporter/TransPendingJob';
 //import PendingJobDetail from './views/Transporter/PendingJob/Detail';
-import JobHistory from './views/Transporter/JobHistory';
+import TransJobHistory from './views/Transporter/TransJobHistory';
+import TransDeclinedByAdmin from './views/Transporter/TransJobHistory/TransDeclinedByAdmin';
+import TransFinishedContract from './views/Transporter/TransJobHistory/TransFinishedContract';
+import TransJobHistoryTransportation from './views/Transporter/TransJobHistory/ByTransportaions';
+import TransJobHistoryDetail from './views/Transporter/TransJobHistory/Detail';
 
 const GetRoutes = () => {
   const routes = useRoutes([
@@ -37,7 +53,7 @@ const GetRoutes = () => {
       path: '/',
       children: [
         {
-          path: 'login',
+          path: '',
           element: <Login></Login>,
         },
         {
@@ -49,24 +65,54 @@ const GetRoutes = () => {
               element: <PostJob></PostJob>,
             },
             {
-              path: 'profile',
-              element: <Profile></Profile>,
+              path: 'shipperProfile',
+              element: <ShipperProfile></ShipperProfile>,
             },
             {
               path: 'uploadedJob',
               element: <UploadedJob></UploadedJob>,
             },
             {
+              path: 'shipperContract',
+              element: <ShipperSmartContract></ShipperSmartContract>,
+            },
+            {
               path: 'uploadedJobDetail',
               element: <UploadedJobDetail></UploadedJobDetail>,
             },
             {
-              path: 'pendingJob',
-              element: <PendingJob></PendingJob>,
+              path: 'activeJob',
+              element: <ActiveJob></ActiveJob>,
             },
             {
-              path: 'jobHistory',
-              element: <JobHistory></JobHistory>,
+              path: 'activeJobDetail',
+              element: <ActiveJobDetail></ActiveJobDetail>,
+            },
+            {
+              path: 'shipperPendingJob',
+              element: <ShipperPendingJob></ShipperPendingJob>,
+            },
+            {
+              path: 'shipperWaitAdmin',
+              element: <ShipperWaitAdmin></ShipperWaitAdmin>,
+            },
+            {
+              path: 'shipperJobHistory',
+              element: <ShipperJobHistory></ShipperJobHistory>,
+            },
+            {
+              path: 'finishedJob',
+              element: <FinishedJob></FinishedJob>,
+            },
+            {
+              path: 'shipperJobHistoryTransportation',
+              element: (
+                <ShipperJobHistoryTransportation></ShipperJobHistoryTransportation>
+              ),
+            },
+            {
+              path: 'shipperJobHistoryDetail',
+              element: <ShipperJobHistoryDetail></ShipperJobHistoryDetail>,
             },
           ],
         },
@@ -76,40 +122,62 @@ const GetRoutes = () => {
           element: <LayoutTransporter></LayoutTransporter>,
           children: [
             {
-              path: 'profile',
-              element: <Profile></Profile>,
+              path: 'transProfile',
+              element: <TransProfile></TransProfile>,
             },
             {
               path: 'availableJob',
               element: <AvailableJob></AvailableJob>,
             },
             {
+              path: 'waitAdminConfirm',
+              element: <WaitAdminConfirm></WaitAdminConfirm>,
+            },
+            {
               path: 'availableJobDetail',
               element: <AvailableJobDetail></AvailableJobDetail>,
             },
             {
-              path: 'smartContract',
-              element: <SmartContract></SmartContract>,
+              path: 'transContract',
+              element: <TransContract></TransContract>,
             },
             {
-              path: 'appliedJob',
-              element: <AppliedJob></AppliedJob>,
+              path: 'onGoingJob',
+              element: <OnGoingJob></OnGoingJob>,
             },
             {
-              path: 'appliedJobDetail',
-              element: <AppliedJobDetail></AppliedJobDetail>,
+              path: 'onGoingJobDetail',
+              element: <OnGoingJobDetail></OnGoingJobDetail>,
             },
             {
-              path: 'pendingJob',
-              element: <PendingJob></PendingJob>,
+              path: 'onGoingJobDelivered',
+              element: <OnGoingJobDelivered></OnGoingJobDelivered>,
             },
-            // {
-            //   path: 'pendingJobDetail',
-            //   element: <PendingJobDetail></PendingJobDetail>,
-            // },
             {
-              path: 'jobHistory',
-              element: <JobHistory></JobHistory>,
+              path: 'transPendingJob',
+              element: <TransPendingJob></TransPendingJob>,
+            },
+            {
+              path: 'transJobHistory',
+              element: <TransJobHistory></TransJobHistory>,
+            },
+            {
+              path: 'transDeclinedByAdmin',
+              element: <TransDeclinedByAdmin></TransDeclinedByAdmin>,
+            },
+            {
+              path: 'transFinishedContract',
+              element: <TransFinishedContract></TransFinishedContract>,
+            },
+            {
+              path: 'transJobHistoryTransportation',
+              element: (
+                <TransJobHistoryTransportation></TransJobHistoryTransportation>
+              ),
+            },
+            {
+              path: 'transJobHistoryDetail',
+              element: <TransJobHistoryDetail></TransJobHistoryDetail>,
             },
           ],
         },
@@ -119,11 +187,23 @@ const GetRoutes = () => {
           element: <LayoutAdmin></LayoutAdmin>,
           children: [
             {
-              path: 'p1',
-              element: <ContractHistory></ContractHistory>,
+              path: 'approvedContract',
+              element: <ApprovedContract></ApprovedContract>,
             },
             {
-              path: 'profile',
+              path: 'declinedContract',
+              element: <DeclinedContract></DeclinedContract>,
+            },
+            {
+              path: 'pendingContract',
+              element: <PendingContract></PendingContract>,
+            },
+            {
+              path: 'pendingContractDetail',
+              element: <PendingContractDetail></PendingContractDetail>,
+            },
+            {
+              path: 'contractHistory',
               element: <ContractHistory></ContractHistory>,
             },
           ],

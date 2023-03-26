@@ -9,66 +9,64 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 
-
 export default function Add() {
   const navigate = useNavigate();
 
   const [cates, setCates] = useState([
     {
-      name: "Glass"
+      name: 'Glass',
     },
     {
-      name: "Flammable"
+      name: 'Flammable',
     },
     {
-      name: "Frozen"
+      name: 'Frozen',
     },
     {
-      name: "Medicine"
+      name: 'Medicine',
     },
     {
-      name: "Electronics"
+      name: 'Electronics',
     },
     {
-      name: "Fragile"
+      name: 'Fragile',
     },
     {
-      name: "Daily"
+      name: 'Daily',
     },
     {
-      name: "Plastice"
-    }
+      name: 'Plastice',
+    },
   ]);
   const [list, setList] = useState([
     {
-      logo: "/images/tlogo.jpg",
-      name: "MyonDong Daily Production",
-      remark: "Type: Fragile, Egg"
+      logo: '/images/tlogo.jpg',
+      name: 'MyonDong Daily Production',
+      remark: 'Type: Fragile, Egg',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Hengyang Medicine Company",
-      remark: "Tune: Medicine"
+      logo: '/images/tlogo.jpg',
+      name: 'Hengyang Medicine Company',
+      remark: 'Tune: Medicine',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Xixi Electronic Production",
-      remark: "Toe: Electronics"
+      logo: '/images/tlogo.jpg',
+      name: 'Xixi Electronic Production',
+      remark: 'Toe: Electronics',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Fantacy Glass Company",
-      remark: "Type: Fragile, Glass"
+      logo: '/images/tlogo.jpg',
+      name: 'Fantacy Glass Company',
+      remark: 'Type: Fragile, Glass',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Happy Month Firework Production",
-      remark: "Type: Fragile, Egg"
+      logo: '/images/tlogo.jpg',
+      name: 'Happy Month Firework Production',
+      remark: 'Type: Fragile, Egg',
     },
-
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const onFinish = async (values) => {
     // console.log('Success:', values);
@@ -89,28 +87,32 @@ export default function Add() {
     message.info('Successfully Saved!');
   };
 
-  const onFinishFailed = () => { };
+  const onFinishFailed = () => {};
 
   return (
     <div className={styles.home}>
-
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
-          < Input.Search placeholder='Search company'></Input.Search>
+          <Input.Search placeholder="Search company"></Input.Search>
           <div className={styles.cates}>
-            {
-              cates.map(item =>
-                <div className={styles.cate} style={{ backgroundColor: selectCate === item ? "#d7dffc" : "" }} onClick={() => {
+            {cates.map((item) => (
+              <div
+                className={styles.cate}
+                style={{
+                  backgroundColor: selectCate === item ? '#d7dffc' : '',
+                }}
+                onClick={() => {
                   setSelectCate(item);
-                }}>
-                  {item.name}
-                </div>)
-            }
+                }}
+              >
+                {item.name}
+              </div>
+            ))}
           </div>
         </div>
         <div>
           <Select
-            defaultValue="lucy"
+            defaultValue=" "
             style={{ width: 200 }}
             options={[
               {
@@ -139,22 +141,28 @@ export default function Add() {
       </div>
       <h1 style={{ marginTop: 20 }}>Results</h1>
       <div className={styles.list}>
-        {
-          list.map(item =>
-            <div className={styles.item} style={{ backgroundColor: selectCate === item ? "#d7dffc" : "" }} onClick={() => {
-              if (item.name === "Fantacy Glass Company") {
-                navigate("/transporter/availableJobDetail");
+        {list.map((item) => (
+          <div
+            className={styles.item}
+            style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
+            onClick={() => {
+              if (item.name === 'Fantacy Glass Company') {
+                navigate('/transporter/availableJobDetail');
               }
-            }}>
-              <img src={item.logo} alt="" style={{ width: 70, height: 70 }}></img>
-              <div className={styles.right}>
-                <div className={styles.name}>{item.name}</div>
-                <div className={styles.remark}>{item.remark}</div>
-              </div>
-
-            </div>)
-        }
+            }}
+          >
+            <img
+              src={item.logo}
+              alt=""
+              style={{ width: 70, height: 70 }}
+            ></img>
+            <div className={styles.right}>
+              <div className={styles.name}>{item.name}</div>
+              <div className={styles.remark}>{item.remark}</div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div >
+    </div>
   );
 }

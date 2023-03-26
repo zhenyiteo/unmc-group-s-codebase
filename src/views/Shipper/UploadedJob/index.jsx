@@ -1,5 +1,4 @@
-//import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import { Input, message, Select } from 'antd';
+import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
@@ -9,9 +8,6 @@ import {
   FileImageOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-
-//localhost:3000/#/transporter/availableJob
-//localhost:3000/#/shipper/postJob
 
 export default function Add() {
   const navigate = useNavigate();
@@ -45,33 +41,43 @@ export default function Add() {
   const [list, setList] = useState([
     {
       logo: '/images/tlogo.jpg',
-      name: 'MyonDong Daily Production',
-      remark: 'Type: Fragile, Egg',
-      price: 'RM 500',
+      jobId: '23',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'Air-DHL',
+      shipmentWeight: '10KG',
+      shipmentType: 'Glass',
+      allowance: 'RM500/1000',
+      status: 'Waiting for pick-up',
     },
     {
       logo: '/images/tlogo.jpg',
-      name: 'Hengyang Medicine Company',
-      remark: 'Type: Medicine',
-      price: 'RM 1000',
+      jobId: 'A773',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'Air-DHL',
+      shipmentWeight: '10KG',
+      shipmentType: 'Glass',
+      allowance: 'RM500/1000',
+      status: 'Waiting for Sign',
     },
     {
       logo: '/images/tlogo.jpg',
-      name: 'Xixi Electronic Production',
-      remark: 'Type: Electronics',
-      price: 'RM 1500',
+      jobId: 'F429',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'Air-DHL',
+      shipmentWeight: '10KG',
+      shipmentType: 'Glass',
+      allowance: 'RM500/1000',
+      status: 'Waiting for pick-up',
     },
     {
       logo: '/images/tlogo.jpg',
-      name: 'Fantacy Glass Company',
-      remark: 'Type: Fragile, Glass',
-      price: 'RM 500',
-    },
-    {
-      logo: '/images/tlogo.jpg',
-      name: 'Happy Month Firework Production',
-      remark: 'Type: Fragile, Egg',
-      price: 'RM300',
+      jobId: 'M27',
+      shiperId: 'Fantacy Glass',
+      shipmentMethod: 'Air-DHL',
+      shipmentWeight: '10KG',
+      shipmentType: 'Glass',
+      allowance: 'RM500/1000',
+      status: 'Waiting for pick-up',
     },
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
@@ -100,78 +106,111 @@ export default function Add() {
 
   return (
     <div className={styles.home}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          <Input.Search placeholder="Search company"></Input.Search>
-          <div className={styles.cates}>
-            {cates.map((item) => (
-              <div
-                className={styles.cate}
-                style={{
-                  backgroundColor: selectCate === item ? '#d7dffc' : '',
-                }}
-                onClick={() => {
-                  setSelectCate(item);
-                }}
-              >
-                {item.name}
-              </div>
-            ))}
-          </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          flex: 1,
+        }}
+      >
+        <div style={{ fontSize: 40, fontWeight: 'bold' }}>
+          My Uploaded Job Status
         </div>
-        <div>
-          <Select
-            defaultValue=" "
-            style={{ width: 200 }}
-            options={[
-              {
-                value: '1',
-                label: 'sort by allowance',
-              },
-              {
-                value: '2',
-                label: 'sort by location',
-              },
-              {
-                value: '3',
-                label: 'sort by rating',
-              },
-              {
-                value: '4',
-                label: 'oldest',
-              },
-              {
-                value: '5',
-                label: 'latest(newest)',
-              },
-            ]}
-          />
+        <div style={{ marginTop: 20 }}>
+          <Input.Search
+            style={{ height: 40, borderRadius: 10 }}
+            placeholder="Search company/job id/shipper id"
+          ></Input.Search>
+        </div>
+
+        <div className={styles.list}>
+          {list.map((item) => (
+            <div
+              className={styles.item}
+              style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
+              onClick={() => {
+                if (item.jobId === '23') {
+                  navigate('/shipper/uploadedJobDetail');
+                } else if (item.jobId === 'A773') {
+                  navigate('/shipper/shipperContract');
+                }
+              }}
+            >
+              <img
+                src={item.logo}
+                alt=""
+                style={{ width: 70, height: 70 }}
+              ></img>
+              <div className={styles.itemright}>
+                <div className={styles.row}>
+                  <div className={styles.name}>Job ID:{item.jobId}</div>
+                  <div style={{ color: 'red' }}>{item.status}</div>
+                </div>
+                <div className={styles.row}>
+                  <div
+                    className={styles.name}
+                    style={{ color: 'blue' }}
+                  >
+                    Shipper ID:{item.shiperId}
+                  </div>
+                  <div style={{ color: 'blue' }}>
+                    Shipment Method:{item.shipmentMethod}
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.name}>
+                    Shipment Weight:{item.shipmentWeight}
+                  </div>
+                  <div>Shipment Type:{item.transporterId}</div>
+                </div>
+                <div className={styles.row}>
+                  <div>Allowance/Penalty:{item.allowance}</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <h1 style={{ marginTop: 20 }}>My Uploaded Jobs</h1>
-      <div className={styles.list}>
-        {list.map((item) => (
-          <div
-            className={styles.item}
-            style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
-            onClick={() => {
-              if (item.name === 'Fantacy Glass Company') {
-                navigate('/shipper/uploadedJobDetail');
-              }
-            }}
-          >
-            <img
-              src={item.logo}
-              alt=""
-              style={{ width: 70, height: 70 }}
-            ></img>
-            <div className={styles.right}>
-              <div className={styles.name}>{item.name}</div>
-              <div className={styles.remark}>{item.remark}</div>
-            </div>
-            <div className={styles.price}>{item.price}</div>
-          </div>
-        ))}
+      <div className={styles['right']}>
+        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
+          Category Filter
+        </div>
+        <div className={styles.cates}>
+          {cates.map((item) => (
+            <div className={styles.item}>{item.name}</div>
+          ))}
+        </div>
+        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
+          {' '}
+          Select by sorting
+        </div>
+        <Select
+          defaultValue=" "
+          style={{ width: '100%', marginTop: 20 }}
+          options={[
+            {
+              value: '1',
+              label: 'sort by allowance',
+            },
+            {
+              value: '2',
+              label: 'sort by location',
+            },
+            {
+              value: '3',
+              label: 'sort by rating',
+            },
+            {
+              value: '4',
+              label: 'oldest',
+            },
+            {
+              value: '5',
+              label: 'latest(newest)',
+            },
+          ]}
+        />
       </div>
     </div>
   );

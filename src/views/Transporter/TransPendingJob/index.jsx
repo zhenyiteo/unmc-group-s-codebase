@@ -1,4 +1,14 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Radio,
+  Row,
+  Select,
+  Upload,
+} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
@@ -11,6 +21,8 @@ import {
 
 export default function Add() {
   const navigate = useNavigate();
+
+  const [flag, setFlag] = useState(1);
 
   const [cates, setCates] = useState([
     {
@@ -42,42 +54,42 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: '23',
-      tranporterId: 'Dylan Drake Bhd',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Declined',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'A773',
-      tranporterId: 'zeroPoint',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Expired',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'F429',
-      tranporterId: 'Ninja Van',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Expired',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'M27',
-      tranporterId: 'Grab',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      status: 'Declined',
     },
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
@@ -114,13 +126,11 @@ export default function Add() {
           flex: 1,
         }}
       >
-        <div style={{ fontSize: 40, fontWeight: 'bold' }}>
-          On-Going Job Status
-        </div>
+        <div style={{ fontSize: 40, fontWeight: 'bold' }}>Pending Jobs</div>
         <div style={{ marginTop: 20 }}>
           <Input.Search
             style={{ height: 40, borderRadius: 10 }}
-            placeholder="Search company/job id/shipper id"
+            placeholder="Search company"
           ></Input.Search>
         </div>
 
@@ -130,8 +140,10 @@ export default function Add() {
               className={styles.item}
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
               onClick={() => {
-                if (item.jobId === '23') {
-                  navigate('/shipper/activeJobDetail');
+                if (item.jobId === '23' && flag === 1) {
+                  navigate('/transporter/waitAdminConfirm');
+                } else if (item.jobId === '23' && flag === 2) {
+                  navigate('/transporter/transDeclinedByAdmin');
                 }
               }}
             >
@@ -142,18 +154,25 @@ export default function Add() {
               ></img>
               <div className={styles.itemright}>
                 <div className={styles.row}>
-                  <div className={styles.name}>Job ID:{item.jobId}</div>
-                  <div style={{ color: 'red' }}>{item.due}</div>
+                  <div
+                    className={styles.name}
+                    style={{ fontSize: 20, fontWeight: 'bold' }}
+                  >
+                    Job ID:{item.jobId}
+                  </div>
+                  <div style={{ color: '#ad8b00' }}>
+                    {flag === 1 ? 'Waiting' : item.status}
+                  </div>
                 </div>
                 <div className={styles.row}>
                   <div
                     className={styles.name}
                     style={{ color: 'blue' }}
                   >
-                    Tranporter Id: {item.tranporterId}
+                    Shipper ID:{item.shiperId}
                   </div>
                   <div style={{ color: 'blue' }}>
-                    Shipment Method:{item.shipmentMethod}
+                    Transporter ID:{item.transporterId}
                   </div>
                 </div>
                 <div className={styles.row}>
@@ -163,15 +182,23 @@ export default function Add() {
                   <div>Shipment Type:{item.shipmentType}</div>
                 </div>
                 <div className={styles.row}>
-                  <div>Allowance/Penalty: {item.allowance}</div>
+                  <div>Allowance/Penalty:{item.allowance}</div>
                 </div>
               </div>
+              <div
+                style={{
+                  height: 100,
+                  width: 10,
+                  backgroundColor: flag === 1 ? '#ffec3d' : '#ff0000',
+                  marginLeft: 10,
+                }}
+              ></div>
             </div>
           ))}
         </div>
       </div>
       <div className={styles['right']}>
-        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
+        <div style={{ marginTop: 100, fontWeight: 'bold' }}>
           Category Filter
         </div>
         <div className={styles.cates}>
@@ -179,33 +206,45 @@ export default function Add() {
             <div className={styles.item}>{item.name}</div>
           ))}
         </div>
-        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
+        <div style={{ marginTop: 40, fontWeight: 'bold' }}>Status</div>
+        <div style={{ marginTop: 10 }}>
+          <Radio.Group
+            value={flag}
+            onChange={(e) => {
+              setFlag(e.target.value);
+            }}
+            defaultValue={1}
+          >
+            <Radio value={1}>Waiting</Radio>
+            <Radio value={2}>Declined/ Expired</Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ marginTop: 28, fontWeight: 'bold' }}>
           Select by sorting
         </div>
         <Select
           defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
+          style={{ width: '100%', marginTop: 0 }}
           options={[
             {
               value: '1',
-              label: 'sort by allowance',
+              label: 'Expiring soonest',
             },
             {
               value: '2',
-              label: 'sort by location',
+              label: 'Newly Created',
             },
             {
               value: '3',
-              label: 'sort by rating',
+              label: 'Shipment Weight',
             },
             {
               value: '4',
-              label: 'oldest',
+              label: 'Shipment Allowance',
             },
             {
               value: '5',
-              label: 'latest(newest)',
+              label: 'Shipment Penalty',
             },
           ]}
         />

@@ -42,42 +42,42 @@ export default function Add() {
     {
       logo: '/images/tlogo.jpg',
       jobId: '23',
-      tranporterId: 'Dylan Drake Bhd',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      expires: 'Expires in: 01:23:22',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'A773',
-      tranporterId: 'zeroPoint',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      expires: 'Expires in: 01:23:22',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'F429',
-      tranporterId: 'Ninja Van',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      expires: 'Expires in: 01:23:22',
     },
     {
       logo: '/images/tlogo.jpg',
       jobId: 'M27',
-      tranporterId: 'Grab',
-      shipmentMethod: 'Air-DHL',
+      shiperId: 'Fantacy Glass',
+      transporterId: 'DHL',
       shipmentWeight: '10KG',
       shipmentType: 'Glass',
       allowance: 'RM500/1000',
-      due: 'Remaining Time: 01:23:22',
+      expires: 'Expires in: 01:23:22',
     },
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
@@ -115,12 +115,12 @@ export default function Add() {
         }}
       >
         <div style={{ fontSize: 40, fontWeight: 'bold' }}>
-          On-Going Job Status
+          Pending Contracts
         </div>
         <div style={{ marginTop: 20 }}>
           <Input.Search
             style={{ height: 40, borderRadius: 10 }}
-            placeholder="Search company/job id/shipper id"
+            placeholder="Search company"
           ></Input.Search>
         </div>
 
@@ -131,7 +131,7 @@ export default function Add() {
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
               onClick={() => {
                 if (item.jobId === '23') {
-                  navigate('/shipper/activeJobDetail');
+                  navigate('/admin/pendingContractDetail');
                 }
               }}
             >
@@ -142,18 +142,23 @@ export default function Add() {
               ></img>
               <div className={styles.itemright}>
                 <div className={styles.row}>
-                  <div className={styles.name}>Job ID:{item.jobId}</div>
-                  <div style={{ color: 'red' }}>{item.due}</div>
+                  <div
+                    className={styles.name}
+                    style={{ fontSize: 20, fontWeight: 'bold' }}
+                  >
+                    Job ID:{item.jobId}
+                  </div>
+                  <div style={{ color: 'red' }}>{item.expires}</div>
                 </div>
                 <div className={styles.row}>
                   <div
                     className={styles.name}
                     style={{ color: 'blue' }}
                   >
-                    Tranporter Id: {item.tranporterId}
+                    Shipper ID:{item.shiperId}
                   </div>
                   <div style={{ color: 'blue' }}>
-                    Shipment Method:{item.shipmentMethod}
+                    Transporter ID:{item.transporterId}
                   </div>
                 </div>
                 <div className={styles.row}>
@@ -163,7 +168,7 @@ export default function Add() {
                   <div>Shipment Type:{item.shipmentType}</div>
                 </div>
                 <div className={styles.row}>
-                  <div>Allowance/Penalty: {item.allowance}</div>
+                  <div>Allowance/Penalty:{item.allowance}</div>
                 </div>
               </div>
             </div>
@@ -171,9 +176,16 @@ export default function Add() {
         </div>
       </div>
       <div className={styles['right']}>
-        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
-          Category Filter
-        </div>
+        <div style={{ marginTop: 20, fontWeight: 'bold' }}>Try search here</div>
+        <Input
+          placeholder="Search by Shipper ID"
+          style={{ marginTop: 20 }}
+        ></Input>
+        <Input
+          placeholder="Search by Transporter ID"
+          style={{ marginTop: 20 }}
+        ></Input>
+        <div style={{ marginTop: 20, fontWeight: 'bold' }}>Category Filter</div>
         <div className={styles.cates}>
           {cates.map((item) => (
             <div className={styles.item}>{item.name}</div>
@@ -189,23 +201,23 @@ export default function Add() {
           options={[
             {
               value: '1',
-              label: 'sort by allowance',
+              label: 'Expiring soonest',
             },
             {
               value: '2',
-              label: 'sort by location',
+              label: 'Newly Created',
             },
             {
               value: '3',
-              label: 'sort by rating',
+              label: 'Shipment Weight',
             },
             {
               value: '4',
-              label: 'oldest',
+              label: 'Shipment Allowance',
             },
             {
               value: '5',
-              label: 'latest(newest)',
+              label: 'Shipment Penalty',
             },
           ]}
         />
