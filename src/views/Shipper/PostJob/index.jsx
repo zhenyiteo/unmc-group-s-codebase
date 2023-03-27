@@ -547,15 +547,7 @@ function PostJobForm() {
           </Form.Item>
         </Col>
 {/* **********************CHECK *******************last time it was col span 9 */}
-        <Col span="6">
-          <Button
-            style={{ width: '100%' }}
-            type="primary"
-            htmlType="submit"
-          >
-            Post Job
-          </Button>
-        </Col>
+        
 
         <Col span="6">
           <Form.Item
@@ -564,10 +556,19 @@ function PostJobForm() {
             rules={[{ required: true, message: 'Please enter some remarks' }]}
           >
             <Input.TextArea
-              rows={4}
+              rows={2}
               placeholder="Enter some remarks"
             />
           </Form.Item>
+        </Col>
+        <Col span="9">
+          <Button
+            style={{ width: '100%' }}
+            type="primary"
+            htmlType="submit"
+          >
+            Post Job
+          </Button>
         </Col>
       </Row>
     </Form>
