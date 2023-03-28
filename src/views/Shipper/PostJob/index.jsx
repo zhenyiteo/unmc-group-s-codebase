@@ -4,11 +4,15 @@ import React, { useEffect, useState } from 'react';
 // import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 //import * as api from '../../api/api';
+import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 
 function PostJobForm() {
   const [form] = Form.useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (values) => {
+    setIsLoading(true);
     axios
       .post(
         'https://pwa0kjtg11.execute-api.us-east-1.amazonaws.com/prod/postjob',
@@ -38,6 +42,7 @@ function PostJobForm() {
       .then((response) => {
         console.log(response);
         message.success('Form submitted successfully!');
+        setIsLoading(false);
         form.resetFields();
       })
       .catch((error) => {
@@ -45,6 +50,16 @@ function PostJobForm() {
         message.error('Failed to submit form!');
       });
   };
+
+  if (isLoading){
+    return (<>
+    <div className={styles.home} >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+        <Spin tip="Loading..." size="large"/>
+      </div>
+    </div>
+    </>)
+  }
 
   return (
     <Form
