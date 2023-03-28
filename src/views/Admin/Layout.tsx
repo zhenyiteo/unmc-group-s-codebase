@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
-import styles from "./layout.module.css";
-import { Outlet, Link, useNavigate } from "react-router-dom";
-import { Menu, Radio, Space } from "antd";
+import React, { useEffect, useState } from 'react';
+import styles from './layout.module.css';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Menu, Radio, Space } from 'antd';
 import {
   MailOutlined,
   AntCloudOutlined,
   SettingOutlined,
   ArrowLeftOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 export default function Layout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!window.location.hash || window.location.hash === "#/") {
-      navigate("/profile");
+    if (!window.location.hash || window.location.hash === '#/') {
+      navigate('/pendingContract');
     }
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <AntCloudOutlined style={{ fontSize: 60, color: "#4444ff" }} />
-          <span style={{ fontSize: 30, fontWeight: "bold", marginLeft: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <AntCloudOutlined style={{ fontSize: 60, color: '#4444ff' }} />
+          <span style={{ fontSize: 30, fontWeight: 'bold', marginLeft: 10 }}>
             Admin
           </span>
         </div>
@@ -33,19 +33,19 @@ export default function Layout() {
             navigate(e.key);
           }}
           style={{ width: 256 }}
-          defaultSelectedKeys={["/profile"]}
-          defaultOpenKeys={["sub1"]}
+          defaultSelectedKeys={['/pendingContract']}
+          defaultOpenKeys={['sub1']}
           mode="inline"
           items={[
             {
-              key: "/admin/p1",
+              key: '/admin/pendingContract',
               icon: <MailOutlined />, //can change later lah
-              label: "Pending Contracts ",
+              label: 'Pending Contracts ',
             },
             {
-              key: "/admin/p2",
+              key: '/admin/contractHistory',
               icon: <MailOutlined />,
-              label: "Contract History",
+              label: 'Contract History',
             },
           ]}
         />
@@ -56,7 +56,7 @@ export default function Layout() {
           <ArrowLeftOutlined style={{ marginRight: 10 }} />
           Logout
         </div>
-        <div style={{ display: "flex", marginTop: 10 }}>
+        <div style={{ display: 'flex', marginTop: 10 }}>
           <img
             alt=""
             src="/images/headimg.jpg"
@@ -64,7 +64,7 @@ export default function Layout() {
           ></img>
           <div style={{ marginLeft: 10 }}>
             <div>MICasa</div>
-            <div style={{ color: "#aaa" }}>MICasa@gmail.com</div>
+            <div style={{ color: '#aaa' }}>MICasa@gmail.com</div>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export default function Layout() {
           mode="inline"
           items={[
             {
-              key: '/transporter/profile',
+              key: '/transporter/transProfile',
               icon: <MailOutlined />, //can change later lah
               label: 'Profile',
             },
@@ -48,17 +48,17 @@ export default function Layout() {
               label: 'Available Jobs',
             },
             {
-              key: '/transporter/appliedJob',
+              key: '/transporter/onGoingJob',
               icon: <MailOutlined />,
-              label: 'Applied Jobs',
+              label: 'Active Jobs',
             },
             {
-              key: '/transporter/pendingJob',
+              key: '/transporter/transPendingJob',
               icon: <MailOutlined />,
               label: 'Pending Job',
             },
             {
-              key: '/transporter/jobHistory',
+              key: '/transporter/transJobHistory',
               icon: <MailOutlined />,
               label: 'Job History',
             },

@@ -119,7 +119,7 @@ function AvailableJobDetails() {
                   borderRadius: 5,
                 }}
                 onClick={() => {
-                  navigate("/transporter/smartContract?JobID=" + item.JobID);
+                  navigate("/transporter/transContract?JobID=" + item.JobID);
                 }}
               >
                 Accept job

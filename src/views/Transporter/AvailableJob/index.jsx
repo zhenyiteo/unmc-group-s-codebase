@@ -52,7 +52,7 @@ function AvailableJob() {
   const filteredList = list.filter(item => {
     let isMatched = true;
     if (selectCate && selectCate.name !== 'All') {
-      isMatched = item.remark.toLowerCase().includes(selectCate.name.toLowerCase());
+      isMatched = item.itemtype.toLowerCase().includes(selectCate.name.toLowerCase());
     }
     if (searchText && !item.name.toLowerCase().includes(searchText.toLowerCase())) {
       isMatched = false;
@@ -64,14 +64,25 @@ function AvailableJob() {
     axios.get('https://uiuokt5tql.execute-api.us-east-1.amazonaws.com/prod/transporteravailablejob')
       .then(response => {
         setList(response.data.body.map(item => ({
-          JobID: item.JobID ,
+          // JobID: item.JobID ,
+          // logo: '/images/tlogo.jpg',
+          // name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
+          // remark: `Type: ${item.itemtype}`,
+          JobID: item.JobID,
           logo: '/images/tlogo.jpg',
           name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
-          remark: `Type: ${item.itemtype}`,
+          itemtype: item.itemtype, 
+          JobStatus: item.JobStatus,
+          ShipperID: item.ShipperID,
+          TransID: item.transID,
+          shipmentWeight: item.shipmentweight + 'kg',
+          allowance: 'RM' + item.allowance,
+          penalty: 'RM' + item.penalty,
+          shipmentMethod: item.shipmentmethod
         })));
         setIsLoading(false);
       })
-      .catch(error => console.error('Error fetching uploaded job data:', error));
+      .catch(error => console.error('Error fetching available job data:', error));
   }, []);
 
   const handleItemClick = (item) => {
@@ -82,8 +93,8 @@ function AvailableJob() {
   };
   if (isLoading){
     return (<>
-    <div className={styles.home} >
-      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%", marginBottom: 30 }}>
+    <div  >
+      <div style={{minHeight:"90vh", display: "flex", alignItems: "center", justifyContent: "center", top:"50%",  marginBottom: 30 }}>
         <Spin tip="Loading..." size="large"/>
       </div>
     </div>
@@ -91,56 +102,127 @@ function AvailableJob() {
   }
 
   return (
+  
     <div className={styles.home}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div className={styles.cates}>
-          {cates.map((item) => (
+    <div
+      style={{
+        display: 'flex',
+        //justifyContent: 'space-between',
+        flexDirection: 'column',
+        flex: 1,
+      }}
+    >
+      <div style={{ fontSize: 40, fontWeight: 'bold' }}>
+        Available Jobs
+      </div>
+      <div className={styles.search}  style={{ marginTop: 20 }}>
+        <Input.Search
+          placeholder="Search by description"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+          allowClear
+        />
+      </div>
+
+        <div className={styles.list}>
+          {filteredList.map((item) => (
             <div
-              className={styles.cate}
-              style={{
-                backgroundColor: selectCate === item ? '#d7dffc' : '',
-              }}
+              className={styles.item}
+              style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
               onClick={() => {
-                setSelectCate(item);
+                handleItemClick(item);
               }}
             >
-              {item.name}
+              <img
+                src={item.logo}
+                alt=""
+                style={{ width: 70, height: 70 }}
+              ></img>
+              <div className={styles.itemright}>
+                <div className={styles.row}>
+                  <div className={styles.name}>Job ID:{item.JobID}</div>
+                  <div style={{ color: 'red' }}>{item.JobStatus}</div>
+                </div>
+                <div className={styles.row}>
+                  <div
+                    className={styles.name}
+                    style={{ color: 'blue' }}
+                  >
+                    Shipper ID: {item.ShipperID}
+                  </div>
+                  <div style={{ color: 'blue' }}>
+                    Shipment Method: {item.shipmentMethod}
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.name}>
+                    Shipment Weight: {item.shipmentWeight}
+                  </div>
+                  <div>Shipment Type: {item.itemtype}</div>
+                </div>
+                <div className={styles.row}>
+                  <div>Allowance: {item.allowance}</div>
+                </div>
+                <div className={styles.row}>
+                  <div>Penalty: {item.penalty}</div>
+                  <div>Description: {item.name}</div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-        <div>
-          <Input.Search
-            placeholder="Search by keyword"
-            value={searchText}
-            onChange={(event) => setSearchText(event.target.value)}
-            allowClear
-          />
-        </div>
-      </div>
-      <h1 style={{ marginTop: 20 }}>Results</h1>
-      <div className={styles.list}>
-        {filteredList.map((item) => (
-          <div
-            className={styles.item}
-            style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
-            onClick={() => {
-              handleItemClick(item);
-            }}
-          >
-            <img
-              src={item.logo}
-              alt=""
-              style={{ width: 70, height: 70 }}
-            ></img>
-            <div className={styles.right}>
-              <div className={styles.name}>{item.name}</div>
-              <div className={styles.remark}>{item.remark}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+      
     </div>
+
+
+      <div className={styles['right']}>
+        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
+          Category Filter
+        </div>
+        <div className={styles.cates}>
+          {cates.map((item) => (
+            <div className={styles.item} 
+            style={{
+              backgroundColor: selectCate === item ? '#d7dffc' : '',
+            }}
+            onClick={() => {setSelectCate(item)}} >{item.name}</div>
+          ))}
+        </div>
+        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
+          {' '}
+          Select by sorting
+        </div>
+        <Select
+          defaultValue=" "
+          style={{ width: '100%', marginTop: 20 }}
+          options={[
+            {
+              value: '1',
+              label: 'sort by allowance',
+            },
+            {
+              value: '2',
+              label: 'sort by location',
+            },
+            {
+              value: '3',
+              label: 'sort by rating',
+            },
+            {
+              value: '4',
+              label: 'oldest',
+            },
+            {
+              value: '5',
+              label: 'latest(newest)',
+            },
+          ]}
+        />
+    </div>
+  
+  </div>
   );
+  
 }
 
 export default AvailableJob;

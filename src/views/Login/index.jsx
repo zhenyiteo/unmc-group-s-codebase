@@ -9,66 +9,64 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 
-
 export default function Login() {
   const navigate = useNavigate();
 
   const [cates, setCates] = useState([
     {
-      name: "Glass"
+      name: 'Glass',
     },
     {
-      name: "Flammable"
+      name: 'Flammable',
     },
     {
-      name: "Frozen"
+      name: 'Frozen',
     },
     {
-      name: "Medicine"
+      name: 'Medicine',
     },
     {
-      name: "Electronics"
+      name: 'Electronics',
     },
     {
-      name: "Fragile"
+      name: 'Fragile',
     },
     {
-      name: "Daily"
+      name: 'Daily',
     },
     {
-      name: "Plastice"
-    }
+      name: 'Plastice',
+    },
   ]);
   const [list, setList] = useState([
     {
-      logo: "/images/tlogo.jpg",
-      name: "MyonDong Daily Production",
-      remark: "Type: Fragile, Egg"
+      logo: '/images/tlogo.jpg',
+      name: 'MyonDong Daily Production',
+      remark: 'Type: Fragile, Egg',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Hengyang Medicine Company",
-      remark: "Tune: Medicine"
+      logo: '/images/tlogo.jpg',
+      name: 'Hengyang Medicine Company',
+      remark: 'Tune: Medicine',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Xixi Electronic Production",
-      remark: "Toe: Electronics"
+      logo: '/images/tlogo.jpg',
+      name: 'Xixi Electronic Production',
+      remark: 'Toe: Electronics',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Fantacy Glass Company",
-      remark: "Type: Fragile, Glass"
+      logo: '/images/tlogo.jpg',
+      name: 'Fantacy Glass Company',
+      remark: 'Type: Fragile, Glass',
     },
     {
-      logo: "/images/tlogo.jpg",
-      name: "Happy Month Firework Production",
-      remark: "Type: Fragile, Egg"
+      logo: '/images/tlogo.jpg',
+      name: 'Happy Month Firework Production',
+      remark: 'Type: Fragile, Egg',
     },
-
   ]);
   const [selectCate, setSelectCate] = useState(cates[0]);
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const onFinish = async (values) => {
     // console.log('Success:', values);
@@ -89,40 +87,77 @@ export default function Login() {
     message.info('Successfully Saved!');
   };
 
-  const onFinishFailed = () => { };
+  const onFinishFailed = () => {};
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", padding: 30, alignItems: "center" }}>
-
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        padding: 30,
+        alignItems: 'center',
+      }}
+    >
       <div style={{ marginRight: 70 }}>
-        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Select Account Type</span>
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
-            navigate("/shipper/postJob");
-          }}>Shipper</Button>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
-            navigate("/transporter/availableJob");
-          }}>Transporter</Button>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
-            navigate("/admin/p1");
-          }}>Admin</Button>
+        <span style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 50 }}>
+          Select Account Type
+        </span>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', marginTop: 30 }}
+        >
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
+            onClick={() => {
+              navigate('/shipper/postJob');
+            }}
+          >
+            Shipper
+          </Button>
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
+            onClick={() => {
+              navigate('/transporter/availableJob');
+            }}
+          >
+            Transporter
+          </Button>
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
+            onClick={() => {
+              navigate('/admin/pendingContract');
+            }}
+          >
+            Admin
+          </Button>
         </div>
       </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Log in your Account!</span>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <span style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 50 }}>
+          Log in your Account!
+        </span>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={{ marginBottom: 10 }}>Email address</span>
           <Input style={{ height: 40, borderRadius: 10 }}></Input>
           <span style={{ marginBottom: 10 }}>Password</span>
           <Input style={{ height: 40, borderRadius: 10 }}></Input>
-          <span style={{ marginBottom: 10, color: "#9898dd", marginTop: 10 }}>Forgot password?</span>
+          <span style={{ marginBottom: 10, color: '#9898dd', marginTop: 10 }}>
+            Forgot password?
+          </span>
 
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}>Sign in</Button>
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
+          >
+            Sign in
+          </Button>
           <div style={{ marginTop: 20 }}>
-            -A new user? <span style={{ color: "#9898dd" }}>Sign Up</span>
+            -A new user? <span style={{ color: '#9898dd' }}>Sign Up</span>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }

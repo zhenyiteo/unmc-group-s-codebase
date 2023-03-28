@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './layout.module.css';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Menu, Radio } from 'antd';
-import { MailOutlined, AntCloudOutlined } from '@ant-design/icons';
+import { MailOutlined, AntCloudOutlined, SettingOutlined,
+  ArrowLeftOutlined, } from '@ant-design/icons';
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function Layout() {
           mode="inline"
           items={[
             {
-              key: '/shipper/profile',
+              key: '/shipper/shipperProfile',
               icon: <MailOutlined />, //can change later lah
               label: 'Profile',
             },
@@ -53,17 +54,34 @@ export default function Layout() {
               label: 'Active Jobs',
             },
             {
-              key: '/shipper/pendingJob',
+              key: '/shipper/shipperPendingJob',
               icon: <MailOutlined />,
               label: 'Pending Jobs',
             },
             {
-              key: '/shipper/jobHistory',
+              key: '/shipper/shipperJobHistory',
               icon: <MailOutlined />,
               label: 'Job History',
             },
           ]}
         />
+        <div style={{ flex: 1 }}></div>
+        <SettingOutlined />
+        <div style={{ marginTop: 10 }}>
+          <ArrowLeftOutlined style={{ marginRight: 10 }} />
+          Logout
+        </div>
+        <div style={{ display: 'flex', marginTop: 10 }}>
+          <img
+            alt=""
+            src="/images/headimg.jpg"
+            style={{ width: 40, height: 40 }}
+          ></img>
+          <div style={{ marginLeft: 10 }}>
+            <div>MICasa</div>
+            <div style={{ color: '#aaa' }}>MICasa@gmail.com</div>
+          </div>
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.outletContent}>
