@@ -96,6 +96,9 @@ if (isLoading){
               alignItems: 'center',
               justifyContent: 'space-between',
             }}
+            onClick={() => {
+              navigate('/shipper/uploadedJob');
+            }}
           >
             <h1>From {item.originstate} To {item.deststate}</h1>
             <div style={{ fontSize: 20 }}>Shipment Duration: {item.shipmentduration} hours </div>
