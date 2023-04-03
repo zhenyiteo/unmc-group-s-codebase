@@ -78,8 +78,8 @@ export default function Layout() {
             style={{ width: 40, height: 40 }}
           ></img>
           <div style={{ marginLeft: 10 }}>
-            <div>MICasa</div>
-            <div style={{ color: '#aaa' }}>MICasa@gmail.com</div>
+            <div>Shipper 9999</div>
+            <div style={{ color: '#aaa' }}>shipper@gmail.com</div>
           </div>
         </div>
       </div>

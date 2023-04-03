@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Input, Select } from 'antd';
 import { useNavigate, useParams} from 'react-router-dom';
 import { message } from 'antd';
@@ -46,6 +46,7 @@ function UploadedJobDetails() {
     },
   ]);
   const [searchText, setSearchText] = useState('');
+  const [sortBy, setSortBy] = useState(null);
 
   const navigate = useNavigate();
 
@@ -59,6 +60,29 @@ function UploadedJobDetails() {
     }
     return isMatched;
   });
+
+  const sortedList = useMemo(() => {
+    if (!sortBy) {
+      return filteredList;
+    }
+
+    const compareFunction = (a, b) => {
+      if (sortBy === '1') {
+        return parseFloat(a.allowance.substr(2)) - parseFloat(b.allowance.substr(2));
+      } else if (sortBy === '2') {
+        return a.shipmentMethod.localeCompare(b.shipmentMethod);
+      } else if (sortBy === '3') {
+        const cmp = a.shipmentMethod.localeCompare(b.shipmentMethod);
+        if (cmp === 0) {
+          return parseFloat(a.allowance.substr(2)) - parseFloat(b.allowance.substr(2));
+        } else {
+          return cmp;
+        }
+      }
+    };
+
+    return [...filteredList].sort(compareFunction);
+  }, [filteredList, sortBy]);
 
   useEffect(() => {
     axios.get('https://s2fdn95cu1.execute-api.us-east-1.amazonaws.com/prod/uploadedjob')
@@ -75,9 +99,6 @@ function UploadedJobDetails() {
           allowance: 'RM' + item.allowance,
           penalty: 'RM' + item.penalty,
           shipmentMethod: item.shipmentmethod
-
-
-          
         })));
         setIsLoading(false);
       })
@@ -99,30 +120,21 @@ function UploadedJobDetails() {
   }
 
   return (
-
-  <div className={styles.home}>
-    <div
-      style={{
-        display: 'flex',
-        //justifyContent: 'space-between',
-        flexDirection: 'column',
-        flex: 1,
-      }}
-    >
-      <div style={{ fontSize: 40, fontWeight: 'bold' }}>
-        My Uploaded Job Status
-      </div>
-      <div className={styles.search}  style={{ marginTop: 20 }}>
-        <Input.Search
-          placeholder="Search by description"
-          value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
-          allowClear
-        />
-      </div>
-
+    <div className={styles.home}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <div style={{ fontSize: 40, fontWeight: 'bold' }}>
+          My Uploaded Job Status
+        </div>
+        <div className={styles.search} style={{ marginTop: 20 }}>
+          <Input.Search
+            placeholder="Search by description"
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+            allowClear
+          />
+        </div>
         <div className={styles.list}>
-          {filteredList.map((item) => (
+          {sortedList.map((item) => (
             <div
               className={styles.item}
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
@@ -141,10 +153,7 @@ function UploadedJobDetails() {
                   <div style={{ color: 'red' }}>{item.JobStatus}</div>
                 </div>
                 <div className={styles.row}>
-                  <div
-                    className={styles.name}
-                    style={{ color: 'blue' }}
-                  >
+                  <div className={styles.name} style={{ color: 'blue' }}>
                     Shipper ID: {item.ShipperID}
                   </div>
                   <div style={{ color: 'blue' }}>
@@ -168,57 +177,36 @@ function UploadedJobDetails() {
             </div>
           ))}
         </div>
-      
-    </div>
-
-
+      </div>
       <div className={styles['right']}>
-        <div style={{ marginTop: 111, fontWeight: 'bold' }}>
-          Category Filter
-        </div>
+        <div style={{ marginTop: 111, fontWeight: 'bold' }}>Category Filter</div>
         <div className={styles.cates}>
           {cates.map((item) => (
-            <div className={styles.item} 
-            style={{
-              backgroundColor: selectCate === item ? '#d7dffc' : '',
-            }}
-            onClick={() => {setSelectCate(item)}} >{item.name}</div>
+            <div
+              className={styles.item}
+              style={{
+                backgroundColor: selectCate === item ? '#d7dffc' : '',
+              }}
+              onClick={() => {
+                setSelectCate(item);
+              }}
+            >
+              {item.name}
+            </div>
           ))}
         </div>
         <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
           Select by sorting
         </div>
         <Select
           defaultValue=" "
           style={{ width: '100%', marginTop: 20 }}
-          options={[
-            {
-              value: '1',
-              label: 'sort by allowance',
-            },
-            {
-              value: '2',
-              label: 'sort by location',
-            },
-            {
-              value: '3',
-              label: 'sort by rating',
-            },
-            {
-              value: '4',
-              label: 'oldest',
-            },
-            {
-              value: '5',
-              label: 'latest(newest)',
-            },
-          ]}
+          options={[          {            value: '1',            label: 'Sort by allowance',          },          {            value: '2',            label: 'Sort by shipment method',          },                 ]}
+          onChange={(value) => setSortBy(value)}
         />
+      </div>
     </div>
-  
-  </div>
-);
+  );
 }
 
 export default UploadedJobDetails;

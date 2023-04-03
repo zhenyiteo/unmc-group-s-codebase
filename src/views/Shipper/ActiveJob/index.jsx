@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 import axios from 'axios';
@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 
 export default function Add() {
-  const navigate = useNavigate();
+  
   const [isLoading, setIsLoading] = useState(true);
 
   const [cates, setCates] = useState([
@@ -48,6 +48,11 @@ export default function Add() {
   const [selectCate, setSelectCate] = useState(cates[0]);
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState([]);
+  
+  const [sortBy, setSortBy] = useState(null);
+
+  const navigate = useNavigate();
+
   const filteredList = list.filter(item => {
     let isMatched = true;
     if (selectCate && selectCate.name !== 'All') {
@@ -58,6 +63,31 @@ export default function Add() {
     }
     return isMatched;
   });
+
+  const sortedList = useMemo(() => {
+    if (!sortBy) {
+      return filteredList;
+    }
+
+    const compareFunction = (a, b) => {
+      if (sortBy === '1') {
+        return parseFloat(a.allowance.substr(2)) - parseFloat(b.allowance.substr(2));
+      } else if (sortBy === '2') {
+        return a.shipmentMethod.localeCompare(b.shipmentMethod);
+      } else if (sortBy === '3') {
+        const cmp = a.shipmentMethod.localeCompare(b.shipmentMethod);
+        if (cmp === 0) {
+          return parseFloat(a.allowance.substr(2)) - parseFloat(b.allowance.substr(2));
+        } else {
+          return cmp;
+        }
+      }
+    };
+
+    return [...filteredList].sort(compareFunction);
+  }, [filteredList, sortBy]);
+
+
 
 
   useEffect(() => {
@@ -127,7 +157,7 @@ export default function Add() {
         </div>
 
         <div className={styles.list}>
-          {filteredList.map((item) => (
+          {sortedList.map((item) => (
             <div
               className={styles.item}
               style={{ backgroundColor: selectCate === item ? '#d7dffc' : '' }}
@@ -194,28 +224,8 @@ export default function Add() {
         <Select
           defaultValue=" "
           style={{ width: '100%', marginTop: 20 }}
-          options={[
-            {
-              value: '1',
-              label: 'sort by allowance',
-            },
-            {
-              value: '2',
-              label: 'sort by location',
-            },
-            {
-              value: '3',
-              label: 'sort by rating',
-            },
-            {
-              value: '4',
-              label: 'oldest',
-            },
-            {
-              value: '5',
-              label: 'latest(newest)',
-            },
-          ]}
+          options={[          {            value: '1',            label: 'Sort by allowance',          },          {            value: '2',            label: 'Sort by shipment method',          },                 ]}
+          onChange={(value) => setSortBy(value)}
         />
       </div>
     </div>
