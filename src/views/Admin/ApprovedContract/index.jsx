@@ -188,7 +188,7 @@ export default function Add() {
                 className={styles.rowValue}
                 style={{color:"#0000FF"}}
               >
-                ADMIN NO.2 FLEETATA
+                ADMIN NO.2
               </div>
             </div>
 
@@ -196,20 +196,20 @@ export default function Add() {
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
               </div>
-              <div className={styles.rowValue}>
+              <div className={styles.rowLabel}>
                 COMPANY - TRANSPORTER NAME
               </div>
             </div>
           
             <div className={styles.row}>
               <div className={styles.rowLabel}>
-                <h2>Violet Shah</h2>
+                <h2>{item.ShipperID}</h2>
                 <div>Visual Designer</div>
                 <div>Vancouver,British Columnbia</div>
                 <div>rosadiaz@gmail.com</div>
               </div>
               <div className={styles.rowLabel} style={{ textAlign: 'right' }}>
-                <h2>Dylan Drake Bhd.xx</h2>
+                <h2>{item.transID}</h2>
                 <div>Robbie Alvarea</div>
                 <div>VSelangor,Malaysia</div>
                 <div>Yzx9887@yahoo.com</div>

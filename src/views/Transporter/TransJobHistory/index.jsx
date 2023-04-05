@@ -60,11 +60,18 @@ export default function Add() {
   const [list, setList] = useState([]);
   const [selectCate, setSelectCate] = useState(cates[0]);
   const [searchText, setSearchText] = useState('');
+  const [accountName, setAccountName] = useState('');
+
   const filteredList = list.filter(item => {
     let isMatched = true;
-    // if(item.JobStatus === 'Waiting For Shipper To Confirm' && flag === 1){
-    //   isMatched = isMatched;
-    // }
+
+
+    if(item.JobStatus !== 'Available'){
+      if(item.TransID !== accountName){
+        isMatched = false;
+      }
+    }
+
     if (selectCate && selectCate.name !== 'All') {
       isMatched = item.itemtype.toLowerCase().includes(selectCate.name.toLowerCase());
     }
@@ -161,6 +168,13 @@ export default function Add() {
         setIsLoading(false);
       })
       .catch(error => console.error('Error fetching pending job data:', error));
+
+      const storedAccountName = sessionStorage.getItem('accountName');
+      if (storedAccountName) {
+        setAccountName(storedAccountName);
+        console.log(accountName);
+      }
+      
   }, []);
 
   const onFinish = async (values) => {

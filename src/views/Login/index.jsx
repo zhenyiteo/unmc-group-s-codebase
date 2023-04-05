@@ -99,39 +99,17 @@ export default function Login() {
       }}
     >
       <div style={{ marginRight: 70 }}>
-        <span style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 50 }}>
-          Select Account Type
-        </span>
-        <div
-          style={{ display: 'flex', flexDirection: 'column', marginTop: 30 }}
-        >
-          <Button
-            type="primary"
-            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
-            onClick={() => {
-              navigate('/shipper/postJob');
-            }}
-          >
-            Shipper
-          </Button>
-          <Button
-            type="primary"
-            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
-            onClick={() => {
-              navigate('/transporter/availableJob');
-            }}
-          >
-            Transporter
-          </Button>
-          <Button
-            type="primary"
-            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
-            onClick={() => {
-              navigate('/admin/pendingContract');
-            }}
-          >
-            Admin
-          </Button>
+        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Select Account Type</span>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/selectCompanyShipper");
+          }}>Shipper</Button>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/selectCompanyTransporter");
+          }}>Transporter</Button>
+          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+            navigate("/admin/pendingContract");
+          }}>Admin</Button>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>

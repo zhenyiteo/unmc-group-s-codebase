@@ -15,7 +15,7 @@ import {
 import reactMarkdown from 'react-markdown';
 
 
-async function GenerateContract(item, dateTime){
+async function GenerateContract(item, dateTime, transID){
   var testNewDate = new Date(dateTime);
   console.log(testNewDate);
   console.log(item.shipmentduration);
@@ -24,7 +24,7 @@ async function GenerateContract(item, dateTime){
 
   const test = await new Promise((resolve, reject)=>{
     const contractShipper = item.ShipperID.replace(/ /g, '%20');
-    const contractTrans = item.transID.replace(/ /g, '%20');
+    const contractTrans = transID.replace(/ /g, '%20');
 
     axios.post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
@@ -51,10 +51,10 @@ return test;
 
 }
 
-async function CreateContract(item, dateTime){
+async function CreateContract(item, dateTime, transID){
 
   const contractShipper = item.ShipperID.replace(/ /g, '%20');
-  const contractTrans = item.transID.replace(/ /g, '%20');
+  const contractTrans = transID.replace(/ /g, '%20');
 
   var testNewDate = new Date(dateTime);
   console.log(testNewDate);
@@ -127,6 +127,26 @@ async function CreateContract(item, dateTime){
         console.error(error);
       });
 
+      await axios
+      .post(
+        'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+        {
+          "function": "UpdateTransporterName",
+          "data": {
+            jobid:item.JobID,
+            transID: transID}
+        },{headers:{
+          "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+          "X-Requested-With": "*"
+        }}).then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
 }
 
 export default function Add() {
@@ -154,6 +174,7 @@ export default function Add() {
   const [template, setTemplate] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dateTime, setDateTime] = useState("");
+  const [accountName, setAccountName] = useState('');
 
   useEffect(() => {
     var today = new Date();
@@ -165,6 +186,13 @@ export default function Add() {
     setDateTime(currentDT);
     console.log(dateTime);
 
+      // retrieve account name from sessionStorage
+      const storedAccountName = sessionStorage.getItem('accountName');
+      if (storedAccountName) {
+        setAccountName(storedAccountName);
+        console.log(accountName);
+      }
+
     axios
       .get(`https://luncgccwm9.execute-api.us-east-1.amazonaws.com/v2/prod?jobid=` +searchParams.get("JobID"))
       .then((response) => {
@@ -172,11 +200,11 @@ export default function Add() {
         console.log(response.data.body[0]);
         const contractText = async() =>{
 
-          const contract = await GenerateContract(response.data.body[0],dateTime);
+          const contract = await GenerateContract(response.data.body[0],dateTime,accountName);
           setTemplate(contract);
-          setIsLoading(false);
+          
         }
-        contractText();
+        contractText(); // check how to keep the loading screen while it runs
       })
       .catch((error) => {
         console.log(error);
@@ -254,7 +282,7 @@ export default function Add() {
                 Signing Admin
               </div>
               <div className={styles.rowValue}>
-                ADMIN NO2 FLEETATA
+                ADMIN NO.2
               </div>
             </div>
 
@@ -272,13 +300,13 @@ export default function Add() {
 
           <div className={styles.row}>
               <div className={styles.rowLabel}>
-                <h2>Violet Shah</h2>
+                <h2>{item.ShipperID}</h2>
                 <div>Visual Designer</div>
                 <div>Vancouver,British Columnbia</div>
                 <div>rosadiaz@gmail.com</div>
               </div>
               <div className={styles.rowLabel} style={{ textAlign: 'right' }}>
-                <h2>Dylan Drake Bhd.xx</h2>
+                <h2>{accountName}</h2>
                 <div>Robbie Alvarea</div>
                 <div>VSelangor,Malaysia</div>
                 <div>Yzx9887@yahoo.com</div>
@@ -320,9 +348,9 @@ export default function Add() {
             !showSign ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {
                 setIsLoading(true);
-                CreateContract(item, dateTime).then(() => {
-                  setIsLoading(false);
+                CreateContract(item, dateTime,accountName).then(() => {
                   setShowSign(true);
+                  setIsLoading(false);
                 })
                 // setShowSign(true);
               }}>Confirm</Button>
@@ -336,11 +364,11 @@ export default function Add() {
               <div style={{ display: "flex", width: "100%", fontWeight: "bold", marginBottom: 20, marginTop: 30 }}>
                 <div style={{ flex: 1, visibility: item.JobStatus === 'Available' ? 'hidden' : 'visible'}}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span>{item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Transporter 8888</span>
+                  <span> {accountName}</span>
                 </div>
               </div>
               <div style={{ display: "flex", width: "100%", fontWeight: "bold", marginBottom: 20 }}>

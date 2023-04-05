@@ -50,13 +50,25 @@ import TransFinishedContract from './views/Transporter/TransJobHistory/TransFini
 import TransJobHistoryTransportation from './views/Transporter/TransJobHistory/ByTransportaions';
 import TransJobHistoryDetail from './views/Transporter/TransJobHistory/Detail';
 
+
+
+//in common
+
+import SelectCompanyTransporter from './views/SelectCompanyTransporter';
+import SelectCompanyShipper from './views/SelectCompanyShipper';
+
+
+
+//import JobHistory from './views/Shipper/JobHistory'; ************CHECK WHY GOT BOTH******************
+
 const GetRoutes = () => {
   const routes = useRoutes([
     {
       path: '/',
       children: [
         {
-          path: '',
+          // path: '',
+          path: '/', // **************Pls check this is from firdaus branch**************
           element: <Login></Login>,
         },
         {
@@ -125,9 +137,23 @@ const GetRoutes = () => {
         },
 
         {
+        path:'selectCompanyTransporter',
+        element: <SelectCompanyTransporter></SelectCompanyTransporter>,
+        children:[],
+        },
+
+        {
+          path:'selectCompanyShipper',
+          element: <SelectCompanyShipper></SelectCompanyShipper>,
+          children:[],
+          },
+
+
+        {
           path: 'transporter',
           element: <LayoutTransporter></LayoutTransporter>,
           children: [
+            
             {
               path: 'transProfile',
               element: <TransProfile></TransProfile>,

@@ -8,11 +8,32 @@ import { MailOutlined, AntCloudOutlined, SettingOutlined,
 export default function Layout() {
   const navigate = useNavigate();
 
+  //set the account name in sessionStorage
+  //sessionStorage.setItem('accountName', 'MICasa');
+
+  const [accountName, setAccountName] = useState('');
+
+  
   useEffect(() => {
     if (!window.location.hash || window.location.hash === '#/') {
       navigate('/shipper/profile');
     }
+
+   
+    // retrieve account name from sessionStorage
+    const storedAccountName = sessionStorage.getItem('accountName');
+    if (storedAccountName) {
+      setAccountName(storedAccountName);
+    }
   }, []);
+
+  console.log(accountName);
+
+  const handleLogout = () => {
+    // clear user session and navigate to login page
+    sessionStorage.clear();
+    navigate("/");
+  };
 
   return (
     <div className={styles.container}>
@@ -67,18 +88,20 @@ export default function Layout() {
         />
         <div style={{ flex: 1 }}></div>
         <SettingOutlined />
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, cursor: "pointer" }} onClick={handleLogout}>
           <ArrowLeftOutlined style={{ marginRight: 10 }} />
           Logout
         </div>
-        <div style={{ display: 'flex', marginTop: 10 }}>
+
+        <div style={{ display: "flex", marginTop: 10 }}>
           <img
             alt=""
             src="/images/headimg.jpg"
             style={{ width: 40, height: 40 }}
           ></img>
           <div style={{ marginLeft: 10 }}>
-            <div>Shipper 9999</div>
+            
+            <div>{accountName}</div>
             <div style={{ color: '#aaa' }}>shipper@gmail.com</div>
           </div>
         </div>
@@ -88,6 +111,6 @@ export default function Layout() {
           <Outlet></Outlet>
         </div>
       </div>
-    </div>
+      </div>
   );
 }

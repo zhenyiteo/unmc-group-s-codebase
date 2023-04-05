@@ -48,7 +48,7 @@ export default function Add() {
   const [selectCate, setSelectCate] = useState(cates[0]);
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState([]);
-  
+  const [accountName, setAccountName] = useState('');
   const [sortBy, setSortBy] = useState(null);
 
   const navigate = useNavigate();
@@ -59,6 +59,10 @@ export default function Add() {
       isMatched = item.itemtype.toLowerCase().includes(selectCate.name.toLowerCase());
     }
     if (searchText && !item.name.toLowerCase().includes(searchText.toLowerCase())) {
+      isMatched = false;
+    }
+
+    if(item.ShipperID !== accountName){
       isMatched = false;
     }
     return isMatched;
@@ -111,6 +115,12 @@ export default function Add() {
         setIsLoading(false);
       })
       .catch(error => console.error('Error fetching active job data:', error));
+
+      const storedAccountName = sessionStorage.getItem('accountName');
+      if (storedAccountName) {
+        setAccountName(storedAccountName);
+        console.log(accountName);
+      }
   }, []);
 
   const onFinish = async (values) => {

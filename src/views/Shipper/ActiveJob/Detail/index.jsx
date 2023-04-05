@@ -151,8 +151,9 @@ export default function Add() {
               visibility: item.JobStatus === "Delivered" ? "visible" : "hidden" 
             }}
             onClick={() => {
-              ConfirmedContract(item);
-              navigate('/shipper/activeJob');
+              setIsLoading(true);
+              ConfirmedContract(item).then(()=>{navigate('/shipper/activeJob'); setIsLoading(false);});
+              
             }}
           >
             Confirm Finished
