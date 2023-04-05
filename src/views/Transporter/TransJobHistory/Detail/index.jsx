@@ -284,7 +284,7 @@ export default function Add() {
           onClick={() => {
             if (!(item.JobStatus === 'Unlisted')){
               if(item.JobStatus === 'Waiting For Shipper To Confirm'){
-                navigate('/transporter/transContract?JobID=' + item.JobID);
+                navigate('/transporter/waitShipperConfirm?JobID=' + item.JobID);
               }
               else if (item.JobStatus === 'Pending Admin Approval'){
                 navigate('/transporter/waitAdminConfirm?JobID=' + item.JobID);

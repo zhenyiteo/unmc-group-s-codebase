@@ -203,7 +203,7 @@ export default function Add() {
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
               </div>
-              <div className={styles.rowValue}>
+              <div className={styles.rowLabel}>
                 COMPANY - TRANSPORTER NAME
               </div>
             </div>
@@ -252,11 +252,11 @@ export default function Add() {
             >
               <div style={{ flex: 1,  }}>
                 <span>Signed by :</span>
-                <span> Violet Shah</span>
+                <span> {item.ShipperID}</span>
               </div>
               <div style={{ flex: 1,  }}>
                 <span> Signed by :</span>
-                <span> Dylan Drake Bhd xxx</span>
+                <span> {item.transID}</span>
               </div>
             </div>
             <div
@@ -281,7 +281,7 @@ export default function Add() {
                   }}
                 ></div>
                 <span>Date:</span>
-                <span> 18:34:05 24/12/2022</span>
+                <span> {item.shipperSignDate}</span>
               </div>
               <div style={{ flex: 1, position: 'relative' }}>
                 <div
@@ -297,7 +297,7 @@ export default function Add() {
                   }}
                 ></div>
                 <span> Date:</span>
-                <span> 19:14:21 24/12/2027</span>
+                <span> {item.beginningdate}7</span>
               </div>
             </div>
           </div>

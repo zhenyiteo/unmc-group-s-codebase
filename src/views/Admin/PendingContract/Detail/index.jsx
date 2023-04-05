@@ -99,26 +99,47 @@ async function SignContract(item, signature){
 }
 
 async function AdminUpdate(item, signature, adminRemark){
-  await axios
-  .put('https://hwr1f5bqsg.execute-api.us-east-1.amazonaws.com/adminsign',
-  {
-    "jobID": item.jobid,
-    "adminSign": signature,
-    "adminRemark": adminRemark
-  },{headers:{
-    "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-    "X-Requested-With": "*"
-  }}).then((response) => {
-    console.log(response);
-  }
-  )
-  .catch((error) =>{
-    console.error(error);
-  }
+  // await axios
+  // .put('https://hwr1f5bqsg.execute-api.us-east-1.amazonaws.com/adminsign2',
+  // {
+  //   "jobID": item.JobID,
+  //   "adminSign": signature,
+  //   "adminRemark": adminRemark
+  // },{headers:{
+  //   "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+  //   "X-Requested-With": "*"
+  // }}).then((response) => {
+  //   console.log(response);
+  // }
+  // )
+  // .catch((error) =>{
+  //   console.error(error);
+  // }
 
-  );
+  // );
+  await axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "adminsign",
+      "data": {
+        jobID:item.JobID,
+        adminSign: signature,
+        adminRemark: adminRemark}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
 }
 
 
@@ -184,32 +205,9 @@ export default function Login() {
             <div style={{ fontSize: 20, fontWeight: 'bold', flex: 1 }}>
               Job ID: <span style={{color:'#6565ff'}}>{item.JobID}</span>
             </div>
-            {/* <div
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                flex: 1,
-                color: '#6565ff',
-              }}
-            >
-              {item.JobID}
-            </div> */}
+
           </div>
-          {/* <div style={{ flex: 2 }}>
-            <div style={{ fontSize: 20, fontWeight: 'bold', flex: 1 }}>
-              Transaction ID
-            </div>
-            <div
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                flex: 1,
-                color: '#6565ff',
-              }}
-            >
-              827302
-            </div>
-          </div> */}
+
         </div>
 
         <div style={{paddingLeft:30,paddingTop:30,paddingBottom:30, backgroundColor: 'lightyellow',maxHeight: "65vh",overflow:"auto"}}>
@@ -456,9 +454,17 @@ export default function Login() {
               borderRadius: 5,
             }}
             onClick={() => {
-              SignContract(item,true);
-              AdminUpdate(item, true, '');
-              navigate('/admin/approvedContract?JobID=' + item.JobID);
+              setIsLoading(true);
+              SignContract(item,true).then(()=>{
+                console.log('signed');
+                AdminUpdate(item, true, '').then(()=>{
+                  navigate('/admin/approvedContract?JobID=' + item.JobID);
+                  setIsLoading(false);
+                  
+                });
+              });
+
+  
             }}
           >
             Confirm
@@ -467,9 +473,18 @@ export default function Login() {
             type="primary"
             onClick={() => {
               if (reason) {
-                SignContract(item, false);
-                AdminUpdate(item, true, reason);
-                navigate('/admin/declinedContract?JobID=' + item.JobID);
+                setIsLoading(true);
+                SignContract(item,false).then(()=>{
+                  console.log('declined');
+                  AdminUpdate(item, true, reason).then(()=>{
+                    navigate('/admin/declinedContract?JobID=' + item.JobID);
+                    setIsLoading(false);
+                    
+                  });
+  
+                });
+
+
               } else {
                 message.error('Please Input Reason!');
               }

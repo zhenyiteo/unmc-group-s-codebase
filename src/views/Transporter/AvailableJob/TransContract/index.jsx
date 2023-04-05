@@ -20,7 +20,7 @@ async function GenerateContract(item, dateTime){
   console.log(testNewDate);
   console.log(item.shipmentduration);
   testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
-  console.log("Expected Delivery ", testNewDate.toISOString());
+  console.log("Expected Delivery ", testNewDate.toLocaleString('sv'));
 
   const test = await new Promise((resolve, reject)=>{
     const contractShipper = item.ShipperID.replace(/ /g, '%20');
@@ -32,7 +32,7 @@ async function GenerateContract(item, dateTime){
       "function": "GetContractTemplate",
       "data": {$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#" + contractShipper,
       transporter:"resource:org.accordproject.party.Party#" + contractTrans,
-      shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toISOString(),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
+      shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toLocaleString('sv'),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -60,7 +60,7 @@ async function CreateContract(item, dateTime){
   console.log(testNewDate);
   console.log(item.shipmentduration);
   testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
-  console.log("Expected Delivery ", testNewDate.toISOString());
+  console.log("Expected Delivery ", testNewDate.toLocaleString('sv'));
 
   await axios
   .post(
@@ -74,7 +74,7 @@ async function CreateContract(item, dateTime){
         contractId: item.JobID,
         contractData: JSON.stringify({$class: "org.accordproject.testcontract2.TestContract",shipper:"resource:org.accordproject.party.Party#" + contractShipper,
           transporter:"resource:org.accordproject.party.Party#" + contractTrans,
-          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toISOString(),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
+          shippingPrice:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.allowance),currencyCode:"MYR",},penalty:{$class:"org.accordproject.money.MonetaryAmount",doubleValue:parseFloat(item.penalty),currencyCode:"MYR",},admin:"AdminCompany",expectedDeliveryDate:testNewDate.toLocaleString('sv'),beginningDate:dateTime,originAddress:item.originaddress,originState:item.originstate,originPostcode:"12345",destAddress:item.destaddress,destState:item.deststate,destPostcode:item.destpostcode,itemLength:parseFloat(item.itemlength),itemWidth:parseFloat(item.itemwidth),itemHeight:parseFloat(item.itemheight),itemWeight:parseFloat(item.shipmentweight),recipientName:item.recipientname,recipientContact:item.recipientcontact,itemType:item.itemtype,jobId:item.JobID,shipmentMethod:item.shipmentmethod,contractId:item.JobID,$identifier:item.JobID})}
     },{headers:{
       "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin": "*",
@@ -136,55 +136,14 @@ export default function Add() {
   const [cates, setCates] = useState([
 
   ]);
-  const [list, setList] = useState([
-    {
-      logo: "/images/tlogo.jpg",
-      name: "MyonDong Daily Production",
-      remark: "Type: Fragile, Egg"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Hengyang Medicine Company",
-      remark: "Tune: Medicine"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Xixi Electronic Production",
-      remark: "Toe: Electronics"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Fantacy Glass Company",
-      remark: "Type: Fragile, Glass"
-    },
-    {
-      logo: "/images/tlogo.jpg",
-      name: "Happy Month Firework Production",
-      remark: "Type: Fragile, Egg"
-    },
 
-  ]);
-  const [selectCate, setSelectCate] = useState(cates[0]);
   const [showSign, setShowSign] = useState(false);
 
 
   useEffect(() => { }, []);
 
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
+
 
     message.info('Successfully Saved!');
   };
@@ -200,7 +159,8 @@ export default function Add() {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    const currentDT = date+' '+time;
+    //const currentDT = date+' '+time;
+    const currentDT = today.toLocaleString('sv');
 
     setDateTime(currentDT);
     console.log(dateTime);
@@ -302,7 +262,7 @@ export default function Add() {
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
               </div>
-              <div className={styles.rowValue}>
+              <div className={styles.rowLabel}>
                 COMPANY - TRANSPORTER NAME
               </div>
             </div>
@@ -359,9 +319,12 @@ export default function Add() {
           {
             !showSign ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {
-                
-                CreateContract(item, dateTime);
-                setShowSign(true);
+                setIsLoading(true);
+                CreateContract(item, dateTime).then(() => {
+                  setIsLoading(false);
+                  setShowSign(true);
+                })
+                // setShowSign(true);
               }}>Confirm</Button>
               <Button style={{ backgroundColor: "#ab423d", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, marginLeft: 20 }} onClick={() => {
                  navigate('/transporter/availableJob');
@@ -377,7 +340,7 @@ export default function Add() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Shipper 9999</span>
+                  <span> Transporter 8888</span>
                 </div>
               </div>
               <div style={{ display: "flex", width: "100%", fontWeight: "bold", marginBottom: 20 }}>
