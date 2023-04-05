@@ -260,11 +260,11 @@ export default function Add() {
               >
                 <div style={{ flex: 1 }}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span> {item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span>{item.transID}</span>
                 </div>
               </div>
               <div
@@ -289,7 +289,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span>Date:</span>
-                  <span> 18:34:05 24/12/2022</span>
+                  <span>{item.shipperSignDate}</span>
                 </div>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <div

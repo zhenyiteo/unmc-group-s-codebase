@@ -55,7 +55,7 @@ async function SignContract(item, signature){
   // console.log(item.shipmentduration);
   // testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
   // console.log("Expected Delivery ", testNewDate.toISOString());
-
+  var signTime;
   await axios
   .post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
@@ -73,7 +73,11 @@ async function SignContract(item, signature){
     }}
   )
   .then((response) => {
-    console.log(response);
+    console.log(response.data.response.$timestamp);
+    signTime = response.data.response.$timestamp;
+    signTime = new Date(signTime);
+    signTime = signTime.toLocaleString('sv'); 
+    console.log("signTime is " + signTime);
   })
   .catch((error) => {
     console.error(error);
@@ -98,12 +102,35 @@ async function SignContract(item, signature){
       console.error(error);
     });
 
+    await axios
+    .post(
+      'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+      {
+        "function": "updateSignDates",
+        "data": {
+          jobid:item.JobID,
+          dateName: "shipperSignDate",
+          date: signTime.toLocaleString()
+        }
+      },{headers:{
+        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+        "X-Requested-With": "*"
+      }}).then((response) => {
+        console.log(response);
+        
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      return signTime;
 }
 
 
 export default function Add() {
   const [showSign, setShowSign] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {}, []);
 
   const onFinish = async (values) => {
@@ -117,6 +144,7 @@ export default function Add() {
   const [pendingJobDetails, setPendingJobDetails] = useState([]);
   const [template, setTemplate] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [shipperSignTime, setShipperSignTime] = useState('');
 
 
   useEffect(() => {
@@ -327,8 +355,15 @@ export default function Add() {
                   borderRadius: 5,
                 }}
                 onClick={() => {
-                  setShowSign(true);
-                  SignContract(item,true);
+                  setIsLoading(true);
+                  SignContract(item,true).then((response)=>{
+                    setIsLoading(false);
+                    setShowSign(true);
+                    console.log(response);
+                    setShipperSignTime(response);
+                  });
+                  
+                  
                 }}
               >
                 Confirm
@@ -344,8 +379,12 @@ export default function Add() {
                   marginLeft: 20,
                 }}
                 onClick={() => {
+                  setIsLoading(true);
+                  SignContract(item,false).then(()=>{
+                    setIsLoading(false);
+                    navigate('/shipper/uploadedJob');
+                  });
 
-                  SignContract(item,false);
                 }}
               >
                 Decline
@@ -367,11 +406,11 @@ export default function Add() {
               >
                 <div style={{ flex: 1 }}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span>{item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span> {item.transID}</span>
                 </div>
               </div>
               <div
@@ -396,7 +435,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span>Date:</span>
-                  <span> 18:34:05 24/12/2022</span>
+                  <span> {shipperSignTime}</span>
                 </div>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <div
@@ -412,7 +451,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span> Date:</span>
-                  <span> 19:14:21 24/12/2027</span>
+                  <span> {item.beginningdate}</span>
                 </div>
               </div>
             </div>

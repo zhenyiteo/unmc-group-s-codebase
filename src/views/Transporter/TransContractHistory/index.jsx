@@ -256,13 +256,13 @@ export default function Add() {
                   marginTop: 30,
                 }}
               >
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, visibility: item.JobStatus === 'Cancelled' && !item.hasOwnProperty('adminRemark') ? 'hidden' : 'visible'}}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span> {item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span> {item.transID}</span>
                 </div>
               </div>
               <div
@@ -273,7 +273,7 @@ export default function Add() {
                   marginBottom: 20,
                 }}
               >
-                <div style={{ flex: 1, position: 'relative' }}>
+                <div style={{ flex: 1, position: 'relative', visibility: item.JobStatus === 'Cancelled' && !item.hasOwnProperty('adminRemark') ? 'hidden' : 'visible' }}>
                   <div
                     style={{
                       position: 'absolute',
@@ -287,7 +287,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span>Date:</span>
-                  <span> 18:34:05 24/12/2022</span>
+                  <span> {item.shipperSignDate}</span>
                 </div>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <div
@@ -303,19 +303,21 @@ export default function Add() {
                     }}
                   ></div>
                   <span> Date:</span>
-                  <span> 19:14:21 24/12/2027</span>
+                  <span> {item.beginningdate}</span>
                 </div>
               </div>
               <div
                 style={{
-                  display: !item.adminSign ? "none" : "flex",
+                  // display: !item.adminSign ? "none" : "flex",
+                  display: item.JobStatus === "Cancelled" ? "flex" : "none",
                   color: '#FF0000',
                   fontWeight: "bold",
                   fontSize: "20px"
                   
                 }}
               >
-                Reason For Cancellation: {item.adminRemark}
+                {item.adminSign ? "Cancelled by Admin: Reason: "+ item.adminRemark : "Cancelled by Shipper"}
+                {/* Reason For Cancellation: {item.adminRemark} */}
               </div>
             </div>
           ) : (

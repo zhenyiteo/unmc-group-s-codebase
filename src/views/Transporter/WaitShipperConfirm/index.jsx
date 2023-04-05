@@ -261,7 +261,7 @@ export default function Add() {
 
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span> {item.transID}</span>
                 </div>
               </div>
               <div

@@ -10,24 +10,10 @@ import {
 } from '@ant-design/icons';
 
 export default function Add() {
-  const [cates, setCates] = useState([]);
   useEffect(() => {}, []);
 
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
+
 
     message.info('Successfully Saved!');
   };

@@ -48,59 +48,6 @@ return test;
 
 
 
-async function SignContract(item){
-
-  // var testNewDate = new Date(dateTime);
-  // console.log(testNewDate);
-  // console.log(item.shipmentduration);
-  // testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
-  // console.log("Expected Delivery ", testNewDate.toISOString());
-
-  await axios
-  .post(
-    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
-    {
-      "function": "accord-contracts-accord-run",
-      "data": {
-        ledgerDataPath: "Accord",
-        contractId: item.JobID,
-        requestString: JSON.stringify({$class:"org.accordproject.testcontract2.ShipperSignRequest","signature":true})}
-    },{headers:{
-      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-      "X-Requested-With": "*"
-    }}
-  )
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
-  await axios
-  .post(
-    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
-    {
-      "function": "QLDBtest",
-      "data": {
-        jobid:item.JobID}
-    },{headers:{
-      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-      "X-Requested-With": "*"
-    }}).then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-}
-
-
 export default function Add() {
   const [showSign, setShowSign] = useState(false);
 
@@ -314,11 +261,11 @@ export default function Add() {
               >
                 <div style={{ flex: 1 }}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span> {item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span> {item.transID}</span>
                 </div>
               </div>
               <div
@@ -343,7 +290,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span>Date:</span>
-                  <span> 18:34:05 24/12/2022</span>
+                  <span> {item.shipperSignDate}</span>
                 </div>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <div
@@ -359,7 +306,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span> Date:</span>
-                  <span> 19:14:21 24/12/2027</span>
+                  <span> {item.beginningdate}</span>
                 </div>
               </div>
             </div>
