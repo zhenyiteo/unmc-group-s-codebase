@@ -151,8 +151,9 @@ export default function Add() {
               visibility: item.JobStatus === "Active" ? "visible" : "hidden"
             }}
             onClick={() => {
-              DeliveredContract(item);
-              navigate('/transporter/onGoingJob');
+              setIsLoading(true);
+              DeliveredContract(item).then(()=>{navigate('/transporter/onGoingJob'); setIsLoading(false)});
+              
             }}
           >
             Delivered

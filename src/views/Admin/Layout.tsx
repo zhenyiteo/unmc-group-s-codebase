@@ -18,6 +18,11 @@ export default function Layout() {
     }
   }, []);
 
+  const handleLogout = () => {
+
+    navigate("/");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
@@ -52,7 +57,7 @@ export default function Layout() {
 
         <div style={{ flex: 1 }}></div>
         <SettingOutlined />
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, cursor:"pointer" }} onClick={handleLogout}>
           <ArrowLeftOutlined style={{ marginRight: 10 }} />
           Logout
         </div>

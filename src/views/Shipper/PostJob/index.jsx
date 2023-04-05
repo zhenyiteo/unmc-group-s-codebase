@@ -10,6 +10,19 @@ import 'antd/es/spin/style/css';
 function PostJobForm() {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [accountName, setAccountName] = useState('');
+
+
+  useEffect(() => {
+   
+    // retrieve account name from sessionStorage
+    const storedAccountName = sessionStorage.getItem('accountName');
+    if (storedAccountName) {
+      setAccountName(storedAccountName);
+      console.log(accountName);
+    }
+  }, []);
+
 
   const handleSubmit = (values) => {
     setIsLoading(true);
@@ -17,6 +30,7 @@ function PostJobForm() {
       .post(
         'https://pwa0kjtg11.execute-api.us-east-1.amazonaws.com/prod/postjob',
         {
+          ShipperID: accountName,
           originaddress: values.originaddress,
           originpostcode: values.originpostcode,
           destaddress: values.destaddress,

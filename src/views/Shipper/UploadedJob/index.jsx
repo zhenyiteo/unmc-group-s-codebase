@@ -47,6 +47,7 @@ function UploadedJobDetails() {
   ]);
   const [searchText, setSearchText] = useState('');
   const [sortBy, setSortBy] = useState(null);
+  const [accountName, setAccountName] = useState('');
 
   const navigate = useNavigate();
 
@@ -56,6 +57,9 @@ function UploadedJobDetails() {
       isMatched = item.itemtype.toLowerCase().includes(selectCate.name.toLowerCase());
     }
     if (searchText && !item.name.toLowerCase().includes(searchText.toLowerCase())) {
+      isMatched = false;
+    }
+    if(item.ShipperID !== accountName){
       isMatched = false;
     }
     return isMatched;
@@ -103,6 +107,12 @@ function UploadedJobDetails() {
         setIsLoading(false);
       })
       .catch(error => console.error('Error fetching uploaded job data:', error));
+
+      const storedAccountName = sessionStorage.getItem('accountName');
+      if (storedAccountName) {
+        setAccountName(storedAccountName);
+        console.log(accountName);
+      }
   }, []);
 
   const handleItemClick = (item) => {

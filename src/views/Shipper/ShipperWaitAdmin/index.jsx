@@ -187,7 +187,7 @@ export default function Add() {
               <div
                 className={styles.rowValue}
               >
-                ADMIN NO.2 FLEETATA
+                ADMIN NO.2
               </div>
             </div>
 
@@ -195,7 +195,7 @@ export default function Add() {
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
               </div>
-              <div className={styles.rowValue}>
+              <div className={styles.rowLabel}>
                 COMPANY - TRANSPORTER NAME
               </div>
             </div>
