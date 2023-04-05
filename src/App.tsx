@@ -26,10 +26,16 @@ import SmartContract from './views/Transporter/AvailableJob/SmartContract';
 import AppliedJob from './views/Transporter/AppliedJob';
 import AppliedJobDetail from './views/Transporter/AppliedJob/Detail';
 
+
 //in common
 import PendingJob from './views/Transporter/PendingJob';
 //import PendingJobDetail from './views/Transporter/PendingJob/Detail';
 import JobHistory from './views/Transporter/JobHistory';
+import SelectCompanyTransporter from './views/SelectCompanyTransporter';
+import SelectCompanyShipper from './views/SelectCompanyShipper';
+
+
+
 //import JobHistory from './views/Shipper/JobHistory'; ************CHECK WHY GOT BOTH******************
 
 const GetRoutes = () => {
@@ -38,7 +44,7 @@ const GetRoutes = () => {
       path: '/',
       children: [
         {
-          path: 'login',
+          path: '/',
           element: <Login></Login>,
         },
         {
@@ -73,9 +79,23 @@ const GetRoutes = () => {
         },
 
         {
+        path:'selectCompanyTransporter',
+        element: <SelectCompanyTransporter></SelectCompanyTransporter>,
+        children:[],
+        },
+
+        {
+          path:'selectCompanyShipper',
+          element: <SelectCompanyShipper></SelectCompanyShipper>,
+          children:[],
+          },
+
+
+        {
           path: 'transporter',
           element: <LayoutTransporter></LayoutTransporter>,
           children: [
+            
             {
               path: 'profile',
               element: <TransProfile></TransProfile>,
@@ -104,6 +124,7 @@ const GetRoutes = () => {
               path: 'pendingJob',
               element: <PendingJob></PendingJob>,
             },
+            
             // {
             //   path: 'pendingJobDetail',
             //   element: <PendingJobDetail></PendingJobDetail>,

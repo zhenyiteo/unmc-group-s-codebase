@@ -98,10 +98,10 @@ export default function Login() {
         <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Select Account Type</span>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
           <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
-            navigate("/shipper/postJob");
+            navigate("/selectCompanyShipper");
           }}>Shipper</Button>
           <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
-            navigate("/transporter/availableJob");
+            navigate("/selectCompanyTransporter");
           }}>Transporter</Button>
           <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
             navigate("/admin/p1");
