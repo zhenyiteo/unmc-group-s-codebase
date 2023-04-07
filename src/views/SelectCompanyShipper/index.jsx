@@ -5,7 +5,9 @@ import { Button } from 'antd';
 export default function SelectCompany() {
   const navigate = useNavigate();
 
-  
+  const handleCompanyClick = (company) => {
+    sessionStorage.setItem('accountName', company);
+  }
 
   return (
     
@@ -16,12 +18,15 @@ export default function SelectCompany() {
       <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50, marginLeft: 120}}>Select a Company</span>
       <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
         <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+          handleCompanyClick("Spa Paragon");
           navigate("/shipper/postJob");
         }}>Spa Paragon</Button>
         <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+          handleCompanyClick("Cloudmore");
           navigate("/shipper/postJob");
         }}>Cloudmore</Button>
         <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+          handleCompanyClick("Quanterra");
           navigate("/shipper/postJob");
         }}>Quanterra</Button>
       </div>
