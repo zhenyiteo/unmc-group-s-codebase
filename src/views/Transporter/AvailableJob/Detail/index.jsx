@@ -46,6 +46,9 @@ function CreateContract(item){
 }
 
 function AvailableJobDetails() {
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const [timerVisible, setTimerVisible] = useState(false);
+  const [timer, setTimer] = useState(3);
   const navigate = useNavigate();
   const { JobID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -80,6 +83,26 @@ function AvailableJobDetails() {
     </>)
   }
 
+
+  
+
+  const handleAcceptJob = (jobId) => {
+    setButtonVisible(false);
+    setTimerVisible(true);
+
+    const countdown = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(countdown);
+      setTimerVisible(false);
+      message.success("Great! You got this order!");
+      message.success("Redirecting you to Smart Contract Page");
+      navigate('/transporter/transContract?JobID=' + jobId);
+    }, 3000);
+  };
+
   return (
     <>
       {availableJobDetails.map((item) => (
@@ -109,6 +132,7 @@ function AvailableJobDetails() {
   
               <div style={{ fontSize: 20, marginTop: 30 }}>Shipment</div>
               <div style={{ fontSize: 20 }}>Allowance: RM{item.allowance}</div>
+              {buttonVisible && (
               <Button
                 style={{
                   backgroundColor: '#4abc3a',
@@ -118,12 +142,29 @@ function AvailableJobDetails() {
                   marginTop: 20,
                   borderRadius: 5,
                 }}
-                onClick={() => {
-                  navigate("/transporter/transContract?JobID=" + item.JobID);
-                }}
+                onClick={() => handleAcceptJob(item.JobID)}
               >
                 Accept job
               </Button>
+            )}
+            {timerVisible && (
+              <div
+              
+                style={{
+                  backgroundColor: '#ccc',
+                  color: '#000',
+                  height: 50,
+                  width: 200,
+                  marginTop: 20,
+                  borderRadius: 5,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Matching {timer}...
+              </div>
+  )}
             </div>
   
             <div style={{ flex: 1, paddingLeft: 30 }}>
