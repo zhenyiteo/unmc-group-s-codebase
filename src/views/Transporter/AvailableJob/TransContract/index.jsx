@@ -202,6 +202,7 @@ export default function Add() {
 
           const contract = await GenerateContract(response.data.body[0],dateTime,accountName);
           setTemplate(contract);
+          setIsLoading(false);
           
         }
         contractText(); // check how to keep the loading screen while it runs
