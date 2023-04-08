@@ -38,6 +38,7 @@
   align-items: flex-start;
   width: 20%;
   margin-left: 20px;
+  
 }
 .row {
   padding-left: 10px;
@@ -55,3 +56,4 @@
 .remark {
   font-size: 15px;
 }
+
