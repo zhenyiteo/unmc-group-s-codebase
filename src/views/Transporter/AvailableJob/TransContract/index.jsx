@@ -351,6 +351,7 @@ export default function Add() {
           {
             !showSign ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Button style={{ backgroundColor: "#4abc3a", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5 }} onClick={() => {
+                message.success("Successfully Signed!");
                 setIsLoading(true);
                 CreateContract(item, dateTime,accountName).then(() => {
                   setShowSign(true);
