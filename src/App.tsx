@@ -49,6 +49,7 @@ import TransDeclinedByAdmin from './views/Transporter/TransJobHistory/TransDecli
 import TransFinishedContract from './views/Transporter/TransJobHistory/TransFinishedContract';
 import TransJobHistoryTransportation from './views/Transporter/TransJobHistory/ByTransportaions';
 import TransJobHistoryDetail from './views/Transporter/TransJobHistory/Detail';
+import TransPenalty from './views/Transporter/Penalty';
 
 
 
@@ -148,6 +149,12 @@ const GetRoutes = () => {
           children:[],
           },
 
+        {
+          path: 'transporter/penalty',
+          element: <TransPenalty></TransPenalty>,
+          children:[],
+      
+        },
 
         {
           path: 'transporter',
@@ -158,6 +165,10 @@ const GetRoutes = () => {
               path: 'transProfile',
               element: <TransProfile></TransProfile>,
             },
+            // {
+            //   path: 'penalty',
+            //   element: <TransPenalty></TransPenalty>,
+            // },
             {
               path: 'availableJob',
               element: <AvailableJob></AvailableJob>,

@@ -200,12 +200,15 @@ export default function Add() {
         console.log(response.data.body[0]);
         const contractText = async() =>{
 
-          const contract = await GenerateContract(response.data.body[0],dateTime,accountName);
-          setTemplate(contract);
-          setIsLoading(false);
+          await GenerateContract(response.data.body[0],dateTime,accountName).then((response)=>{
+            setTemplate(response);
+            setIsLoading(false);
+
+          });
+
           
         }
-        contractText(); // check how to keep the loading screen while it runs
+        contractText();
       })
       .catch((error) => {
         console.log(error);

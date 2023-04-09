@@ -162,7 +162,8 @@ export default function Add() {
           shipmentWeight: item.shipmentweight + 'kg',
           allowance: 'RM' + item.allowance,
           penalty: 'RM' + item.penalty,
-          shipmentMethod: item.shipmentmethod
+          shipmentMethod: item.shipmentmethod,
+          transPenalty: item.transPenalty,
 
         })));
         setIsLoading(false);
@@ -241,7 +242,7 @@ export default function Add() {
                     Job ID:{item.JobID}
                   </div>
                   <div >
-                    {item.JobStatus}
+                    {item.JobStatus}{item.transPenalty == null ? '': ' With Penalty'}
                   </div>
                 </div>
                 <div className={styles.row}>

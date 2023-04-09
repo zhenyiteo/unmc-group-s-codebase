@@ -180,7 +180,7 @@ export default function Add() {
                 className={styles.rowValue}
                 style={{ color: '#f5222d' }}
               >
-                None - Declined
+                {item.hasOwnProperty('transPenalty') ? 'ADMIN NO2 FLEETATA': 'None - Declined'}
               </div>
             </div>
 
@@ -195,7 +195,7 @@ export default function Add() {
                 className={styles.rowValue}
                 style={{ color: '#f5222d' }}
               >
-                {item.adminRemark}
+                {item.hasOwnProperty('transPenalty') ? 'Shipment Cancelled by Transporter' : item.adminRemark}
               </div>
             </div>
 
