@@ -58,6 +58,75 @@ async function DeliveredContract(item){
 
 }
 
+async function CancelContract(item){
+
+  await axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "accord-contracts-accord-run",
+      "data": {
+        ledgerDataPath: "Accord",
+        contractId: item.JobID,
+        requestString: JSON.stringify({$class:"org.accordproject.testcontract2.TransCancelRequest"})}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}
+  )
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+  await axios
+  .post(
+    'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+    {
+      "function": "QLDBtest",
+      "data": {
+        jobid:item.JobID}
+    },{headers:{
+      "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+      "X-Requested-With": "*"
+    }}).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    await axios
+    .post(
+      'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
+      {
+        "function": "SetTransPenalty",
+        "data": {
+          jobid:item.JobID,
+          transPenalty:true}
+      },{headers:{
+        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
+        "X-Requested-With": "*"
+      }}).then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  
+
+    
+
+}
+
 export default function Add() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -172,7 +241,9 @@ export default function Add() {
 
                   }}
                   onClick={() => {
-                    navigate('/transporter/onGoingJob');
+                    //navigate('/transporter/onGoingJob');
+                    setIsLoading(true);
+                    CancelContract(item).then(()=>{navigate('/transporter/penalty?JobID=' + item.JobID); setIsLoading(false)});
                   }}
                 >
                   Cancel Job
