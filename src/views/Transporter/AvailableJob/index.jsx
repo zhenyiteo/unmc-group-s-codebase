@@ -64,10 +64,6 @@ function AvailableJob() {
     axios.get('https://uiuokt5tql.execute-api.us-east-1.amazonaws.com/prod/transporteravailablejob')
       .then(response => {
         setList(response.data.body.map(item => ({
-          // JobID: item.JobID ,
-          // logo: '/images/tlogo.jpg',
-          // name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
-          // remark: `Type: ${item.itemtype}`,
           JobID: item.JobID,
           logo: '/images/tlogo.jpg',
           name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
@@ -188,36 +184,7 @@ function AvailableJob() {
             onClick={() => {setSelectCate(item)}} >{item.name}</div>
           ))}
         </div>
-        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
-          options={[
-            {
-              value: '1',
-              label: 'sort by allowance',
-            },
-            {
-              value: '2',
-              label: 'sort by location',
-            },
-            {
-              value: '3',
-              label: 'sort by rating',
-            },
-            {
-              value: '4',
-              label: 'oldest',
-            },
-            {
-              value: '5',
-              label: 'latest(newest)',
-            },
-          ]}
-        />
+
     </div>
   
   </div>

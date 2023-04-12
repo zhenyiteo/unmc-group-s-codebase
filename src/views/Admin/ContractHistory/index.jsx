@@ -293,35 +293,7 @@ if (isLoading){
             <Radio value={4}>Declined</Radio>
           </Radio.Group>
         </div>
-        <div style={{ marginTop: 28, fontWeight: 'bold' }}>
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 0 }}
-          options={[
-            {
-              value: '1',
-              label: 'Expiring soonest',
-            },
-            {
-              value: '2',
-              label: 'Newly Created',
-            },
-            {
-              value: '3',
-              label: 'Shipment Weight',
-            },
-            {
-              value: '4',
-              label: 'Shipment Allowance',
-            },
-            {
-              value: '5',
-              label: 'Shipment Penalty',
-            },
-          ]}
-        />
+
       </div>
     </div>
   );

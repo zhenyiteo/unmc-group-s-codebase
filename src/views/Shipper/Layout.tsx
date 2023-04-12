@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './layout.module.css';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Menu, Radio } from 'antd';
+import { Menu, Radio, Avatar } from 'antd';
 import { MailOutlined, AntCloudOutlined, SettingOutlined,
-  ArrowLeftOutlined, } from '@ant-design/icons';
+  ArrowLeftOutlined, UserOutlined} from '@ant-design/icons';
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -94,11 +94,7 @@ export default function Layout() {
         </div>
 
         <div style={{ display: "flex", marginTop: 10 }}>
-          <img
-            alt=""
-            src="/images/headimg.jpg"
-            style={{ width: 40, height: 40 }}
-          ></img>
+          <Avatar shape="square" size="large" icon={<UserOutlined />} />
           <div style={{ marginLeft: 10 }}>
             
             <div>{accountName}</div>

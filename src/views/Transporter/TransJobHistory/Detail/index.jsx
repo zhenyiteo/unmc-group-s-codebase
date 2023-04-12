@@ -8,6 +8,7 @@ import {
   Row,
   Select,
   Upload,
+  Icon
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -22,6 +23,7 @@ import {
   LoadingOutlined,
   FileImageOutlined,
   PlusOutlined,
+  SolutionOutlined
 } from '@ant-design/icons';
 
 export default function Add() {
@@ -65,27 +67,27 @@ export default function Add() {
 
     <div className={styles.home}>
       <div style={{ display: 'flex' }}>
-        <span style={{ fontSize: 20, fontWeight: 'bold', marginRight: 100 }}>
+        <span style={{ fontSize: 40, fontWeight: 'bold', marginRight: 100 }}>
           Job History
         </span>
 
       </div>
       <div style={{ marginTop: 20 }}>
         <div style={{ display: 'flex' }}>
-          <Upload>
+
             <div
               style={{
-                backgroundColor: '#f7f5fe',
-                width: 300,
-                height: 280,
+
+                width: 200,
+                height: 200,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
+              <SolutionOutlined style={{ fontSize: "180px", color: '#000000' }} />
             </div>
-          </Upload>
+
           <div style={{ flex: 1, marginLeft: 20 }}>
             <div
               style={{
@@ -109,7 +111,7 @@ export default function Add() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginTop: 10,
+                marginTop: 30,
               }}
             >
               <div style={{ flex: 1, display: 'flex' }}>
@@ -134,7 +136,7 @@ export default function Add() {
               }}
             >
               <div style={{ flex: 1, display: 'flex' }}>
-                <div className={styles['label']}>Finish Date:</div>
+                <div className={styles['label']}>Expected Delivery Date:</div>
                 <div className={styles['value']}>{item.expecteddate}</div>
               </div>
               <div style={{ flex: 1, display: 'flex' }}>
@@ -146,44 +148,7 @@ export default function Add() {
                 <div className={styles['value']}>{item.penalty}</div>
               </div>
             </div>
-            <div>
-              <span style={{ color: '#999', marginRight: 10 }}>
-                Rated by Others
-              </span>
-              <Rate value={3}></Rate>
-            </div>
-            <div>
-              <a href="/#/shipper/uploadedJobDetail">View Attachment</a>
-            </div>
-            <div style={{ display: 'flex', marginTop: 10 }}>
-              <Upload>
-                <div className={styles['img-wrapper']}>
-                  <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
-                </div>
-              </Upload>
-              <Upload>
-                <div className={styles['img-wrapper']}>
-                  <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
-                </div>
-              </Upload>
-              <Upload>
-                <div className={styles['img-wrapper']}>
-                  <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
-                </div>
-              </Upload>
-              <Upload>
-                <div className={styles['img-wrapper']}>
-                  <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
-                </div>
-              </Upload>
-              <Upload>
-                <div className={styles['img-wrapper']}>
-                  <FileImageOutlined style={{ fontSize: 40, color: '#999' }} />
-                </div>
-              </Upload>
-              <div style={{ flex: 1 }}></div>
 
-            </div>
           </div>
         </div>
       </div>

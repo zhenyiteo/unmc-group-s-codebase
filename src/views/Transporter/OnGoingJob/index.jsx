@@ -198,36 +198,7 @@ export default function Add() {
             className={styles.item}>{item.name}</div>
           ))}
         </div>
-        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
-          options={[
-            {
-              value: '1',
-              label: 'sort by allowance',
-            },
-            {
-              value: '2',
-              label: 'sort by location',
-            },
-            {
-              value: '3',
-              label: 'sort by rating',
-            },
-            {
-              value: '4',
-              label: 'oldest',
-            },
-            {
-              value: '5',
-              label: 'latest(newest)',
-            },
-          ]}
-        />
+
       </div>
     </div>
   );

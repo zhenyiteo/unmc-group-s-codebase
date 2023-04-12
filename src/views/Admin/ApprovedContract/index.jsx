@@ -191,7 +191,7 @@ export default function Add() {
                 ADMIN NO.2
               </div>
             </div>
-
+            <div className={styles.row}><br/></div>
             <div className={styles.row}>
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
@@ -204,15 +204,11 @@ export default function Add() {
             <div className={styles.row}>
               <div className={styles.rowLabel}>
                 <h2>{item.ShipperID}</h2>
-                <div>Visual Designer</div>
-                <div>Vancouver,British Columnbia</div>
-                <div>rosadiaz@gmail.com</div>
+
               </div>
               <div className={styles.rowLabel} style={{ textAlign: 'right' }}>
                 <h2>{item.transID}</h2>
-                <div>Robbie Alvarea</div>
-                <div>VSelangor,Malaysia</div>
-                <div>Yzx9887@yahoo.com</div>
+
               </div>
             </div>
             <h1 style={{ marginTop: 20, textAlign:"center" }}>Contract Specifications</h1>

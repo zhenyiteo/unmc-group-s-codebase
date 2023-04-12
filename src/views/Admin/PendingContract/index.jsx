@@ -234,36 +234,7 @@ export default function Add() {
             <div onClick={() => {setSelectCate(item)}} className={styles.item}>{item.name}</div>
           ))}
         </div>
-        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
-          options={[
-            {
-              value: '1',
-              label: 'Expiring soonest',
-            },
-            {
-              value: '2',
-              label: 'Newly Created',
-            },
-            {
-              value: '3',
-              label: 'Shipment Weight',
-            },
-            {
-              value: '4',
-              label: 'Shipment Allowance',
-            },
-            {
-              value: '5',
-              label: 'Shipment Penalty',
-            },
-          ]}
-        />
+
       </div>
     </div>
   );
