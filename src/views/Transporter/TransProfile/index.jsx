@@ -14,20 +14,92 @@ import 'antd/es/spin/style/css';
 const { Title } = Typography;
 
 function TransDetails() {
-  const [transData, setTransData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [list, setList] = useState([]);
+  const [accountName, setAccountName] = useState('');
+  const filteredList = list.filter(item=>{
+      let isMatched = true;
+      if(item.TransID != accountName){
+        isMatched = false;
+      }
+      return isMatched;
+});
+  const total = filteredList.length;
+  const totalCompleted = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Completed"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+
+  const totalPendingShipper = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Waiting For Shipper To Confirm"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+  const totalPendingAdmin = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Pending Admin Approval"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+  const totalActive = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Active"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+  const totalDelivered = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Delivered"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+  const totalCancelled = filteredList.filter(item=>{
+    let isMatched = true;
+      if(item.JobStatus != "Cancelled"){
+        isMatched = false;
+      }
+      return isMatched;
+  }).length;
+
+
+
   useEffect(() => {
-    axios
-      .get(
-        'https://w62n1e1wfj.execute-api.us-east-1.amazonaws.com/prod/transporter'
-      )
-      .then((response) => {
-        setTransData(response.data.body);
+    axios.get('https://cs6cmxy7k7.execute-api.us-east-1.amazonaws.com/prod/prod')
+      .then(response => {
+        setList(response.data.body.map(item => ({
+          JobID: item.JobID,
+          logo: '/images/tlogo.jpg',
+          name: `RM${item.allowance} From: ${item.originpostcode},${item.originstate} To: ${item.destpostcode},${item.deststate}` ,
+          itemtype: item.itemtype, 
+          JobStatus: item.JobStatus,
+          ShipperID: item.ShipperID,
+          TransID: item.transID,
+          shipmentWeight: item.shipmentweight + 'kg',
+          allowance: 'RM' + item.allowance,
+          penalty: 'RM' + item.penalty,
+          shipmentMethod: item.shipmentmethod,
+          transPenalty: item.transPenalty,
+
+        })));
         setIsLoading(false);
+        console.log(filteredList);
+
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(error => console.error('Error fetching pending job data:', error));
+
+      const storedAccountName = sessionStorage.getItem('accountName');
+      if (storedAccountName) {
+        setAccountName(storedAccountName);
+        console.log(accountName);
+      }
   }, []);
 
   if (isLoading){
@@ -39,44 +111,23 @@ function TransDetails() {
     </div>
     </>)
   }
-  const handleEditProfile = () => {
-    // handle edit profile button click
-    console.log('Edit profile clicked');
-  };
 
-  return (
-    <div style={{ margin: '2rem auto', maxWidth: 800 }}>
-      <Title level={2} style={{ textAlign: 'center', marginBottom: '2rem' }}>
+  return (<>
+    <div style={{ margin: '2rem auto', maxWidth: 800 }} > 
+      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }} >
         Transporter Profile
-      </Title>
-      {transData.map((trans) => (
-        <div key={trans.transID} style={{ marginBottom: '2rem' }}>
-          <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <strong>Transporter ID:</strong> {trans.transID}
-            </Col>
-            <Col span={12}>
-              <strong>Name:</strong> {trans.name}
-            </Col>
-            <Col span={12}>
-              <strong>Contact:</strong> {trans.contact}
-            </Col>
-            <Col span={12}>
-              <strong>Email:</strong> {trans.email}
-            </Col>
-            <Col span={24}>
-              <strong>Website:</strong> {trans.website}
-            </Col>
-          </Row>
-          <Button type="primary" onClick={handleEditProfile}>
-            Edit Profile
-          </Button>
-          {transData.indexOf(trans) !== transData.length - 1 && (
-            <Divider />
-          )}
-        </div>
-      ))}
+      </h1>
+      <h2>Total Jobs: {total}</h2>
+
+      <h2>Total Jobs Pending Shipper Approval: {totalPendingShipper}</h2>
+      <h2>Total Jobs Pending Admin Approval: {totalPendingAdmin}</h2>
+      <h2>Total Active Jobs: {totalActive}</h2>
+      <h2>Total Delivered Jobs: {totalDelivered}</h2>
+      <h2>Total Completed Jobs: {totalCompleted}</h2>
+      <h2>Total Cancelled Jobs: {totalCancelled}</h2>
+
     </div>
+    </>
   );
 }
 
