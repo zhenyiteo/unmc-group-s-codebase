@@ -5,7 +5,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import axios from "axios";
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { Modal } from 'antd'; 
+import { Modal, Icon } from 'antd'; 
+import { SolutionOutlined } from '@ant-design/icons';
 //import * as api from '../../api/api';
 // import {
 //   LoadingOutlined,
@@ -96,57 +97,144 @@ if (isLoading){
               alignItems: 'center',
               justifyContent: 'space-between',
             }}
-            onClick={() => {
-              navigate('/shipper/uploadedJob');
-            }}
           >
+            <h1>Job ID: {item.JobID}</h1>
             <h1>From {item.originstate} To {item.deststate}</h1>
-            <div style={{ fontSize: 20 }}>Shipment Duration: {item.shipmentduration} hours </div>
+            <h1>Shipment Duration: {item.shipmentduration} hours </h1>
           </div>
+          
           <div style={{ display: 'flex' }}>
-            <div>
-              <img
-                src={'/images/ship.jpg'}
-                alt=""
-                style={{ width: 150, height: 150 }}
-              ></img>
-              <div className={styles.label}>Job ID</div>
-              <div className={styles.value}>{item.JobID}</div>
-              
+
   
-              
-  
-              <div style={{ fontSize: 20, marginTop: 30 }}>Shipment</div>
-              <div style={{ fontSize: 20 }}>Allowance: RM{item.allowance}</div>
-              <Button
-          style={{
-            backgroundColor: '#4abc3a',
-            color: '#fff',
-            height: 50,
-            width: 200,
-            marginTop: 20,
-            borderRadius: 5,
-          }}
-          onClick={() => {
-            navigate("/shipper/uploadedJob");
-          }}
-        >
-          Return to Uploaded Job
-        </Button>
-        <Button
-          style={{
-            backgroundColor: 'red',
-            color: '#fff',
-            height: 50,
-            width: 200,
-            marginTop: 20,
-            borderRadius: 5,
-            marginLeft: 20,
-          }}
-          onClick={handleCancelJob}
-        >
+            <div style={{ flex: 1, paddingTop: 30, paddingLeft: 30 }}>
+              {/* <div className={styles.label}>Remarks</div>
+              <div className={styles.value}>{item.remarks}</div> */}
+
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ flex:1}}><SolutionOutlined style={{fontSize: "150px",}}/></div>
+              <div style={{ flex: 1, paddingTop:"60px"}}>
+                <div className={styles.label}>Shipment Allowance</div>
+                <div className={styles.value}>RM{item.allowance}</div>
+              </div>
+              <div style={{ flex: 1, paddingTop:"60px" }}>
+                <div className={styles.label}>Shipment Penalty</div>
+                <div className={styles.value}>RM{item.penalty}</div>
+              </div>
+
+
+            </div>
+
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style = {{flex:1}}>
+
+        <div style={{flex:1}}>
+                <Button
+                style={{
+                  backgroundColor: '#4abc3a',
+                  color: '#fff',
+                  height: 50,
+                  width: 200,
+                  marginTop: 20,
+                  borderRadius: 5,
+                }}
+                onClick={() => {
+                  navigate("/shipper/uploadedJob");
+                }}
+                >
+                Return to Uploaded Job
+                </Button>
+              </div>
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipment Dimensions Length*Width*Height</div>
+              <div className={styles.value}>{item.itemlength}M*{item.itemwidth}M*{item.itemheight}M</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Item Type</div>
+              <div className={styles.value}>{item.itemtype}</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+          {/* <div style={{ flex: 1 }}></div> */}
+            <div style={{ flex: 1 }}>
+            <Button
+              style={{
+                backgroundColor: 'red',
+                color: '#fff',
+                height: 50,
+                width: 200,
+                marginTop: 20,
+                borderRadius: 5,
+              }}
+              onClick={handleCancelJob}
+            >
           Cancel Job
         </Button>
+        </div>
+          <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipment Weight</div>
+              <div className={styles.value}>{item.shipmentweight}kg</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Shipping Method</div>
+              <div className={styles.value}>{item.shipmentmethod}</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destination State</div>
+              <div className={styles.value}>{item.deststate}</div>
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin State</div>
+              <div className={styles.value}>{item.originstate}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+                <div className={styles.label}>Receiver Name and Contact</div>
+                <div className={styles.value}>{item.recipientname} {item.recipientcontact}</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destination Address</div>
+              <div className={styles.value}>{item.destaddress}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin Address</div>
+              <div className={styles.value}>{item.originaddress}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+                <div className={styles.label}>Remarks</div>
+                <div className={styles.value}>{item.remarks}</div>
+            </div>
+          </div>
+          
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Destination Postcode</div>
+              <div className={styles.value}>{item.destpostcode}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div className={styles.label}>Origin Postcode</div>
+              <div className={styles.value}>{item.originpostcode}</div>
+            </div>
+            <div style={{ flex: 1 }}>
+
+            </div>
+            
+          </div>
+
+
         <Modal
           title="Cancel Job"
           visible={isModalVisible}
@@ -156,83 +244,12 @@ if (isLoading){
           <p>Are you sure you want to cancel the job?</p>
           
         </Modal>
-        
-              
-            </div>
-  
-            <div style={{ flex: 1, paddingLeft: 30 }}>
-              <div className={styles.label}>Remarks</div>
-              <div className={styles.value}>
-              {item.remarks}
-              </div>
-  
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ flex: 1 }}>
-              <div className={styles.label}>Origin State</div>
-              <div className={styles.value}>{item.originstate}</div>
-            </div>
-
-               <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipment Penalty</div>
-              <div className={styles.value}>RM{item.penalty}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Origin Address</div>
-              <div className={styles.value}>{item.originaddress}</div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Item Type</div>
-              <div className={styles.value}>{item.itemtype}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Destination State</div>
-              <div className={styles.value}>{item.deststate}</div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipping Method</div>
-              <div className={styles.value}>{item.shipmentmethod}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Destination Address</div>
-              <div className={styles.value}>{item.destaddress}</div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipment Weight</div>
-              <div className={styles.value}>{item.shipmentweight}kg</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Destinatian Postcode</div>
-              <div className={styles.value}>{item.destpostcode}</div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Shipment Dimensions Length*Width*Height</div>
-              <div className={styles.value}>{item.itemlength}M*{item.itemwidth}M*{item.itemheight}M</div>
-            </div>
-          </div>
-          
-
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: 1 }}>
-              <div className={styles.label}>Receiver Name and Contact</div>
-              <div className={styles.value}>{item.recipientname} {item.recipientcontact}</div>
-            </div>
-            
-              </div>
             </div>
           </div>
         </div>
+
+
+
       ))}
     </>
   );

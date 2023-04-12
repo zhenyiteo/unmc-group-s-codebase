@@ -69,20 +69,7 @@ export default function Login() {
   useEffect(() => {}, []);
 
   const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
+
 
     message.info('Successfully Saved!');
   };
@@ -94,46 +81,22 @@ export default function Login() {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        padding: 30,
+        padding: 150,
         alignItems: 'center',
       }}
     >
       <div style={{ marginRight: 70 }}>
-        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50 }}>Select Account Type</span>
+        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50, marginLeft: 120 }}>Select Account Type</span>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+          <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
             navigate("/selectCompanyShipper");
           }}>Shipper</Button>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+          <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
             navigate("/selectCompanyTransporter");
           }}>Transporter</Button>
-          <Button type='primary' style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }} onClick={() => {
+          <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
             navigate("/admin/pendingContract");
           }}>Admin</Button>
-        </div>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 50 }}>
-          Log in your Account!
-        </span>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ marginBottom: 10 }}>Email address</span>
-          <Input style={{ height: 40, borderRadius: 10 }}></Input>
-          <span style={{ marginBottom: 10 }}>Password</span>
-          <Input style={{ height: 40, borderRadius: 10 }}></Input>
-          <span style={{ marginBottom: 10, color: '#9898dd', marginTop: 10 }}>
-            Forgot password?
-          </span>
-
-          <Button
-            type="primary"
-            style={{ marginTop: 10, width: 300, height: 40, borderRadius: 10 }}
-          >
-            Sign in
-          </Button>
-          <div style={{ marginTop: 20 }}>
-            -A new user? <span style={{ color: '#9898dd' }}>Sign Up</span>
-          </div>
         </div>
       </div>
     </div>

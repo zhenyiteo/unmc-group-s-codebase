@@ -227,7 +227,7 @@ export default function Add() {
             className={styles.item}>{item.name}</div>
           ))}
         </div>
-        <div style={{ marginTop: 20, fontWeight: 'bold' }}>
+        {/* <div style={{ marginTop: 20, fontWeight: 'bold' }}>
           {' '}
           Select by sorting
         </div>
@@ -236,7 +236,7 @@ export default function Add() {
           style={{ width: '100%', marginTop: 20 }}
           options={[          {            value: '1',            label: 'Sort by allowance',          },          {            value: '2',            label: 'Sort by shipment method',          },                 ]}
           onChange={(value) => setSortBy(value)}
-        />
+        /> */}
       </div>
     </div>
   );

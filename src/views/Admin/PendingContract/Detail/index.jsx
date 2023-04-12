@@ -161,9 +161,11 @@ export default function Login() {
         console.log(response.data.body[0]);
         const contractText = async() =>{
 
-          const contract = await GenerateContract(response.data.body[0]);
-          setTemplate(contract);
-          setIsLoading(false);
+          await GenerateContract(response.data.body[0]).then((response)=>{
+            setTemplate(response);
+            setIsLoading(false);
+          });
+
         }
         contractText();
       })
@@ -424,7 +426,7 @@ export default function Login() {
               type="primary"
               style={{
                 marginTop: 120,
-                marginLeft: 60,
+                marginLeft: 100,
                 height: 40,
                 width: 240,
                 borderRadius: 5,

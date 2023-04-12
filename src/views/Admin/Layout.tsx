@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './layout.module.css';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Menu, Radio, Space } from 'antd';
+import { Menu, Radio, Space, Avatar } from 'antd';
 import {
   MailOutlined,
   AntCloudOutlined,
   SettingOutlined,
   ArrowLeftOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 
 export default function Layout() {
@@ -62,14 +63,10 @@ export default function Layout() {
           Logout
         </div>
         <div style={{ display: 'flex', marginTop: 10 }}>
-          <img
-            alt=""
-            src="/images/headimg.jpg"
-            style={{ width: 40, height: 40 }}
-          ></img>
+          <Avatar shape="square" size="large" icon={<UserOutlined />} />
           <div style={{ marginLeft: 10 }}>
-            <div>MICasa</div>
-            <div style={{ color: '#aaa' }}>MICasa@gmail.com</div>
+            <div>Admin</div>
+            <div style={{ color: '#aaa' }}>admin@gmail.com</div>
           </div>
         </div>
       </div>

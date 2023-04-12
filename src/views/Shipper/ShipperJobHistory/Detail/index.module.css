@@ -42,14 +42,15 @@
 }
 .label {
   color: #000;
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .left {
   width: 500px;
 }
 .value {
   color: #000;
-  font-size: 15px;
+  font-size: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
