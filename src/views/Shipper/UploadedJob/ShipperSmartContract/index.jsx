@@ -320,7 +320,7 @@ export default function Add() {
               }}
             >
               <h2>Press Confirm and we will send for admin approval</h2>
-              <h2 style={{ display: 'flex', alignItems: 'center' }}>
+              {/* <h2 style={{ display: 'flex', alignItems: 'center' }}>
                 <div
                   style={{
                     width: 8,
@@ -331,7 +331,7 @@ export default function Add() {
                   }}
                 ></div>
                 <span>or it will auto reject within 30 minutes*</span>
-              </h2>
+              </h2> */}
             </div>
           </div>
           {!showSign ? (
@@ -457,7 +457,7 @@ export default function Add() {
             <></>
           )}
 
-          {!showSign ? (
+          {/* {!showSign ? (
             <div
               style={{
                 color: 'red',
@@ -470,7 +470,7 @@ export default function Add() {
             </div>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
     </div>

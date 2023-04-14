@@ -216,7 +216,7 @@ export default function Login() {
           <ReactMarkdown style={{textAlign: "center"}}children={template}/>
         </div>
         
-        <div
+        {/* <div
           style={{
             fontSize: 20,
             fontWeight: 'bold',
@@ -225,7 +225,7 @@ export default function Login() {
           }}
         >
           Expires in: 10 minutes and will automatically decline
-        </div>
+        </div> */}
       </div>
 
       <div style={{ flex: 1, marginLeft: 20 }}>

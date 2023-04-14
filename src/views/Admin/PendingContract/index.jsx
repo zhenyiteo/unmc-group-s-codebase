@@ -184,7 +184,7 @@ export default function Add() {
                   >
                     Job ID:{item.JobID}
                   </div>
-                  <div style={{ color: 'red' }}>Expires in: {item.expiry} hours</div>
+                  {/* <div style={{ color: 'red' }}>Expires in: {item.expiry} hours</div> */}
                 </div>
                 <div className={styles.row}>
                   <div

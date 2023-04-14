@@ -40,7 +40,7 @@ function PostJobForm() {
           recipientname: values.recipientname,
           recipientcontact: values.recipientcontact,
           shipmentduration: values.shipmentduration,
-          expirytime: values.expirytime,
+         // expirytime: values.expirytime,
           shipmentweight: values.shipmentweight,
           itemlength: values.itemlength,
           itemwidth: values.itemwidth,
@@ -329,7 +329,7 @@ function PostJobForm() {
             </div>
           </Form.Item>
         </Col>
-        <Col span="6">
+        {/* <Col span="6">
           <Form.Item
             label="Expiry Time"
             name="expirytime"
@@ -349,7 +349,7 @@ function PostJobForm() {
               />
             </div>
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
       <Row gutter={16}>
         <Col span="5">
