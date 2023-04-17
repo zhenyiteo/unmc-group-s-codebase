@@ -1,17 +1,10 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import styles from './index.module.css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
-import axios from "axios";
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { useSearchParams } from 'react-router-dom';
+import styles from './index.module.css';
 
 async function GenerateContract(item){
 
@@ -47,19 +40,9 @@ return test;
 }
 
 
-
-
 export default function Add() {
   const [showSign, setShowSign] = useState(false);
 
-  useEffect(() => {}, []);
-
-  const onFinish = async (values) => {
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [pendingJobDetails, setPendingJobDetails] = useState([]);
@@ -190,7 +173,9 @@ export default function Add() {
                 ADMIN NO.2
               </div>
             </div>
-
+            <div className={styles.row}>
+              <br/>
+            </div>
             <div className={styles.row}>
               <div className={styles.rowLabel}>
                 CLIENT - SHIPPER NAME
@@ -202,16 +187,10 @@ export default function Add() {
           
             <div className={styles.row}>
               <div className={styles.rowLabel}>
-                <h2>Violet Shah</h2>
-                <div>Visual Designer</div>
-                <div>Vancouver,British Columnbia</div>
-                <div>rosadiaz@gmail.com</div>
+                <h2>{item.ShipperID}</h2>
               </div>
               <div className={styles.rowLabel} style={{ textAlign: 'right' }}>
-                <h2>Dylan Drake Bhd.xx</h2>
-                <div>Robbie Alvarea</div>
-                <div>VSelangor,Malaysia</div>
-                <div>Yzx9887@yahoo.com</div>
+                <h2>{item.transID}</h2>
               </div>
             </div>
             <h1 style={{ marginTop: 20, textAlign:"center" }}>Contract Specifications</h1>
@@ -260,11 +239,11 @@ export default function Add() {
               >
                 <div style={{ flex: 1 }}>
                   <span>Signed by :</span>
-                  <span> Violet Shah</span>
+                  <span> {item.ShipperID}</span>
                 </div>
                 <div style={{ flex: 1 }}>
                   <span> Signed by :</span>
-                  <span> Dvlan Drake Bhd xxx</span>
+                  <span> {item.transID}</span>
                 </div>
               </div>
               <div
@@ -289,7 +268,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span>Date:</span>
-                  <span> 18:34:05 24/12/2022</span>
+                  <span> {item.shipperSignDate}</span>
                 </div>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <div
@@ -305,7 +284,7 @@ export default function Add() {
                     }}
                   ></div>
                   <span> Date:</span>
-                  <span> 19:14:21 24/12/2027</span>
+                  <span> {item.beginningdate}</span>
                 </div>
               </div>
             </div>

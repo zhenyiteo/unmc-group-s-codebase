@@ -1,17 +1,8 @@
-import {
-  Button,
-  Col,
-  Divider,
-  Row,
-  Typography,
-} from 'antd';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styles from './index.module.css';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
-
-const { Title } = Typography;
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import styles from './index.module.css';
 
 function TransDetails() {
   const [isLoading, setIsLoading] = useState(true);

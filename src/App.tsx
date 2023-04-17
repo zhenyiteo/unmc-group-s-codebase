@@ -14,6 +14,8 @@ import PendingContractDetail from './views/Admin/PendingContract/Detail';
 
 //login
 import Login from './views/Login';
+import SelectCompanyTransporter from './views/SelectCompanyTransporter';
+import SelectCompanyShipper from './views/SelectCompanyShipper';
 
 //shipper
 import ShipperProfile from './views/Shipper/ShipperProfile';
@@ -26,8 +28,6 @@ import ActiveJobDetail from './views/Shipper/ActiveJob/Detail';
 import ShipperPendingJob from './views/Shipper/ShipperPendingJob';
 import ShipperWaitAdmin from './views/Shipper/ShipperWaitAdmin';
 import ShipperJobHistory from './views/Shipper/ShipperJobHistory';
-import FinishedJob from './views/Shipper/ShipperJobHistory/FinishedJob';
-import ShipperJobHistoryTransportation from './views/Shipper/ShipperJobHistory/ByTransportaions';
 import ShipperJobHistoryDetail from './views/Shipper/ShipperJobHistory/Detail';
 import ShipperContractHistory from './views/Shipper/ShipperContractHistory';
 
@@ -41,26 +41,12 @@ import TransContract from './views/Transporter/AvailableJob/TransContract';
 import TransContractHistory from './views/Transporter/TransContractHistory';
 import OnGoingJob from './views/Transporter/OnGoingJob';
 import OnGoingJobDetail from './views/Transporter/OnGoingJob/Detail';
-import OnGoingJobDelivered from './views/Transporter/OnGoingJob/Delivered';
 import TransPendingJob from './views/Transporter/TransPendingJob';
-//import PendingJobDetail from './views/Transporter/PendingJob/Detail';
 import TransJobHistory from './views/Transporter/TransJobHistory';
-import TransDeclinedByAdmin from './views/Transporter/TransJobHistory/TransDeclinedByAdmin';
-import TransFinishedContract from './views/Transporter/TransJobHistory/TransFinishedContract';
-import TransJobHistoryTransportation from './views/Transporter/TransJobHistory/ByTransportaions';
 import TransJobHistoryDetail from './views/Transporter/TransJobHistory/Detail';
 import TransPenalty from './views/Transporter/Penalty';
 
 
-
-//in common
-
-import SelectCompanyTransporter from './views/SelectCompanyTransporter';
-import SelectCompanyShipper from './views/SelectCompanyShipper';
-
-
-
-//import JobHistory from './views/Shipper/JobHistory'; ************CHECK WHY GOT BOTH******************
 
 const GetRoutes = () => {
   const routes = useRoutes([
@@ -68,8 +54,7 @@ const GetRoutes = () => {
       path: '/',
       children: [
         {
-          // path: '',
-          path: '/', // **************Pls check this is from firdaus branch**************
+          path: '/', 
           element: <Login></Login>,
         },
         {
@@ -117,16 +102,6 @@ const GetRoutes = () => {
               element: <ShipperJobHistory></ShipperJobHistory>,
             },
             {
-              path: 'finishedJob',
-              element: <FinishedJob></FinishedJob>,
-            },
-            {
-              path: 'shipperJobHistoryTransportation',
-              element: (
-                <ShipperJobHistoryTransportation></ShipperJobHistoryTransportation>
-              ),
-            },
-            {
               path: 'shipperJobHistoryDetail',
               element: <ShipperJobHistoryDetail></ShipperJobHistoryDetail>,
             },
@@ -165,10 +140,6 @@ const GetRoutes = () => {
               path: 'transProfile',
               element: <TransProfile></TransProfile>,
             },
-            // {
-            //   path: 'penalty',
-            //   element: <TransPenalty></TransPenalty>,
-            // },
             {
               path: 'availableJob',
               element: <AvailableJob></AvailableJob>,
@@ -202,10 +173,6 @@ const GetRoutes = () => {
               element: <OnGoingJobDetail></OnGoingJobDetail>,
             },
             {
-              path: 'onGoingJobDelivered',
-              element: <OnGoingJobDelivered></OnGoingJobDelivered>,
-            },
-            {
               path: 'transPendingJob',
               element: <TransPendingJob></TransPendingJob>,
             },
@@ -213,20 +180,7 @@ const GetRoutes = () => {
               path: 'transJobHistory',
               element: <TransJobHistory></TransJobHistory>,
             },
-            {
-              path: 'transDeclinedByAdmin',
-              element: <TransDeclinedByAdmin></TransDeclinedByAdmin>,
-            },
-            {
-              path: 'transFinishedContract',
-              element: <TransFinishedContract></TransFinishedContract>,
-            },
-            {
-              path: 'transJobHistoryTransportation',
-              element: (
-                <TransJobHistoryTransportation></TransJobHistoryTransportation>
-              ),
-            },
+
             {
               path: 'transJobHistoryDetail',
               element: <TransJobHistoryDetail></TransJobHistoryDetail>,
@@ -257,29 +211,9 @@ const GetRoutes = () => {
             {
               path: 'contractHistory',
               element: <ContractHistory></ContractHistory>,
-              //  **************** CHECK what is profile 4****************************
-              // path: 'profile4',
-              // element: <Profile></Profile>,
             },
           ],
         },
-
-        // {
-        //   path: 'uploadedJob',
-        //   element: <UploadedJob></UploadedJob>,
-        // },
-        // {
-        //   path: 'activeJob',
-        //   element: <ActiveJob></ActiveJob>,
-        // },
-        // {
-        //   path: 'pendingJob',
-        //   element: <PendingJob></PendingJob>,
-        // },
-        // {
-        //   path: 'profile4',
-        //   element: <JobHistory></JobHistory>,
-        // },
       ],
     },
   ]);

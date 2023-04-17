@@ -1,16 +1,10 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Input, message } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import axios from 'axios';
 import Spin from 'antd/es/spin';
-import 'antd/es/spin/style/css'
+import 'antd/es/spin/style/css';
+import axios from 'axios';
 
 export default function Add() {
   const navigate = useNavigate();
@@ -96,26 +90,7 @@ export default function Add() {
       .catch(error => console.error('Error fetching pending job data:', error));
   }, []);
 
-  const onFinish = async (values) => {
-    // console.log('Success:', values);
-    // if (!id) {
-    //   await api.add({
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // } else {
-    //   await api.update(id, {
-    //     ...values,
-    //     type: tab === "1" ? 1 : 2,
-    //     cate: selectCate.title
-    //   });
-    // }
 
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
 
   const handleItemClick = (item) => {
       
@@ -138,7 +113,6 @@ export default function Add() {
       <div
         style={{
           display: 'flex',
-          // justifyContent: 'space-between',
           flexDirection: 'column',
           flex: 1,
         }}
@@ -146,12 +120,6 @@ export default function Add() {
         <div style={{ fontSize: 40, fontWeight: 'bold' }}>
           Pending Contracts
         </div>
-        {/* <div style={{ marginTop: 20 }}>
-          <Input.Search
-            style={{ height: 40, borderRadius: 10 }}
-            placeholder="Search company"
-          ></Input.Search>
-        </div> */}
 
         <div style={{ marginTop: 20 }}>
           <Input.Search
@@ -184,7 +152,6 @@ export default function Add() {
                   >
                     Job ID:{item.JobID}
                   </div>
-                  {/* <div style={{ color: 'red' }}>Expires in: {item.expiry} hours</div> */}
                 </div>
                 <div className={styles.row}>
                   <div

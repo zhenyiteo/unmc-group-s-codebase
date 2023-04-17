@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Input, Select } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
+import { Input } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import styles from './index.module.css';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
 
 function AvailableJob() {
   const [list, setList] = useState([]);
@@ -103,7 +97,6 @@ function AvailableJob() {
     <div
       style={{
         display: 'flex',
-        //justifyContent: 'space-between',
         flexDirection: 'column',
         flex: 1,
       }}

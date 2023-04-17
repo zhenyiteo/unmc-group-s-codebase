@@ -1,8 +1,7 @@
-import { Button, Divider } from 'antd';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import styles from './index.module.css';
 
 function ShipperDetails() {

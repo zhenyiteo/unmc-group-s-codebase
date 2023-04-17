@@ -1,16 +1,10 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import { useEffect, useState, useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styles from './index.module.css';
-import axios from 'axios';
+import { Input } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
 
 export default function Add() {
   
@@ -92,8 +86,6 @@ export default function Add() {
   }, [filteredList, sortBy]);
 
 
-
-
   useEffect(() => {
     axios.get('https://ayrq8ohpl5.execute-api.us-east-1.amazonaws.com/v1')
       .then(response => {
@@ -123,13 +115,6 @@ export default function Add() {
       }
   }, []);
 
-  const onFinish = async (values) => {
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
-
   const handleItemClick = (item) => {
     navigate('/shipper/activeJobDetail?JobID=' + item.JobID);
   };
@@ -149,7 +134,6 @@ export default function Add() {
       <div
         style={{
           display: 'flex',
-         // justifyContent: 'space-between',
           flexDirection: 'column',
           flex: 1,
         }}
@@ -227,16 +211,6 @@ export default function Add() {
             className={styles.item}>{item.name}</div>
           ))}
         </div>
-        {/* <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          {' '}
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
-          options={[          {            value: '1',            label: 'Sort by allowance',          },          {            value: '2',            label: 'Sort by shipment method',          },                 ]}
-          onChange={(value) => setSortBy(value)}
-        /> */}
       </div>
     </div>
   );

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './layout.module.css';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Menu, Radio, Space, Avatar } from 'antd';
 import {
-  MailOutlined,
   AntCloudOutlined,
-  SettingOutlined,
   ArrowLeftOutlined,
+  MailOutlined,
+  SettingOutlined,
   UserOutlined
 } from '@ant-design/icons';
+import { Avatar, Menu } from 'antd';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import styles from './layout.module.css';
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function Layout() {
           items={[
             {
               key: '/admin/pendingContract',
-              icon: <MailOutlined />, //can change later lah
+              icon: <MailOutlined />,
               label: 'Pending Contracts ',
             },
             {

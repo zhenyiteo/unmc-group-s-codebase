@@ -1,17 +1,11 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
-import axios from "axios";
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
+import ReactMarkdown from 'react-markdown';
 
 async function GenerateContract(item){
 
@@ -46,15 +40,8 @@ return test;
 
 }
 
-
-
 async function SignContract(item, signature){
 
-  // var testNewDate = new Date(dateTime);
-  // console.log(testNewDate);
-  // console.log(item.shipmentduration);
-  // testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
-  // console.log("Expected Delivery ", testNewDate.toISOString());
   var signTime;
   await axios
   .post(
@@ -131,15 +118,6 @@ async function SignContract(item, signature){
 export default function Add() {
   const [showSign, setShowSign] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {}, []);
-
-  const onFinish = async (values) => {
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [pendingJobDetails, setPendingJobDetails] = useState([]);
   const [template, setTemplate] = useState([]);
@@ -320,18 +298,6 @@ export default function Add() {
               }}
             >
               <h2>Press Confirm and we will send for admin approval</h2>
-              {/* <h2 style={{ display: 'flex', alignItems: 'center' }}>
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 4,
-                    backgroundColor: '#000',
-                    marginRight: 5,
-                  }}
-                ></div>
-                <span>or it will auto reject within 30 minutes*</span>
-              </h2> */}
             </div>
           </div>
           {!showSign ? (
@@ -457,20 +423,6 @@ export default function Add() {
             <></>
           )}
 
-          {/* {!showSign ? (
-            <div
-              style={{
-                color: 'red',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                marginTop: 10,
-              }}
-            >
-              Expires is 00:23:22 and will automatically decline
-            </div>
-          ) : (
-            <></>
-          )} */}
         </div>
       </div>
     </div>

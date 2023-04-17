@@ -1,18 +1,10 @@
-//import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
 import { Button, message } from 'antd';
-import React, { useEffect, useState } from 'react';
-//import { useNavigate, useParams } from 'react-router-dom';
-import styles from './index.module.css';
-import axios from "axios";
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { Modal, Icon } from 'antd'; 
+import { useEffect, useState } from 'react';
 import { SolutionOutlined } from '@ant-design/icons';
-//import * as api from '../../api/api';
-// import {
-//   LoadingOutlined,
-//   FileImageOutlined
-//   PlusOutlined,
-// } from '@ant-design/icons';
+import { Modal } from 'antd';
+import axios from "axios";
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import styles from './index.module.css';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
 
@@ -48,11 +40,6 @@ function UploadedJobDetails() {
       });
   }, []);
 
-  const onFinish = async (values) => {
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
 const [isModalVisible, setIsModalVisible] = useState(false); //for prompt window function for concel job 
 
 const handleCancelJob = () => { //for prompt window function for concel job 
@@ -107,8 +94,6 @@ if (isLoading){
 
   
             <div style={{ flex: 1, paddingTop: 30, paddingLeft: 30 }}>
-              {/* <div className={styles.label}>Remarks</div>
-              <div className={styles.value}>{item.remarks}</div> */}
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ flex:1}}><SolutionOutlined style={{fontSize: "150px",}}/></div>
@@ -158,7 +143,6 @@ if (isLoading){
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
-          {/* <div style={{ flex: 1 }}></div> */}
             <div style={{ flex: 1 }}>
             <Button
               style={{
@@ -247,8 +231,6 @@ if (isLoading){
             </div>
           </div>
         </div>
-
-
 
       ))}
     </>

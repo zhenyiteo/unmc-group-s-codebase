@@ -1,18 +1,11 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import styles from './index.module.css';
-import axios from "axios";
-import ReactMarkdown from 'react-markdown';
+import { Button, message } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import reactMarkdown from 'react-markdown';
+import axios from "axios";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import styles from './index.module.css';
 
 
 async function GenerateContract(item, dateTime, transID){
@@ -153,22 +146,9 @@ export default function Add() {
   
   const navigate = useNavigate();
 
-  const [cates, setCates] = useState([
-
-  ]);
 
   const [showSign, setShowSign] = useState(false);
 
-
-  useEffect(() => { }, []);
-
-  const onFinish = async (values) => {
-
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => { };
   const [searchParams, setSearchParams] = useSearchParams();
   const [availableJobDetails, setAvailableJobDetails] = useState([]);
   const [template, setTemplate] = useState([]);
@@ -178,9 +158,6 @@ export default function Add() {
 
   useEffect(() => {
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    //const currentDT = date+' '+time;
     const currentDT = today.toLocaleString('sv');
 
     setDateTime(currentDT);
@@ -205,7 +182,6 @@ export default function Add() {
             setIsLoading(false);
 
           });
-
           
         }
         contractText();

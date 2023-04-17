@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 async function CheckPenalty(transID){
@@ -52,51 +51,49 @@ export default function SelectCompany() {
 
     <div style={{ display: "flex", justifyContent: "center", padding: 150, alignItems: "center" }}>
 
-    <div style={{ marginRight: 70 }}>
-      <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50, marginLeft: 120}}>Select a Company</span>
-      <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
-        <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
-          sessionStorage.setItem('accountName', "J&T Express");
-          setIsLoading(true);
-          
-          CheckPenalty("J&T Express").then((response)=>{ 
-            if (response.data.body.penalty){
-              navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
-            }
-            else{
-              navigate("/transporter/availableJob");
-            }
-            setIsLoading(false)});
-          // navigate("/transporter/availableJob");
-        }}>J&T Express</Button>
-        <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
-          sessionStorage.setItem('accountName', "DHL Express");
-          setIsLoading(true);
-          CheckPenalty("DHL Express").then((response)=>{
-            if (response.data.body.penalty){
-              navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
-            }
-            else{
-              navigate("/transporter/availableJob");
-            }
-            setIsLoading(false)});
-        }}>DHL Express</Button>
-        <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
-          sessionStorage.setItem('accountName', "Ninjavan");
-          setIsLoading(true);
-          CheckPenalty("Ninjavan").then((response)=>{ 
-            if (response.data.body.penalty){
-              navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
-            }
-            else{
-              navigate("/transporter/availableJob");
-            }
-            
-            setIsLoading(false)});
-          //navigate("/transporter/availableJob");
-        }}>Ninjavan</Button>
-      </div>
-      </div>
+      <div style={{ marginRight: 70 }}>
+        <span style={{ fontSize: 30, fontWeight: "bold", marginBottom: 50, marginLeft: 120}}>Select a Company</span>
+          <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
+            <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+              sessionStorage.setItem('accountName', "J&T Express");
+              setIsLoading(true);
+              
+              CheckPenalty("J&T Express").then((response)=>{ 
+                if (response.data.body.penalty){
+                  navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
+                }
+                else{
+                  navigate("/transporter/availableJob");
+                }
+                setIsLoading(false)});
+            }}>J&T Express</Button>
+            <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+              sessionStorage.setItem('accountName', "DHL Express");
+              setIsLoading(true);
+              CheckPenalty("DHL Express").then((response)=>{
+                if (response.data.body.penalty){
+                  navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
+                }
+                else{
+                  navigate("/transporter/availableJob");
+                }
+                setIsLoading(false)});
+            }}>DHL Express</Button>
+            <Button type='primary' style={{ marginTop: 10, width: 500, height: 43, borderRadius: 10 }} onClick={() => {
+              sessionStorage.setItem('accountName', "Ninjavan");
+              setIsLoading(true);
+              CheckPenalty("Ninjavan").then((response)=>{ 
+                if (response.data.body.penalty){
+                  navigate("/transporter/penalty?JobID=" + response.data.body.data.JobID);
+                }
+                else{
+                  navigate("/transporter/availableJob");
+                }
+                
+                setIsLoading(false)});
+            }}>Ninjavan</Button>
+          </div>
+        </div>
       </div>
 
     

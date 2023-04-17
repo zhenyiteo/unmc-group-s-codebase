@@ -1,17 +1,14 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Button, Input, message } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
-//import * as api from '../../api/api';
 import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
+  FileImageOutlined
 } from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
-import axios from "axios";
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
+import ReactMarkdown from 'react-markdown';
 
 async function GenerateContract(item){
 
@@ -47,12 +44,6 @@ return test;
 }
 
 async function SignContract(item, signature){
-
-  // var testNewDate = new Date(dateTime);
-  // console.log(testNewDate);
-  // console.log(item.shipmentduration);
-  // testNewDate.setHours(testNewDate.getHours()+parseInt(item.shipmentduration)); 
-  // console.log("Expected Delivery ", testNewDate.toISOString());
 
   await axios
   .post(
@@ -99,26 +90,7 @@ async function SignContract(item, signature){
 }
 
 async function AdminUpdate(item, signature, adminRemark){
-  // await axios
-  // .put('https://hwr1f5bqsg.execute-api.us-east-1.amazonaws.com/adminsign2',
-  // {
-  //   "jobID": item.JobID,
-  //   "adminSign": signature,
-  //   "adminRemark": adminRemark
-  // },{headers:{
-  //   "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
-  //   "X-Requested-With": "*"
-  // }}).then((response) => {
-  //   console.log(response);
-  // }
-  // )
-  // .catch((error) =>{
-  //   console.error(error);
-  // }
 
-  // );
   await axios
   .post(
     'https://kcc9v1oqjh.execute-api.us-east-1.amazonaws.com/v2/lambdainvoke',
@@ -216,16 +188,7 @@ export default function Login() {
           <ReactMarkdown style={{textAlign: "center"}}children={template}/>
         </div>
         
-        {/* <div
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            color: 'red',
-          }}
-        >
-          Expires in: 10 minutes and will automatically decline
-        </div> */}
+
       </div>
 
       <div style={{ flex: 1, marginLeft: 20 }}>

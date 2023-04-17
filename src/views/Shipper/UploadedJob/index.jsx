@@ -1,16 +1,10 @@
-import { useEffect, useState, useMemo } from 'react';
-import { Input, Select } from 'antd';
-import { useNavigate, useParams} from 'react-router-dom';
-import { message } from 'antd';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import styles from './index.module.css';
-import axios from 'axios';
+import { Input } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
 
 function UploadedJobDetails() {
   const [list, setList] = useState([]);
@@ -205,15 +199,6 @@ function UploadedJobDetails() {
             </div>
           ))}
         </div>
-        {/* <div style={{ marginTop: 20, fontWeight: 'bold' }}>
-          Select by sorting
-        </div>
-        <Select
-          defaultValue=" "
-          style={{ width: '100%', marginTop: 20 }}
-          options={[          {            value: '1',            label: 'Sort by allowance',          },          {            value: '2',            label: 'Sort by shipment method',          },                 ]}
-          onChange={(value) => setSortBy(value)}
-        /> */}
       </div>
     </div>
   );

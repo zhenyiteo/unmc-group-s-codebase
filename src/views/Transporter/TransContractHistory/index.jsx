@@ -1,17 +1,10 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import styles from './index.module.css';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
-import axios from "axios";
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { useSearchParams } from 'react-router-dom';
+import styles from './index.module.css';
 
 async function GenerateContract(item){
 
@@ -51,13 +44,6 @@ export default function Add() {
   const [showSign, setShowSign] = useState(false);
 
   useEffect(() => {}, []);
-
-  const onFinish = async (values) => {
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [JobDetails, setJobDetails] = useState([]);
@@ -124,7 +110,6 @@ export default function Add() {
             display: 'flex',
             fontSize: 30,
             fontWeight: 'bold',
-            // color: '#d48806',
             marginLeft: 810,
           }}
         >
@@ -306,7 +291,6 @@ export default function Add() {
               </div>
               <div
                 style={{
-                  // display: !item.adminSign ? "none" : "flex",
                   display: item.JobStatus === "Cancelled" ? "flex" : "none",
                   color: '#FF0000',
                   fontWeight: "bold",
@@ -315,7 +299,6 @@ export default function Add() {
                 }}
               >
                 {item.adminSign ? "Cancelled by Admin: Reason: "+ item.adminRemark : "Cancelled by Shipper"}
-                {/* Reason For Cancellation: {item.adminRemark} */}
               </div>
             </div>
           ) : (

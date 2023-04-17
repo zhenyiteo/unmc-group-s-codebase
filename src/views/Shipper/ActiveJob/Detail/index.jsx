@@ -1,17 +1,11 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import styles from './index.module.css';
-import axios from "axios";
+import { Button, message } from 'antd';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import styles from './index.module.css';
 
 async function ConfirmedContract(item){
 
@@ -95,9 +89,6 @@ export default function Add() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeJobDetails, setActiveJobDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [cates, setCates] = useState([]);
-  const [list, setList] = useState([]);
-  const [selectCate, setSelectCate] = useState(cates[0]);
   const [template, setTemplate] = useState([]);
 
  useEffect(() => {
@@ -117,15 +108,6 @@ export default function Add() {
         console.log(error);
       });
   }, []);
-
-
-
-  const onFinish = async (values) => {
-
-    message.info('Successfully Saved!');
-  };
-
-  const onFinishFailed = () => {};
 
   
   if (isLoading){
@@ -337,9 +319,6 @@ export default function Add() {
               </div>
             </div>
 
-            
-
-
           <div className={styles.row}>
               <div className={styles.rowLabel}>
                 <h2>{item.ShipperID}</h2>
@@ -348,10 +327,6 @@ export default function Add() {
                 <h2>{item.transID}</h2>
               </div>
             </div>
-            
-           
-
-
           </div>
         </div>
 
@@ -411,20 +386,17 @@ export default function Add() {
 
           <div style={{ display: "flex", flexDirection: "row"}}>
 
-            <Button style={{ backgroundColor: "#50C878", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, visibility: item.JobStatus === "Delivered" ? "visible" : "hidden"  }} onClick={() => {
-
+            <Button style={{ backgroundColor: "#50C878", color: "#fff", height: 50, width: 200, marginTop: 20, borderRadius: 5, 
+            visibility: item.JobStatus === "Delivered" ? "visible" : "hidden"  }} 
+            onClick={() => {
               setIsLoading(true);
               ConfirmedContract(item).then(()=>{navigate('/shipper/activeJob'); setIsLoading(false);});
             }}>Confirm Finished</Button>
 
           </div>
-
         </div>
-        
-
       </div>
-
-    </div >
+    </div>
   ))}
   </>
   );
