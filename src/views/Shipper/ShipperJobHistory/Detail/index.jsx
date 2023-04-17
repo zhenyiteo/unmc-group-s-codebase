@@ -1,36 +1,19 @@
 import {
-  Button,
-  Col,
-  Form,
-  Input,
-  message,
-  Rate,
-  Row,
-  Select,
-  Upload,
-  Icon
+  message
 } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
-//import * as api from '../../api/api';
-import axios from "axios";
-import ReactMarkdown from 'react-markdown';
 import Spin from 'antd/es/spin';
 import 'antd/es/spin/style/css';
+import axios from "axios";
 
 import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
   SolutionOutlined
 } from '@ant-design/icons';
 
 export default function Add() {
   const navigate = useNavigate();
-  const [cates, setCates] = useState([]);
-  const [list, setList] = useState([]);
-  const [selectCate, setSelectCate] = useState(cates[0]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [JobDetails, setJobDetails] = useState([]);
@@ -45,11 +28,7 @@ export default function Add() {
       })
       .catch(error => console.error('Error fetching job data:', error));
   }, []);
-  const onFinish = async (values) => {
-    message.info('Successfully Saved!');
-  };
 
-  const onFinishFailed = () => {};
 
   if (isLoading){
     return (<>

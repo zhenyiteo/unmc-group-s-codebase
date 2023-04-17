@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './layout.module.css';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Menu, Radio, Space, Avatar } from 'antd';
 import {
-MailOutlined,
-AntCloudOutlined,
-SettingOutlined,
-ArrowLeftOutlined,
-UserOutlined
+  AntCloudOutlined,
+  ArrowLeftOutlined,
+  MailOutlined,
+  SettingOutlined,
+  UserOutlined
 } from '@ant-design/icons';
+import { Avatar, Menu } from 'antd';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import styles from './layout.module.css';
 
 export default function Layout() {
 const navigate = useNavigate();
@@ -19,8 +19,7 @@ useEffect(() => {
   if (!window.location.hash || window.location.hash === '#/') {
     navigate('/transporter/profile');
   }
-  // set the account name in sessionStorage
-  //sessionStorage.setItem('accountName', 'MICasa');
+
   // retrieve account name from sessionStorage
   const storedAccountName = sessionStorage.getItem('accountName');
   if (storedAccountName) {
@@ -51,7 +50,7 @@ useEffect(() => {
           items={[
             {
               key: '/transporter/transProfile',
-              icon: <MailOutlined />, //can change later lah
+              icon: <MailOutlined />, 
               label: 'Profile',
             },
             {
@@ -86,7 +85,6 @@ useEffect(() => {
         <div style={{ display: 'flex', marginTop: 10 }}>
         <Avatar shape="square" size="large" icon={<UserOutlined />} />
           <div style={{ marginLeft: 10 }}>
-            {/* <div>Transporter 8888</div> */}
             <div>{accountName}</div>
             <div style={{ color: '#aaa' }}>transporter@gmail.com</div>
           </div>

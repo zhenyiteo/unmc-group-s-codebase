@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import {
+  AntCloudOutlined,
+  ArrowLeftOutlined,
+  MailOutlined,
+  SettingOutlined,
+  UserOutlined
+} from '@ant-design/icons';
+import { Avatar, Menu } from 'antd';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './layout.module.css';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Menu, Radio, Avatar } from 'antd';
-import { MailOutlined, AntCloudOutlined, SettingOutlined,
-  ArrowLeftOutlined, UserOutlined} from '@ant-design/icons';
 
 export default function Layout() {
   const navigate = useNavigate();
 
-  //set the account name in sessionStorage
-  //sessionStorage.setItem('accountName', 'MICasa');
 
   const [accountName, setAccountName] = useState('');
 
@@ -56,7 +59,7 @@ export default function Layout() {
           items={[
             {
               key: '/shipper/shipperProfile',
-              icon: <MailOutlined />, //can change later lah
+              icon: <MailOutlined />, 
               label: 'Profile',
             },
             {

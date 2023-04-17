@@ -1,26 +1,14 @@
 import {
-  Button,
-  Col,
-  Form,
   Input,
   message,
-  Radio,
-  Row,
-  Select,
-  Upload,
+  Radio
 } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styles from './index.module.css';
-import axios from 'axios';
 import Spin from 'antd/es/spin';
-import 'antd/es/spin/style/css'
-//import * as api from '../../api/api';
-import {
-  LoadingOutlined,
-  FileImageOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import 'antd/es/spin/style/css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './index.module.css';
 
 export default function Add() {
   const navigate = useNavigate();
@@ -147,11 +135,7 @@ export default function Add() {
       .catch(error => console.error('Error fetching pending job data:', error));
   }, []);
 
-  const onFinish = async (values) => {
-    message.info('Successfully Saved!');
-  };
 
-  const onFinishFailed = () => {};
 
   const handleItemClick = (item) => {
     if (item.JobStatus === "Pending Admin Approval"){
@@ -181,7 +165,6 @@ if (isLoading){
       <div
         style={{
           display: 'flex',
-          // justifyContent: 'space-between',
           flexDirection: 'column',
           flex: 1,
         }}

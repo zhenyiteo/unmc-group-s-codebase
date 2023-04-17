@@ -1,6 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 export default function SelectCompany() {
   const navigate = useNavigate();
