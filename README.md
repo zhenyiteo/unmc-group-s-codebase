@@ -102,7 +102,7 @@ Using Yarn:
 Open your terminal or command prompt.
 Type the following command: 
 ```sh
-  yarn add react.
+  yarn add react
   ```
 Press enter to run the command and wait for the installation to complete.
 
@@ -111,12 +111,20 @@ To install Ant Design, you can use npm or Yarn to install the antd package:
 Using npm:
 
 Open your terminal or command prompt.
-Type the following command: npm install antd.
+Type the following command: 
+```sh
+  npm install antd
+  ```
 Press enter to run the command and wait for the installation to complete.
+
 Using Yarn:
 
 Open your terminal or command prompt.
-Type the following command: yarn add antd.
+Type the following command: 
+```sh
+  yarn add antd
+  ```
+
 Press enter to run the command and wait for the installation to complete.
 
 
