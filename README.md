@@ -33,10 +33,16 @@
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
     <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" alt="Logo" width="80" height="80">
-    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" alt="Logo" width="80" height="80">
+    
   </a>
 
   <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
+  <div align="center">
+  <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
+    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" alt="Logo" width="80" height="80">
+    
+  </a>
+  
 
   <p align="center">
     made by Year 2 Undergraduate University of Nottingham 2023
