@@ -66,7 +66,8 @@
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    .
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Report Bug</a>
     ·
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Request Feature</a>
