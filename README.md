@@ -1,4 +1,8 @@
 [![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
 
 ### Built With
 
@@ -55,16 +59,14 @@ Press enter to run the command and wait for the installation to complete.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
 [contributors-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[forks-shield]: https://img.shields.io/github/forks/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
+[forks-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/network/members
+[stars-shield]: https://img.shields.io/github/stars/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
+[stars-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
+[issues-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/issues
+
+
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
