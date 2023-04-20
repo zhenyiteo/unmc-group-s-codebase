@@ -13,12 +13,12 @@
   <h3 align="center">Best-README-Template</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Ledger Based Delivery System!
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">View Demo</a>
+    
     ·
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Report Bug</a>
     ·
