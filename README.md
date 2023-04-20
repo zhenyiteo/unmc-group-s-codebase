@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="[images/logo.png](https://avatars.githubusercontent.com/u/29445438?s=280&v=4)" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Ledger Based Delivery System</h3>
