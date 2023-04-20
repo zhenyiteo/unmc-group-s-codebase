@@ -37,11 +37,7 @@
   </a>
 
   <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
-  <div align="center">
-  <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" alt="Logo" width="80" height="80">
-    
-  </a>
+ 
   
 
   <p align="center">
@@ -58,6 +54,11 @@
   </p>
 </div>
 
+ <div align="center">
+  <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
+    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" alt="Logo" width="80" height="80">
+    
+  </a>
 ## About The Project
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
 Smart Contract information will be stored in AWS QLDB immutable database. \
