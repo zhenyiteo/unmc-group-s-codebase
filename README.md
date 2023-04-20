@@ -13,7 +13,7 @@
   <h3 align="center">Accord Project:Ledger Based Delivery System</h3>
 
   <p align="center">
-    Made by Year 2 Undergraduate University of Nottingham 2023
+    made by Year 2 Undergraduate University of Nottingham 2023
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
