@@ -51,9 +51,9 @@
 </div>
 
 ## About The Project
-This Project is making a web application mainly using Accord Project to create a smart contract template.
-Smart Contract information will be stored in AWS QLDB immutable database.
-ReactJS is used for buiding this program.
+This Project is making a web application mainly using Accord Project to create a smart contract template. \
+Smart Contract information will be stored in AWS QLDB immutable database. \
+ReactJS is used for building this program. \
 
 
 
