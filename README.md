@@ -7,10 +7,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="[images/logo.png](https://avatars.githubusercontent.com/u/29445438?s=280&v=4)" alt="Logo" width="80" height="80">
+    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Ledger Based Delivery System</h3>
+  <h3 align="center">Accord Project:Ledger Based Delivery System</h3>
 
   <p align="center">
     Made by Year 2 Undergraduate University of Nottingham 2023
