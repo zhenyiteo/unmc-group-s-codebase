@@ -65,28 +65,47 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![React][React.js]][React-url]
 
 Ledger-Based Delivery System
-Hosting on Firebase: 
+
+It is now live hosting on Firebase: 
 
 [unm-sandbox-gs.web.app](unm-sandbox-gs.web.app) \
 [unm-sandbox-gs.firebaseapp.com](unm-sandbox-gs.firebaseapp.com)
 
-To install the latest version of Node.js, you can follow these steps:
+<!-- GETTING STARTED -->
+## Getting Started
 
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+To install the latest version of Node.js, you can follow these steps:
 Go to the official Node.js website at https://nodejs.org/en/ in your web browser.
 Click the "Download" button to download the Node.js installer for your operating system (e.g., Windows, macOS, Linux).
 Once the download is complete, run the installer and follow the prompts to install Node.js on your computer. The default installation settings should work fine for most users.
+
+### Installation
+
 To install the latest version of React.js, you can use npm or Yarn to install the react package:
 
 Using npm:
 
 Open your terminal or command prompt.
-Type the following command: npm install react.
+Type the following command: 
+```sh
+  npm install react
+  ```
 Press enter to run the command and wait for the installation to complete.
+
 Using Yarn:
 
 Open your terminal or command prompt.
-Type the following command: yarn add react.
+Type the following command: 
+```sh
+  yarn add react.
+  ```
 Press enter to run the command and wait for the installation to complete.
+
 To install Ant Design, you can use npm or Yarn to install the antd package:
 
 Using npm:
