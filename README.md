@@ -19,7 +19,6 @@
     <br />
     <br />
     
-    ·
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Report Bug</a>
     ·
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Request Feature</a>
