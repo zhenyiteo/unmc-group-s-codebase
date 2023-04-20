@@ -68,8 +68,8 @@ Ledger-Based Delivery System
 
 It is now live hosting on Firebase: 
 
-[unm-sandbox-gs.web.app](unm-sandbox-gs.web.app) \
-[unm-sandbox-gs.firebaseapp.com](unm-sandbox-gs.firebaseapp.com)
+https://unm-sandbox-gs.web.app/
+https://unm-sandbox-gs.firebaseapp.com/
 
 <!-- GETTING STARTED -->
 ## Getting Started
