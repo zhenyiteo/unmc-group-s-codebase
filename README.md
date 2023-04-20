@@ -34,7 +34,7 @@
     <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Accord Project:Ledger Based Delivery System</h3>
+  <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
 
   <p align="center">
     made by Year 2 Undergraduate University of Nottingham 2023
