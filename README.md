@@ -139,7 +139,10 @@ Type the following command:
 
 To open the project in localhost
 Open your terminal or command prompt
-cd /pathofyourfolder
+```sh
+  cd /pathofyourfolder
+  ```
+
 ```sh
   yarn start
   ```
