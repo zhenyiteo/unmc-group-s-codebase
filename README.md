@@ -55,7 +55,7 @@
   </p>
 </div>
 
-
+## COMP2019_CW_GroupS
 ## About The Project
 This repository is used to store front end ReactJS source code \
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
