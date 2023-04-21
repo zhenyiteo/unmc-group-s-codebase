@@ -39,9 +39,7 @@
   <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
  
   
- <div align="center">
-  <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" >
+
     
   </a>
   <p align="center">
@@ -52,9 +50,9 @@
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Our Project</a>
     .
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Report Bug</a>
+    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Our Project</a>
     ·
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Request Feature</a>
+    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Our Project</a>
   </p>
 </div>
 
