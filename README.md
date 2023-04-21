@@ -56,6 +56,10 @@
 </div>
 
 ## COMP2019_CW_GroupS
+Software Engineering Group Project Group S 2022-2023 \
+\
+Title: Ledger Based Delivery System \
+\
 ## About The Project
 This repository is used to store front end ReactJS source code \
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
@@ -85,7 +89,7 @@ https://unm-sandbox-gs.firebaseapp.com/
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of instructions on setting up your project locally.
+This is an example of instructions on setting up your project locally and run on localhost.
 To get a local copy up and running follow these simple example steps.
 You can download this repo and unzip into a folder
 
@@ -158,6 +162,8 @@ Open your terminal or command prompt
 ```sh
   yarn start
   ```
+  
+  
 
 
 ## Contributing
