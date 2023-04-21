@@ -43,7 +43,7 @@
     
   </a>
   <p align="center">
-    Made by Year 2 Undergraduate University of Nottingham 2023
+    This repository is provided by our industrial client
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
