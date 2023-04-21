@@ -35,7 +35,7 @@
     
   </a>
   <p align="center">
-    This repository is provided by our industrial client
+    This repository is provided by our industrial client for this project
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
