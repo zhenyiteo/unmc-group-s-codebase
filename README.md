@@ -58,7 +58,7 @@
 ## COMP2019_CW_GroupS
 Software Engineering Group Project Group S 2022-2023 \
 \
-Title: Ledger Based Delivery System \
+Title: Ledger Based Delivery System 
 
 ## About The Project
 This repository is used to store front end ReactJS source code \
@@ -69,15 +69,15 @@ Smart Contract information will be stored in AWS QLDB immutable database. \
 \
 ReactJS is used for frontend \
 \
-NodeJS (AWS Lambda) is used for frontend \
+NodeJS (AWS Lambda) is used for backend \
 \
-DynamoDB is used for database \
+AWS DynamoDB is used for database \
 \
 We uses APIs are from AWS API gateway that trigger AWS Lambda  \
 \
 AWS Credential for this project is private provided by our industry client therefore backend code Lambda function are stored in AWS cloud  \
 \
-AWS Services that we use for this project : AWS QLDB,S3 Bucket,AWS Lambda,API Gateway,IAM,DynamoDB \
+AWS Services that we use for this project : AWS QLDB, S3 Bucket, AWS Lambda, API Gateway, IAM, DynamoDB \
 \
 AWS Regions: us-east-1 N.Virginia \
 \
