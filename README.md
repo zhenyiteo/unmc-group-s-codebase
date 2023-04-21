@@ -67,7 +67,7 @@ Software Engineering Group Project Group S 2022-2023 \
 \
 Title: Ledger Based Delivery System 
 
-The project is live! We Host this project on Firebase too! 
+The project is live! We host this project on Firebase too! 
 
 https://unm-sandbox-gs.web.app/ \
 https://unm-sandbox-gs.firebaseapp.com/
