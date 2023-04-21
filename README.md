@@ -89,7 +89,9 @@ AWS Services that we use for this project : AWS QLDB, S3 Bucket, AWS Lambda, API
 \
 AWS Regions: us-east-1 N.Virginia \
 \
-Project Duration: 15th February 2023 - 21st April 2023
+Project Duration: September 2022 - 21st April 2023\
+\
+Software Development Duration: 15th February 2023 - 21st April 2023
 
 
 ### Built With
