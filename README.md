@@ -55,16 +55,37 @@
   </p>
 </div>
 
+## COMP2019_CW_GroupS
+Software Engineering Group Project Group S 2022-2023 \
+\
+Title: Ledger Based Delivery System 
+
+The project is live! Hosting on Firebase: 
+
+https://unm-sandbox-gs.web.app/ \
+https://unm-sandbox-gs.firebaseapp.com/
 
 ## About The Project
 This repository is used to store front end ReactJS source code \
+\
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
+\
 Smart Contract information will be stored in AWS QLDB immutable database. \
-ReactJS is used for building the program frontend this program. \
+\
+ReactJS is used for frontend \
+\
+NodeJS (AWS Lambda) is used for backend \
+\
+AWS DynamoDB is used for database \
+\
 We uses APIs are from AWS API gateway that trigger AWS Lambda  \
+\
 AWS Credential for this project is private provided by our industry client therefore backend code Lambda function are stored in AWS cloud  \
-AWS Services that we use for this project : AWS QLDB,S3 Bucket,AWS Lambda,API Gateway,IAM,DynamoDB \
+\
+AWS Services that we use for this project : AWS QLDB, S3 Bucket, AWS Lambda, API Gateway, IAM, DynamoDB \
+\
 AWS Regions: us-east-1 N.Virginia \
+\
 Project Duration: 15th February 2023 - 21st April 2023
 
 
@@ -85,7 +106,7 @@ https://unm-sandbox-gs.firebaseapp.com/
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of instructions on setting up your project locally.
+This is an example of instructions on setting up your project locally and run on localhost.
 To get a local copy up and running follow these simple example steps.
 You can download this repo and unzip into a folder
 
@@ -158,6 +179,8 @@ Open your terminal or command prompt
 ```sh
   yarn start
   ```
+  
+  
 
 
 ## Contributing
