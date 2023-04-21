@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" >
+    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" width="200" height="200" >
     
    
 
@@ -19,7 +19,7 @@
   
   
    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-     <img src="https://user-images.githubusercontent.com/80567028/233587948-cd5f20ae-7be3-44dd-ac36-56bdcd568705.png" >
+     <img src="https://user-images.githubusercontent.com/80567028/233587948-cd5f20ae-7be3-44dd-ac36-56bdcd568705.png" width="200" height="200" >
     
    
 
