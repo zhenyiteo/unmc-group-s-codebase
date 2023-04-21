@@ -48,10 +48,9 @@
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-   
-    .
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Our Project</a>
-    ·
+    .
+    
    
   </p>
 </div>
