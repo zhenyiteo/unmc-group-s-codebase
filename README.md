@@ -32,7 +32,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" alt="Logo" width="80" height="80">
+    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" >
     
   </a>
 
@@ -43,7 +43,7 @@
     
   </a>
   <p align="center">
-    made by Year 2 Undergraduate University of Nottingham 2023
+    Made by Year 2 Undergraduate University of Nottingham 2023
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
