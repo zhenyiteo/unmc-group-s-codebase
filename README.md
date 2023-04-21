@@ -62,8 +62,9 @@
 ## About The Project
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
 Smart Contract information will be stored in AWS QLDB immutable database. \
-ReactJS is used for building this program. 
-
+ReactJS is used for building this program. \
+apis are from AWS api gateway that trigger AWS lambda  \
+AWS Credential for this project is private and cannot release to the public
 
 
 ### Built With
