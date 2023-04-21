@@ -42,9 +42,9 @@
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a> 
     .
-    <a href="https://unm-sandbox-gs.web.app/">Firebase Link</a> 
+    <a href="https://unm-sandbox-gs.web.app/" target="_blank">Firebase Link</a> 
     .
-    <a href="https://unm-sandbox-gs.firebaseapp.com/">Another Firebase Link</a>
+    <a href="https://unm-sandbox-gs.firebaseapp.com/" target="_blank" >Another Firebase Link</a>
   
     
     
@@ -61,7 +61,7 @@ Title: Ledger Based Delivery System
 
 The project is live! We host this project on Firebase too! 
 
-<a href="https://unm-sandbox-gs.web.app/">
+<a href="https://unm-sandbox-gs.web.app/" target="_blank" >
 <img src="https://user-images.githubusercontent.com/80567028/233587273-b8c439c2-0735-443f-83a9-33c4a11639d1.png" width="200" height="100"></a> 
 
 https://unm-sandbox-gs.web.app/ \
