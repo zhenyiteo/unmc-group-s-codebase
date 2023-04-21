@@ -24,6 +24,7 @@
 
 
 
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -34,6 +35,8 @@
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
     <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" >
+    <img src="https://user-images.githubusercontent.com/80567028/233584371-13e78f86-da52-4fdd-bec9-756b36e91124.png" >
+   
     
   </a>
 
