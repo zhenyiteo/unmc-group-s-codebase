@@ -32,38 +32,40 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" alt="Logo" width="80" height="80">
+    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" >
     
   </a>
 
   <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
  
   
- <div align="center">
-  <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://user-images.githubusercontent.com/80567028/233459964-3439afd8-0526-4ff2-a428-7c5284ecaa7e.jpg" >
+
     
   </a>
   <p align="center">
-    made by Year 2 Undergraduate University of Nottingham 2023
+    Made by Year 2 Undergraduate University of Nottingham 2023
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Our Project</a>
-    .
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase/issues">Request Feature</a>
+    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a>
+    
+    
+   
   </p>
 </div>
 
 
 ## About The Project
+This repository is used to store front end ReactJS source code \
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
 Smart Contract information will be stored in AWS QLDB immutable database. \
-ReactJS is used for building this program. 
-
+ReactJS is used for building the program frontend this program. \
+We uses APIs are from AWS API gateway that trigger AWS Lambda  \
+AWS Credential for this project is private provided by our industry client therefore backend code Lambda function are stored in AWS cloud  \
+AWS Services that we use for this project : AWS QLDB,S3 Bucket,AWS Lambda,API Gateway,IAM,DynamoDB \
+AWS Regions: us-east-1 N.Virginia \
+Project Duration: 15th February 2023 - 21st April 2023
 
 
 ### Built With
@@ -75,7 +77,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 Ledger-Based Delivery System
 
-It is now live hosting on Firebase: 
+The project is live! Hosting on Firebase: 
 
 https://unm-sandbox-gs.web.app/ \
 https://unm-sandbox-gs.firebaseapp.com/
@@ -83,8 +85,9 @@ https://unm-sandbox-gs.firebaseapp.com/
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+This is an example of instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+You can download this repo and unzip into a folder
 
 ### Prerequisites
 
@@ -149,7 +152,7 @@ Type the following command:
 To open the project in localhost
 Open your terminal or command prompt
 ```sh
-  cd /pathofyourfolder
+  cd /pathtoyourfolderofthisrepo
   ```
 
 ```sh
