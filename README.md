@@ -28,7 +28,7 @@
   </a>
     
 
-  <h3 align="center">Accord Project x Ledger Based Delivery System x Amazon Web Services</h3>
+  <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
  
   
 
