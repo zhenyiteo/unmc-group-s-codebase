@@ -50,7 +50,7 @@
     <br />
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a>
-  [1200px-AmazonWebservices_Logo_svg](https://user-images.githubusercontent.com/80567028/233580814-af1c899d-2d60-462f-a6cc-2cc36386b104.png)
+ <img src="https://user-images.githubusercontent.com/80567028/233580814-af1c899d-2d60-462f-a6cc-2cc36386b104.png"></src>
     
     
    
