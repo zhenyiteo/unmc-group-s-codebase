@@ -30,7 +30,7 @@
     <a href="https://unm-sandbox-gs.web.app/">Firebase Link</a> 
     .
     <a href="https://unm-sandbox-gs.firebaseapp.com/">Another Firebase Link</a>
-  <img src="https://user-images.githubusercontent.com/80567028/233585090-1ce90d7a-ef9c-4713-b949-d3167f45a301.png" width="100" height="50" >
+  
     
     
     
@@ -50,6 +50,7 @@ https://unm-sandbox-gs.web.app/ \
 https://unm-sandbox-gs.firebaseapp.com/
 
 ## About The Project
+<img src="https://user-images.githubusercontent.com/80567028/233585090-1ce90d7a-ef9c-4713-b949-d3167f45a301.png" width="100" height="50" >
 This repository is used to store front end ReactJS source code \
 \
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
