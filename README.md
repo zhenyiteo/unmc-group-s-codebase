@@ -50,6 +50,11 @@
     <br />
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a> 
+    .
+    <a href="https://unm-sandbox-gs.web.app/">Firebase Link</a> 
+    .
+    <a href="https://unm-sandbox-gs.firebaseapp.com/">Another Firebase Link</a>
+    
     
     
     
@@ -62,7 +67,7 @@ Software Engineering Group Project Group S 2022-2023 \
 \
 Title: Ledger Based Delivery System 
 
-The project is live! Hosting on Firebase: 
+The project is live! We Host this project on Firebase too! 
 
 https://unm-sandbox-gs.web.app/ \
 https://unm-sandbox-gs.firebaseapp.com/
