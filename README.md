@@ -209,7 +209,7 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
 [contributors-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
