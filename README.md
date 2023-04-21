@@ -1,28 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-
-
-
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -32,9 +8,26 @@
 <br />
 <div align="center">
   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
-    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" >
+    <img src="https://avatars.githubusercontent.com/u/29445438?s=280&v=4" width="200" height="200" >
     
+   
+
+
+
   </a>
+  
+  
+  
+  
+   <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">
+     <img src="https://user-images.githubusercontent.com/80567028/233587948-cd5f20ae-7be3-44dd-ac36-56bdcd568705.png" width="200" height="200" >
+    
+   
+
+
+
+  </a>
+    
 
   <h3 align="center">Accord Project x Ledger Based Delivery System</h3>
  
@@ -43,12 +36,19 @@
     
   </a>
   <p align="center">
-    Made by Year 2 Undergraduate University of Nottingham 2023
+    This repository is provided by our industrial client for this project
     <br />
     <a href="https://github.com/pinetoplabs/unmc-group-s-codebase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a>
+    <a href="https://github.com/pinetoplabs/unmc-group-s-codebase">Our Project</a> 
+    .
+    <a href="https://unm-sandbox-gs.web.app/" target="_blank">Firebase Link</a> 
+    .
+    <a href="https://unm-sandbox-gs.firebaseapp.com/" target="_blank" >Another Firebase Link</a>
+  
+    
+    
     
     
    
@@ -60,12 +60,16 @@ Software Engineering Group Project Group S 2022-2023 \
 \
 Title: Ledger Based Delivery System 
 
-The project is live! Hosting on Firebase: 
+The project is live! We host this project on Firebase too! 
+
+<a href="https://unm-sandbox-gs.web.app/" target="_blank" >
+<img src="https://user-images.githubusercontent.com/80567028/233587273-b8c439c2-0735-443f-83a9-33c4a11639d1.png" width="200" height="100"></a> 
 
 https://unm-sandbox-gs.web.app/ \
 https://unm-sandbox-gs.firebaseapp.com/
 
 ## About The Project
+
 This repository is used to store front end ReactJS source code \
 \
 This Project is making a web application mainly using Accord Project to create a smart contract template. \
@@ -86,7 +90,9 @@ AWS Services that we use for this project : AWS QLDB, S3 Bucket, AWS Lambda, API
 \
 AWS Regions: us-east-1 N.Virginia \
 \
-Project Duration: 15th February 2023 - 21st April 2023
+Project Duration: September 2022 - 21st April 2023\
+\
+Software Development Duration: 15th February 2023 - 21st April 2023
 
 
 ### Built With
@@ -203,10 +209,10 @@ Don't forget to give the project a star! Thanks again!
 
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
 [contributors-url]: https://github.com/pinetoplabs/unmc-group-s-codebase/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/pinetoplabs/unmc-group-s-codebase.svg?style=for-the-badge
